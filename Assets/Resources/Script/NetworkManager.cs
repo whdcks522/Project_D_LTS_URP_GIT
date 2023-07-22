@@ -16,6 +16,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button PreviousBtn;
     public Button NextBtn;
     public Text StatusText;
+    public LobbyPlayer lobbyPlayer;
 
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
@@ -113,6 +114,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
     public override void OnJoinedRoom()
     {
+        StartCoroutine(lobbyPlayer.Dissolve());
         PhotonNetwork.LoadLevel("GameScene");
     }
 

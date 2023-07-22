@@ -9,12 +9,14 @@ Shader "New Shader Graph"
         [HideInInspector][NoScaleOffset]unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset]unity_ShadowMasks("unity_ShadowMasks", 2DArray) = "" {}
 
+//1------------------------------------------------------
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
         _StencilOp ("Stencil Operation", Float) = 0
         _StencilWriteMask ("Stencil Write Mask", Float) = 255
         _StencilReadMask ("Stencil Read Mask", Float) = 255
         _ColorMask ("Color Mask", Float) = 15
+//1------------------------------------------------------
     }
     SubShader
     {
@@ -38,7 +40,7 @@ Shader "New Shader Graph"
         // Render State
         Cull Back
         Blend One Zero
-        ZTest [unity_GUIZTestMode]
+        ZTest[unity_GUIZTestMode] //2------------------------------------------------------
         ZWrite On
         
         // Debug
@@ -47,6 +49,7 @@ Shader "New Shader Graph"
         // --------------------------------------------------
         // Pass
         
+        //3------------------------------------------------------
         Stencil
    {
     Ref [_Stencil]
@@ -56,6 +59,7 @@ Shader "New Shader Graph"
     WriteMask [_StencilWriteMask]
    }
    ColorMask [_ColorMask]
+//3------------------------------------------------------
 
         HLSLPROGRAM
         

@@ -8072,7 +8072,6 @@ MonoBehaviour:
   isUseNav: 1
   isDissolve: 0
   isControl: 0
-  curActionNum: 0
   trail: {fileID: 2751184602698021911}
   box: {fileID: 7799157266709932320}
 --- !u!114 &7620617676514077471

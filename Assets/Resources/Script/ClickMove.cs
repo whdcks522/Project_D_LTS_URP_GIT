@@ -131,44 +131,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
         playerName.GetComponent<Text>().color = new Color(nameColor.r, nameColor.g, nameColor.b, 1);
     }
 
-    #region 왜곡장
-    public void InvisibleDissolve() // 점차 안보이게 되는 것
-    {
-        StopCoroutine(Dissolve(false));
-        StartCoroutine(Dissolve(true));
-    }
-    public void VisibleDissolve() //점차 보이게 되는 것 
-    {
-            StopCoroutine(Dissolve(true));
-            StartCoroutine(Dissolve(false));
-    }
-    private IEnumerator Dissolve(bool b)
-    {
-        if (b) isDissolve = true;
-        float firstValue = b ? 0f : 1f;      //true는 InvisibleDissolve(2초)
-        float targetValue = b ? 1f : 0f;     //false는 VisibleDissolve(3초)
-
-        float duration = 2f;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            float progress = elapsedTime / duration;//진행률
-            float value = Mathf.Lerp(firstValue, targetValue, progress);
-
-            elapsedTime += Time.deltaTime;
-
-            skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", value);
-            skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", value);
-            yield return null;
-        }
-        if (!b) isDissolve = false;
-        skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", targetValue);
-        skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", targetValue);
-
-    }
-    #endregion
-
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
         if (other.gameObject.tag == "EnemyAttack" && !isDissolve && gameManager.EnemiesCount > 0 ) 
@@ -333,6 +295,44 @@ public class ClickMove : MonoBehaviourPunCallbacks
             }
             yield return null;
         } 
+    }
+    #endregion
+
+    #region 왜곡장
+    public void InvisibleDissolve() // 점차 안보이게 되는 것
+    {
+        StopCoroutine(Dissolve(false));
+        StartCoroutine(Dissolve(true));
+    }
+    public void VisibleDissolve() //점차 보이게 되는 것 
+    {
+        StopCoroutine(Dissolve(true));
+        StartCoroutine(Dissolve(false));
+    }
+    private IEnumerator Dissolve(bool b)
+    {
+        if (b) isDissolve = true;
+        float firstValue = b ? 0f : 1f;      //true는 InvisibleDissolve(2초)
+        float targetValue = b ? 1f : 0f;     //false는 VisibleDissolve(3초)
+
+        float duration = 2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float progress = elapsedTime / duration;//진행률
+            float value = Mathf.Lerp(firstValue, targetValue, progress);
+
+            elapsedTime += Time.deltaTime;
+
+            skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", value);
+            skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", value);
+            yield return null;
+        }
+        if (!b) isDissolve = false;
+        skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", targetValue);
+        skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", targetValue);
+
     }
     #endregion
 }
