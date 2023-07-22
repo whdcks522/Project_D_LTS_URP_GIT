@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
@@ -6,7 +7,9 @@ using Photon.Pun.Demo.PunBasics;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 //using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -23,14 +26,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
     #endregion
-
+   
     //오브젝트 풀링
-    string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", "PlayerName"};   
+    string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", "PlayerName", 
+        "BossA", "EnemyBulletB"};//, "MinePlayer"
     List<GameObject>[] pools;//실제로 주소가 저장될 곳
 
-    [Header("UI 관련")]
-    public GameObject canvas;
-    public GameObject chapterArea;
     [Header("적 관련")]
     public GameObject Bars;//체력 바
     BoxCollider absoluteAttack;//절대 공격 영역
@@ -39,21 +40,78 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject playerGroup; //플레이어가 생성될 부모
     public GameObject playerName;//플레이어 이름
     [Header("스테이지 관련")]
-    public int curStage = 1;
-    public int EneniesCount;
+    public GameObject canvas;//캔버스
+    public GameObject chapterArea;//닿으면 게임 시작
+
+    public Transform[] generatePos;//적이 생성 될 위치
+    public string mouseText;//쥐가 사용할 텍스트
+    public int curStage = 0;//현재 스테이지
+    public int EnemiesCount;//남은 적의 수
+    public int MaxEnemiesCount;
     
+    public Mouse mouse;
+    PhotonView photonView;
+    bool isAllreadyAbs;
+    public bool isChat;
+
+    #region 적 정보 클래스
+    [Serializable]
+    public class EnemySpawnInfo
+    {
+        public string enemyType;
+        public int generateIndex;
+
+        public EnemySpawnInfo(string type, int index)
+        {
+            enemyType = type;
+            generateIndex = index;
+        }
+    }
+
+    [Serializable]
+    public class EnemySpawnInfoArray
+    {
+        public EnemySpawnInfo[] enemySpawnInfo;
+    }
+
+    private List<EnemySpawnInfo> enemySpawnList;//이번 스테이지에서 소환할 적의 목록
+    public EnemySpawnInfoArray[] enemySpawnInfoArray;//챕터 전체에서 소환할 적의 목록
+
+    #endregion
+
     private void Awake()
     {
+        //프레임
         Application.targetFrameRate = 60;
-        PhotonNetwork.SendRate = 90;//동기화 속도
-        PhotonNetwork.SerializationRate = 45;
+        //동기화 속도
+        PhotonNetwork.SendRate = 480;//동기화 속도 = 60
+        PhotonNetwork.SerializationRate = 240;//30
+
         absoluteAttack = GetComponent<BoxCollider>();
 
         //오브젝트 풀링_풀 배열 초기화
         pools = new List<GameObject>[resourceNames.Length];
         for (int index = 0; index < pools.Length; index++)//풀 하나하나 초기화
             pools[index] = new List<GameObject>();
+
+        photonView = GetComponent<PhotonView>();
+
+        //적 목록 리스트 초기화
+        enemySpawnList = new List<EnemySpawnInfo>();
+        enemySpawnListControl();
     }
+
+    private void Start()
+    {
+        #region 시작 시 플레이어 생성
+        GameObject minePlayer = PhotonNetwork.Instantiate("MinePlayer", new Vector3(0, 2.5f, 0), Quaternion.identity);
+        //하이라키 창에서 자식으로
+        minePlayer.transform.parent = playerGroup.transform;
+        //시작하는 물리적 위치를 이동
+        minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, Random.Range(-4, 2));
+        #endregion
+    }
+
 
     #region 오브젝트 풀링
     public GameObject Get(string name) //있으면 적 부르고, 없으면 생성
@@ -74,11 +132,14 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!item.activeSelf)
             {
                 if (item.gameObject.tag == "PlayerAttack" || item.gameObject.tag == "EnemyAttack")//총알은 총알에서 반환
-                    select = item.GetComponent<Bullet>().Allreturn();
+                {
+                    select = item;
+                }
 
                 else if (item.gameObject.tag == "Enemy")//적은 적에서 반환
-                    select = item.GetComponent<Enemy>().Allreturn();
-
+                {
+                    select = item;
+                }
                 else if (item.gameObject.tag == "UI")//UI일 경우 그냥 생성
                 {
                     select = item;
@@ -103,8 +164,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 select = PhotonNetwork.Instantiate(resourceNames[index], new Vector3(0, 0, 0), Quaternion.identity);
-                select.transform.parent = this.transform;
-
             }
             pools[index].Add(select);
         }
@@ -112,89 +171,167 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    [PunRPC]
+    public void AbsoluteReviveStart() {
+        StartCoroutine(AbsoluteRevive());
+    } 
     #region 플레이어 전원 사망 시, 특수 부활
-    public IEnumerator AbsoluteRevive(int size)
-    {  
-        //플레이어 1, 2명 부활
-        for (int i = 0; i < size; i++)
-            playerGroup.transform.GetChild(i).gameObject.GetComponent<ClickMove>().Revive();
-        //시작 영역 표시
-        chapterArea.SetActive(true);
+    public IEnumerator AbsoluteRevive()
+    {
+        if (!isAllreadyAbs) 
+        {
+            //플레이어 1, 2명 부활
+            for (int i = 0; i < playerGroup.transform.childCount; i++)
+                playerGroup.transform.GetChild(i).gameObject.GetComponent<ClickMove>().Revive();
+            //시작 영역 표시
+            chapterArea.SetActive(true);
+            //쥐 보이도록
+            mouse.VisibleDissolve();
+            //절대 공격
+            absoluteAttack.enabled = true;
+            yield return new WaitForSeconds(0.5f);
+            absoluteAttack.enabled = false;
 
-        //절대 공격
-        absoluteAttack.enabled = true;
-        yield return null;
-        absoluteAttack.enabled = false;   
+            isAllreadyAbs = true;
+        }      
     }
     #endregion 
-    private void Start()
-    {
-        #region 시작 시 플레이어 생성
-        GameObject minePlayer = PhotonNetwork.Instantiate("MinePlayer", new Vector3(0, 2.5f, 0), Quaternion.identity);
-        minePlayer.transform.parent = playerGroup.transform;//하이라키 창에서 자식으로
-        minePlayer.transform.position = playerGroup.transform.position;//시작하는 물리적 위치를 이동
-        #endregion
-    }
 
-    public void SpawnEnemy(string str, Vector3 vec) 
+    
+
+    public void SpawnEnemy(string str, int generateIndex) //둘 다 실행함
     {
-        //적 소환
-        GameObject enemy = Get(str);
         //소환 수 전달
-        EneniesCount++;
-        //소환 위치 조정
-        enemy.transform.position = vec;
+        EnemiesCount++;
+        if (photonView.IsMine) 
+        {
+            //적 소환
+            GameObject enemy = Get(str);
+            enemy.GetComponent<Enemy>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, generatePos[generateIndex - 1].position);
+
+            #region useNav를 쓰는 경우 위치 고정인데 안씀
+            //Enemy enemyScript = enemy.GetComponent<Enemy>();
+            //if (enemyScript.isUseNav) 
+            {
+                //왜 또 안써도 작동되냐
+                //enemyScript.photonView.RPC("OriginControlStart", RpcTarget.AllBuffered, enemy.transform.position);
+                // StartCoroutine(enemyScript.OriginConrol(enemy.transform.position));
+            }
+            #endregion
+        }
     }
 
     #region 적을 잡으면 개체 수 감소
-    public void EneniesCountControl() 
-    {     
-        if (--EneniesCount <= 0 ) NextStage();
-        Debug.Log("남은 적: " + EneniesCount);
+    public void EneniesCountControl() //둘 다 사용함
+    {
+        if (--EnemiesCount <= 0)
+            NextStage();
     }
     #endregion
 
-    public void NextStage()
+    #region 현재 스테이지 클리어해서 다음 스테이지로
+    [PunRPC]
+    public void NextStage()//위에서 둘 다 불림
     {
-        curStage++;
-        int size = playerGroup.transform.childCount;
-        //1 명 일 때 플레이어 초기화
-        playerGroup.transform.GetChild(0).gameObject.GetComponent<ClickMove>().Revive(); ;
-        if (size == 2)//2 명 일 때  플레이어 초기화 
-            playerGroup.transform.GetChild(1).gameObject.GetComponent<ClickMove>().Revive(); ;
+            //다음 스테이지로
+            curStage++;
+        if (curStage == enemySpawnInfoArray.Length)
+        {
+            if (SceneManager.GetActiveScene().name == "TmpScene")//테스트 중이라면 시작 창으로
+                PhotonNetwork.LoadLevel("AuthScene");
+            else if (SceneManager.GetActiveScene().name == "GameScene")//게임 중이라면 로비로
+            {
+                PhotonNetwork.LeaveRoom();
+                PhotonNetwork.LoadLevel("LobbyScene");
+            }
+                
+            //PhotonNetwork.ConnectUsingSettings()
+        }
+        else 
+        {
+            //플레이어 관리
+            int size = playerGroup.transform.childCount;//플레이어의 수
+            //n 명 일 때 플레이어 초기화
+            for (int i = 0; i < playerGroup.transform.childCount; i++)
+                playerGroup.transform.GetChild(i).gameObject.GetComponent<ClickMove>().Revive(); ;
 
-        //바닥에 적힌 글자 변경
-        chapterArea.transform.GetChild(0).gameObject.GetComponent<TextMesh>().text = "Stage " + curStage + '\n' + "Game Start";
+            //바닥에 적힌 글자 변경
+            chapterArea.transform.GetChild(0).gameObject.GetComponent<TextMesh>().text = "Stage " + curStage + '\n' + "Game Start";
+            // 쥐 보이도록
+            mouse.VisibleDissolve();
+            //적 리스트 초기화
+            enemySpawnListControl();
+        }  
     }
+    #endregion
 
-    public void EnterStage(Collider other) 
+    #region 스테이지 시작
+    [PunRPC]
+    public void EnterStage() //둘 다 실행함
     {
         //숫자 초기화(호스트만)
-        EneniesCount = 0;
+        EnemiesCount = 0;
+        isAllreadyAbs = false;
         //시작 영역 비활성화
         chapterArea.SetActive(false);
+        //쥐 비활성화
+        mouse.InvisibleDissolve();
+        //쥐 UI 종료
+        mouse.isMaxfalse();
         //적 소환
-        if (curStage == 1)
         {
-            SpawnEnemy("EnemyA", new Vector3(5, 0.5f, 5));
-            SpawnEnemy("EnemyA", new Vector3(5, 0.5f, 5));
-        }
-        else if (curStage == 2) 
-        {
-            SpawnEnemy("EnemyA", new Vector3(5, 0.5f, 5));
-            SpawnEnemy("EnemyB", new Vector3(7, 0.5f, 5));
-        }
-        else if (curStage == 3) SpawnEnemy("EnemyC" , new Vector3(5, 0.5f, 5));
-        else if (curStage == 4)
-        {
-            SpawnEnemy("EnemyB", new Vector3(3, 0.5f, 3));
-            SpawnEnemy("EnemyB", new Vector3(3, 0.5f, -3));
-        }
-        else if (curStage == 5)
-        {
-            SpawnEnemy("EnemyA", new Vector3(0, 0.5f, 0));
-            SpawnEnemy("EnemyB", new Vector3(3, 0.5f, 3));
-            SpawnEnemy("EnemyB", new Vector3(3, 0.5f, -3));
-        }
+            foreach (var spawnInfo in enemySpawnList)
+                SpawnEnemy(spawnInfo.enemyType, spawnInfo.generateIndex);
+        }     
     }
+    #endregion
+
+    #region 적 목록 리스트 초기화
+    void enemySpawnListControl()
+    {
+        enemySpawnList.Clear();
+        mouseText = "";
+        //스테이지 적 리스트에 삽입
+        foreach (EnemySpawnInfo spawnInfo in enemySpawnInfoArray[curStage].enemySpawnInfo)
+            enemySpawnList.Add(spawnInfo);
+       
+        #region 쥐 대사 관리
+        string curEnemyType = "";
+        int curEnemyTypeCount = 0;
+        MaxEnemiesCount = enemySpawnList.Count;
+
+        foreach (var spawnInfo in enemySpawnList)
+        {
+            if (curEnemyType == spawnInfo.enemyType)//같은 종류인 경우
+            {
+                curEnemyTypeCount++;
+            }
+            else
+            {
+                //맨 처음 대사를 시작하는 것이 아니라면 ,하고 체 추가
+                if (curEnemyType != "")
+                {
+                    mouseText += ", " + curEnemyType + " " + curEnemyTypeCount + "체";
+                }
+                //해당 타입 저장
+                curEnemyType = spawnInfo.enemyType;
+                //해당 타입의 적 수 초기화
+                curEnemyTypeCount = 1;
+            }
+        }
+
+        // 마지막 적 종류 정보를 추가
+        if (curEnemyType != "")
+        {
+            mouseText += ", " + curEnemyType + " " + curEnemyTypeCount + "체";
+        }
+
+        // 첫 번째 쉼표와 공백 제거
+        if (mouseText.Length > 2 && mouseText.Substring(0, 2) == ", ")
+        {
+            mouseText = mouseText.Substring(2);
+        }
+        #endregion
+    }
+    #endregion
 }

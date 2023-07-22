@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviourPunCallbacks
 
     public bool isUseNav;
     public bool isDissolve;
+
+    public bool isControl;
     private void Awake()
     {
         blood = GetComponent<ParticleSystem>();
@@ -58,14 +60,17 @@ public class Enemy : MonoBehaviourPunCallbacks
         //ai를 이용하는 경우만
         if (isUseNav) 
             nms.BuildNavMesh();
+        //부모 설정
+        transform.parent = gameManager.transform;
     }
 
     private void Update()
     {
-        if (!target.activeSelf) //타켓이 없을 질 경우 새로 정함
-            photonView.RPC("TargetChange", RpcTarget.AllBuffered);
+        if (!target.activeSelf && photonView.IsMine) //타켓이 없을 질 경우 새로 정함
+            TargetChange();
+            //photonView.RPC("TargetChange", RpcTarget.AllBuffered);
 
-        if (isUseNav && agent.enabled) //ai를 이용하는 경우만
+        if (isUseNav && agent.enabled) //ai를 이용하는 경우만  && photonView.IsMine
         {
             //타겟으로 이동
             agent.SetDestination(target.transform.position);
@@ -74,10 +79,28 @@ public class Enemy : MonoBehaviourPunCallbacks
 
     private void LateUpdate()
     {
-        //UI 위치 초기화
+        //UI 위치 초기화(적의 위치 요소를 빼와서 적용)
         redBar.transform.position = Camera.main.WorldToScreenPoint(transform.GetChild(1).transform.position + Vector3.forward);
         grayBar.transform.position = Camera.main.WorldToScreenPoint(transform.GetChild(1).transform.position + Vector3.forward);
     }
+    /*
+    [PunRPC]
+    public void OriginControlStart(Vector3 vec) 
+    {
+        StartCoroutine(OriginConrol(vec));
+    }
+
+    public IEnumerator OriginConrol(Vector3 vec)
+    {
+        float curTime = 0;
+        while (curTime < 0.5f)
+        {
+            agent.Warp(vec);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+    */
     private void OnEnable()
     {
         //체력 회복
@@ -89,7 +112,12 @@ public class Enemy : MonoBehaviourPunCallbacks
         redBar = Bars.transform.GetChild(1).GetComponent<Image>();
         redBar.fillAmount = 1;
         //타겟 설정
-        photonView.RPC("TargetChange", RpcTarget.AllBuffered);
+        //photonView.RPC("TargetChange", RpcTarget.AllBuffered);
+
+        if (photonView.IsMine) //타켓이 없을 질 경우 새로 정함
+            TargetChange();
+
+
         //죽었을 때 이동하지 않도록
         col.enabled = true;
         //왜곡장 시작
@@ -99,10 +127,8 @@ public class Enemy : MonoBehaviourPunCallbacks
         if (isUseNav)
         { 
             anim.SetBool("isRun", false);
-            
             //AI
-            agent.enabled = true;
-            agent.isStopped = true;
+            agent.enabled = false;          
         }       
         //1.5초부터 활성화
         Invoke("Activate", 1.5f);            
@@ -115,7 +141,8 @@ public class Enemy : MonoBehaviourPunCallbacks
         Color redColor = redBar.color;
         grayBar.color = new Color(grayColor.r, grayColor.g, grayColor.b , 1);
         redBar.color = new Color(redColor.r, redColor.g, redColor.b, 1);
-
+        //제어
+        isControl = true;
         //애니메이션
         anim.SetBool("isLive", true);
 
@@ -124,6 +151,7 @@ public class Enemy : MonoBehaviourPunCallbacks
         {
             // 애니메이션
             anim.SetBool("isRun", true);
+            agent.enabled = true;
             agent.isStopped = false;
         }    
     }
@@ -131,67 +159,86 @@ public class Enemy : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
-       
-        if (other.gameObject.tag == "PlayerAttack" && !isDissolve) //플레이어 공격
-                                     Hitby(other);
-        else if(other.gameObject.tag == "AbsoluteAttack") //절대 공격 처리
-                                     Hitby(other);
-
+        Hitby(other);
     }
+
     #region 플레이어에게 공격받을 시
-    public void Hitby(Collider other) //EnemyB에서 이펙트를 2개 쓰므로 분리
+    public void Hitby(Collider other) //EnemyB, C에서 이펙트를 2개 쓰므로 분리
     {
-        //핏자국
-        if (other.gameObject.tag == "PlayerAttack") blood.Play();
-        Bullet otherBullet = other.gameObject.GetComponent<Bullet>();
-        //데미지 계산
-        health -= otherBullet.dmg;
-        redBar.fillAmount = (float)health / (float)maxHealth;
+        if ((other.gameObject.tag == "PlayerAttack" && !isDissolve) || other.gameObject.tag == "AbsoluteAttack") 
+        {
+            Bullet BulletScript = other.gameObject.GetComponent<Bullet>();
 
-        //사망 처리와 총알 관리는 방장만 함
-        if (!gameManager.photonView.IsMine) return;
-
-        if (health <= 0)
-            photonView.RPC("SoonDie", RpcTarget.AllBuffered, other.gameObject.tag == "PlayerAttack"? true : false);
-        //총알이면 비활성화
-        if (otherBullet.isBullet)
-            otherBullet.photonView.RPC("BulletOff", RpcTarget.AllBuffered);
+            //사망 처리와 총알 관리는 방장만 함
+            if (BulletScript.photonView.IsMine)
+            {
+                //방장에서 피해 처리
+                bool hitbyPlayer = other.gameObject.tag == "PlayerAttack" ? true : false;
+                photonView.RPC("DamageControl", RpcTarget.AllBuffered, hitbyPlayer, BulletScript.dmg);
+                if (health <= 0)
+                {
+                    //방장에서 사망 처리
+                    photonView.RPC("SoonDie", RpcTarget.AllBuffered, hitbyPlayer);
+                }
+                //총알 삭제
+                if (BulletScript.isBullet)
+                    BulletScript.photonView.RPC("BulletOff", RpcTarget.AllBuffered);
+            }
+        }
     }
     #endregion
+
+    [PunRPC]
+    public void DamageControl(bool hitbyPlayer, int dmg) 
+    {
+        //플레이어의 공격이 경우 핏자국
+        if (hitbyPlayer)
+            blood.Play();
+        //데미지 계산
+        health -= dmg;
+        //체력 바 계산
+        redBar.fillAmount = (float)health / (float)maxHealth;
+    }
 
     #region 곧죽음
     [PunRPC]
     public void SoonDie(bool hitbyPlayer)//죽는 애니메이션에서 사용 (이벤트로 넣지는 않음)
     {
-        health = 0;
-        //죽었을 때 충돌하지 않도록
-        col.enabled = false;
-        StopCoroutine(Dissolve(false));
-        if (isUseNav) //AI 사용 시
-        {   
-            //ai 비활성화
-            agent.enabled = false;
-            //애니메이션
-            anim.SetBool("isRun", false);
-        }
-        anim.SetBool("isLive", false);
+            //제어
+            isControl = false;
+            //체력
+            health = 0;
+            //죽었을 때 충돌하지 않도록
+            col.enabled = false;
+            StopCoroutine(Dissolve(false));
+            if (isUseNav) //AI 사용 시
+            {
+                //ai 비활성화
+                agent.enabled = false;
+                //애니메이션
+                anim.SetBool("isRun", false);
+            }
+            anim.SetBool("isLive", false);
 
-        if (hitbyPlayer) //플레이어에 의해 맞았을 때만, 사망 애니메이션
-            anim.SetTrigger("isDie");
-        else //절대 공격 영역일 경우
-        {
-            StartCoroutine(Dissolve(true));
-            Invoke("RealDiebyAbsolute", 1.5f);
-        }
-        //ui 종료
-        Bars.SetActive(false);
+            if (hitbyPlayer) //플레이어에 의해 맞았을 때만, 사망 애니메이션
+                anim.SetTrigger("isDie");
+            else //절대 공격 영역일 경우
+            {
+                StartCoroutine(Dissolve(true));
+                Invoke("RealDiebyAbsolute", 1.5f);
+            }
+            //ui 종료
+            Bars.SetActive(false);
     }
     #endregion
+
     #region 바로 죽음
     void RealDie() //죽는 애니메이션에서 사용
     {
         CancelInvoke();
+        //둘 다 계산
         gameManager.EneniesCountControl();
+
         gameObject.SetActive(false);
     }
     void RealDiebyAbsolute() //절대 영역에 죽음
@@ -203,35 +250,50 @@ public class Enemy : MonoBehaviourPunCallbacks
 
     #region 오브젝트 풀링
     [PunRPC]
-    public GameObject Allreturn()
+    public void RPCActivate(Vector3 vec)//GameObject
     {
         gameObject.SetActive(true);
-        return this.gameObject;
+        transform.position = vec;
     }
     #endregion
 
+
     #region 목표 설정
-    [PunRPC]
-    public void TargetChange() 
+    void TargetChange() 
     {
+        //방장이 정함
         int size = gameManager.playerGroup.transform.childCount;
-        if (size == 1) 
+        
+        bool isAllDie = true;
+
+        int ran = Random.Range(0, size);
+        target = gameManager.playerGroup.transform.GetChild(ran).gameObject;
+
+        if (target.gameObject.activeSelf)//첫 번째 플레이어가 살아있다면
         {
-            target = gameManager.playerGroup.transform.GetChild(0).gameObject;
-            if (!target.activeSelf) 
+            photonView.RPC("TargetChangeEnd", RpcTarget.AllBuffered, target.GetPhotonView().ViewID);
+            isAllDie = false;
+        }
+        else if(size == 2)//첫 번째 플레이어가 사망했으면서, 플레이어 수가 2명이 넘으면
+        {
+            ran = ran == 0 ? 1 : 0;
+            target = gameManager.playerGroup.transform.GetChild(ran).gameObject;
+            if (target.gameObject.activeSelf)
             {
-                StartCoroutine(gameManager.AbsoluteRevive(1));
-                
+                photonView.RPC("TargetChangeEnd", RpcTarget.AllBuffered, target.GetPhotonView().ViewID);
+                isAllDie = false;
             }
-                    
         }
-        else if (size == 2)
-        {
-            target = gameManager.playerGroup.transform.GetChild(0).gameObject;
-            if(!target.activeSelf)
-                target = gameManager.playerGroup.transform.GetChild(1).gameObject;
-            else gameManager.AbsoluteRevive(2);
-        }
+        
+        if (isAllDie)
+            gameManager.photonView.RPC("AbsoluteReviveStart", RpcTarget.AllBuffered);
+        
+    }
+    [PunRPC]
+    public void TargetChangeEnd(int targetViewID)
+    {
+        target = PhotonView.Find(targetViewID).gameObject;
+        // targetObj를 사용하여 원하는 작업을 수행합니다.
     }
     #endregion
 
@@ -249,7 +311,6 @@ public class Enemy : MonoBehaviourPunCallbacks
             StartCoroutine(Dissolve(false));
         }     
     } 
-   
     IEnumerator Dissolve(bool b)//왜곡장 1.5초간
     {
         if (b) isDissolve = true;

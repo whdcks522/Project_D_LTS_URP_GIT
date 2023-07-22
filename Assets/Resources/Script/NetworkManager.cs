@@ -83,6 +83,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Connect();
     }
+
+ 
+
     public void Connect() => PhotonNetwork.ConnectUsingSettings();//AuthManager에서 이미 써서 필요 없음
 
     public override void OnConnectedToMaster() => PhotonNetwork.JoinLobby();//AuthManager에서 이미 써서 필요 없음

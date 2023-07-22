@@ -4,6 +4,7 @@ using Photon.Pun.Demo.PunBasics;
 using Photon.Pun;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using Photon.Pun.Demo.Asteroids;
 
 public class EnemyC : Enemy
 {
@@ -51,17 +52,18 @@ public class EnemyC : Enemy
 
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
-        #region 플레이어의 공격
+            Hitby(other);
         if (other.gameObject.tag == "PlayerAttack" && !isDissolve) //플레이어 공격
-        {
-            Hitby(other);//파티클 Play하면 오브젝트 내부 모든 파티클이 실행됨
-            earthQuake.Stop();
-        }
-        #endregion
-        else if (other.gameObject.tag == "AbsoluteAttack") Hitby(other);
+            photonView.RPC("RPCEffect", RpcTarget.AllBuffered);
     }
 
-    
+    [PunRPC]
+    void RPCEffect() 
+    {
+        earthQuake.Stop();
+    }
+
+
 
     private void OnDisable() 
     {

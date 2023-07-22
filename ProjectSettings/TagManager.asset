@@ -11,6 +11,7 @@ TagManager:
   - AbsoluteAttack
   - StageStart
   - GameManager
+  - Mouse
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - UnitTerritory
   - StageStart
   - AbsoluteAttack
-  - 
+  - Mouse
   - 
   - 
   - 

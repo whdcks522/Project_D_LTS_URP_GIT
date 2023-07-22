@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2787054423421745700}
   - component: {fileID: 8543203183260940617}
   - component: {fileID: -148620383682618156}
+  - component: {fileID: 6493859073888757825}
+  - component: {fileID: 8669575564367717047}
   m_Layer: 7
   m_Name: PlayerBulletA
   m_TagString: PlayerAttack
@@ -191,9 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7079b5380a8735439a01f1b5c6c40bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
+  trailRenderer: {fileID: 0}
   dmg: 10
-  lifeTime: 1.5
+  speed: 15
+  lifeTime: 1
   isBullet: 1
+  isGenetic: 0
 --- !u!54 &8543203183260940617
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239,7 +245,41 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6493859073888757825}
+  - {fileID: 8669575564367717047}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6493859073888757825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868516879234548295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &8669575564367717047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868516879234548295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0

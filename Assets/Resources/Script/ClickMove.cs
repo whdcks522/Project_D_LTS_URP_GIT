@@ -17,7 +17,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
     Rigidbody rigid;
     Ray ray;
 
-    Transform spot;//이동할 장소
+    public Transform spot;//이동할 장소
     GameManager gameManager;//게임매니저
     NavMeshAgent agent;
     NavMeshSurface nms;//ai
@@ -29,7 +29,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     //[Header("UI")]
     GameObject playerName;//플레이어 이름
-    public bool isControl;
+    bool isControl;
+    bool isDissolve;
 
     private void Awake()
     {
@@ -64,7 +65,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //플레이어 이름
         playerName = gameManager.Get("PlayerName");
         //플레이어 이름
-        playerName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
+        //playerName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
+        playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
         if (photonView.IsMine) //자신의 것일 경우
         {
             //1번 관절
@@ -83,6 +85,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
             //플레이어 이름 색
             playerName.GetComponent<Text>().color = new Color(0.25f, 0.22f, 0.08f, 0);
         }
+        transform.parent = gameManager.playerGroup.transform;
     }
 
     private void LateUpdate()
@@ -98,7 +101,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //오브젝트 활성화
         gameObject.SetActive(true);
         //위치 초기화
-        transform.position = gameManager.playerGroup.transform.position;
+        transform.position = gameManager.playerGroup.transform.position + new Vector3(0,0,Random.Range(-4, 2));
         //죽었을 때 충돌하지 않도록
         col.enabled = true;
         //애니메이션
@@ -119,7 +122,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
             StopCoroutine(draw);
         //2초부터 활성화
         Invoke("Activate", 2f);
-
     }
 
     public void Activate()//2초후 부터 움직이도록
@@ -142,6 +144,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
     }
     private IEnumerator Dissolve(bool b)
     {
+        if (b) isDissolve = true;
         float firstValue = b ? 0f : 1f;      //true는 InvisibleDissolve(2초)
         float targetValue = b ? 1f : 0f;     //false는 VisibleDissolve(3초)
 
@@ -159,39 +162,45 @@ public class ClickMove : MonoBehaviourPunCallbacks
             skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", value);
             yield return null;
         }
+        if (!b) isDissolve = false;
         skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", targetValue);
         skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", targetValue);
+
     }
     #endregion
 
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
-        if (other.gameObject.tag == "EnemyAttack") 
+        if (other.gameObject.tag == "EnemyAttack" && !isDissolve && gameManager.EnemiesCount > 0 ) 
         {
-            //핏자국
-            particle.Play();
+            Bullet otherBullet = other.gameObject.GetComponent<Bullet>();
 
             //데미지 계산은 피격자만 함
-            if (photonView.IsMine) 
+            if (photonView.IsMine)
             {
-                Bullet otherBullet = other.gameObject.GetComponent<Bullet>();
                 //데미지 계산
                 photonView.RPC("SoonDie", RpcTarget.AllBuffered);
                 //총알이면 비활성화
                 if (otherBullet.isBullet)
                     otherBullet.photonView.RPC("BulletOff", RpcTarget.AllBuffered);
-            }  
+            }
+
+            
         }
-        else if (other.gameObject.tag == "StageStart" && SceneManager.GetActiveScene().name == "TmpScene")
-            gameManager.EnterStage(other);
+        else if (other.gameObject.tag == "StageStart" && photonView.IsMine)// && SceneManager.GetActiveScene().name == "TmpScene"
+            gameManager.photonView.RPC("EnterStage", RpcTarget.AllBuffered);//모든 플레이어에게 입장을 알림
     }
 
     #region 곧죽음
     [PunRPC]
     void SoonDie()//죽는 애니메이션에서 사용 
     {
+        //핏자국
+        particle.Play();
+
         //통제 불가
         isControl = false;
+        if(agent.enabled)
         agent.isStopped = true;
         lr.enabled = false;
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
@@ -204,7 +213,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
         anim.SetBool("isLive", false);
         anim.SetTrigger("isDie");
         //ui 종료
-        //playerName.SetActive(false);
         Color nameColor = playerName.GetComponent<Text>().color;
         playerName.GetComponent<Text>().color = new Color(nameColor.r, nameColor.g, nameColor.b, 0);
     }
@@ -220,25 +228,19 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     #endregion
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    {
-        //PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-        //위에거 처럼 쓰면 모두에게 보이나 봄
-        //ChatRPC("<color=yellow>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
-
-        //통신 단절 시 ui 삭제
-        playerName.SetActive(false);
-    }
-
     #region 사격
-    [PunRPC]
-    void GunReload(Vector3 rotation) 
+    void GunReload() 
     {
+        //투사체 생성
         GameObject bullet = gameManager.Get("PlayerBulletA");
-
-        transform.rotation = Quaternion.Euler(rotation);
-        bullet.transform.position = transform.position + new Vector3(0, 2.25f, 0);
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 15;
+        //투사체 잔상 제거
+        bullet.GetComponent<Bullet>().trailRenderer.Clear();
+        //투사체 위치 조정
+        bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0) + transform.forward.normalized;
+        //투사체 네트워크를 통한 가속
+        bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
+        //투사체 잔상 제거
+        bullet.GetComponent<Bullet>().trailRenderer.Clear();
     }
     #endregion
 
@@ -255,10 +257,10 @@ public class ClickMove : MonoBehaviourPunCallbacks
         
     }
     #endregion
-
+    
     void Update()
     {
-        if (photonView.IsMine && isControl)//로컬이 아니면 취소
+        if (photonView.IsMine && isControl && !gameManager.isChat)//로컬이 아니면 취소
         {
            
             if (Input.GetKeyDown(KeyCode.Q))
@@ -281,7 +283,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
                     transform.LookAt(spot.position);
                     transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
                     //발사
-                    photonView.RPC("GunReload", RpcTarget.AllBuffered, transform.rotation.eulerAngles);
+                    //photonView.RPC("GunReload", RpcTarget.AllBuffered, transform.rotation.eulerAngles);
+                GunReload();
                 #endregion
             }
             

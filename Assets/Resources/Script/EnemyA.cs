@@ -30,25 +30,34 @@ public class EnemyA : Enemy
 
     private void FixedUpdate()
     { 
-        if (health > 0 && agent.enabled)//추적중이라면 물리법칙 무시
+        if (health > 0 && agent.enabled)//추적중이라면 물리법칙 무시  
         {
+            
             if (agent.isStopped) return;
-                //설정 안하면 충돌 시, 끝까지 밀려남
-                rigid.velocity = Vector3.zero;
+            
+            //설정 안하면 충돌 시, 끝까지 밀려남
+            rigid.velocity = Vector3.zero;
                 rigid.angularVelocity = Vector3.zero;
                 //공격 사거리 확인
                 float targetRadius = 1f;
-                float targetRange = 0.75f;
+                float targetRange = 0.65f;
                 //Vector3.forward는 월드 좌표, transform.forward는 로컬 좌표
                 RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,
                 LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore);
             if (rayHits.Length > 0)
             {
-                agent.isStopped = true;
-                anim.SetTrigger("isAttack");
+                photonView.RPC("StopControl", RpcTarget.AllBuffered);   
             }  
         }
-        else if (health <= 0) AttackControl(false);
+        if (health <= 0) AttackControl(false);
+    }
+    [PunRPC]
+    void StopControl() 
+    {
+        if (agent.enabled)
+            agent.isStopped = true;
+
+        anim.SetTrigger("isAttack");
     }
 
     void AttackControl(bool b)//공격 처리 관리 
@@ -80,6 +89,7 @@ public class EnemyA : Enemy
         if (health > 0) 
         {
             //네비매쉬 활성화
+            if(agent.enabled)
             agent.isStopped = false;
         }
     }

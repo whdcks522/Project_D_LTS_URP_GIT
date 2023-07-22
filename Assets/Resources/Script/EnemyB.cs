@@ -37,17 +37,24 @@ public class EnemyB : Enemy
 
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
-        #region 플레이어의 공격
-        if (other.gameObject.tag == "PlayerAttack" && !isDissolve) //플레이어 공격
-        {
-            Hitby(other);//파티클 Play하면 오브젝트 내부 모든 파티클이 실행됨
-            chargeBall.Stop();
-        }
-        #endregion
-        else if (other.gameObject.tag == "AbsoluteAttack") Hitby(other);
+        Hitby(other);
+
+        if (other.gameObject.tag == "PlayerAttack" && !isDissolve)
+            photonView.RPC("RPCEffect", RpcTarget.AllBuffered);
     }
 
-    private void OnDisable()=>isAttack = false;
+    [PunRPC]
+    void RPCEffect()
+    {
+        chargeBall.Stop();
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+        isAttack = false;
+    }
+
 
     #region 공격 애니메이션 이벤트
     void AttackCharge() 
@@ -61,16 +68,36 @@ public class EnemyB : Enemy
 
     public void AttackThrow() 
     {
-        if (health > 0)
+        if (health > 0 )
         {
-            GameObject bullet = gameManager.Get("EnemyBulletA");
-            bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0);
-            bullet.GetComponent<Rigidbody>().velocity = transform.forward * 5;
+            if (gameManager.photonView.IsMine)
+            {
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    GameObject bullet = gameManager.Get("EnemyBulletA");
+                    //투사체 위치 조정 
+                    bullet.transform.position = transform.position + Vector3.up + transform.forward.normalized * 1f;
+                    //투사체 방향 조정
+                    bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + i * 20, 0);
+                    //투사체 네트워크를 통한 가속 조정
+                    bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, bullet.transform.forward);
+                    //투사체 방향 재조정
+                    bullet.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y + i * 20, 0);
+
+                    //파티클
+                    ParticleSystem bulletParticle = bullet.GetComponent<ParticleSystem>();
+                    bulletParticle.Stop();
+                    bulletParticle.Simulate(2f); // 예시에서는 1초로 설정하여 이미 2초 경과된 상태로 생성
+                                                 //bulletParticle.Play(); //회전 자체는 매터리얼이 하므로 필요없음(로컬로 처리하니까 안 사라지더라)
+                }
+            }
         }
         else isAttack = false;
     }
 
-    void AttackEnd() =>isAttack = false;
-    
+
+    void AttackEnd() => isAttack = false;
+
+
     #endregion
 }

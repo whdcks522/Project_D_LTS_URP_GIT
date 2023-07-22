@@ -51,6 +51,23 @@ MonoBehaviour:
   - GunAction
   - GunReload
   - GunShot
+  - EnterStage
+  - NextStage
+  - OriginControlStart
+  - RPCInstantiateEffect
+  - RealInstantiateEffect
+  - RealSlash360
+  - RealTargetSlash
+  - Test
+  - RPCActivate
+  - DamageControl
+  - ControlAttack
+  - StopControl
+  - RPCEffect
+  - StopControlEnd
+  - TargetChangeEnd
+  - AbsoluteReviveStart
+  - RoomRenewal
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

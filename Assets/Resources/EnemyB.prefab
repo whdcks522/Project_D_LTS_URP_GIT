@@ -889,7 +889,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656208659228968074}
   serializedVersion: 8
-  lengthInSec: 0.6
+  lengthInSec: 0.4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -7796,7 +7796,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &6700323999121133367
 CapsuleCollider:
@@ -7842,7 +7842,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2584f1c037440d14eb3638d3df9a8a31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12696,13 +12696,14 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   col: {fileID: 0}
   target: {fileID: 0}
-  maxHealth: 50
+  maxHealth: 150
   health: 0
   Bars: {fileID: 0}
   redBar: {fileID: 0}
   grayBar: {fileID: 0}
   isUseNav: 0
   isDissolve: 0
+  isControl: 0
   chargeBall: {fileID: 9068929384841276366}
   isAttack: 0
 --- !u!114 &8694336439055703093
@@ -12721,14 +12722,17 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isDie
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isAttack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRun
+  - Type: 4
+    SynchronizeType: 1
+    Name: isLive
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

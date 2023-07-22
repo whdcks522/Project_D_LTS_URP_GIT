@@ -1817,7 +1817,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.8396226, g: 0.058615133, b: 0.058615133, a: 1}
-        key1: {r: 0.2264151, g: 0.03289426, b: 0.03289426, a: 0.4509804}
+        key1: {r: 0.2264151, g: 0.03289426, b: 0.03289426, a: 0.1764706}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1832,7 +1832,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 49730
+        atime0: 49551
         atime1: 65535
         atime2: 0
         atime3: 0
@@ -5285,8 +5285,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 33c94031a921bd44496f381392371cea, type: 2}
+  - {fileID: 2100000, guid: 33c94031a921bd44496f381392371cea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5372,9 +5372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7079b5380a8735439a01f1b5c6c40bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
+  trailRenderer: {fileID: 0}
   dmg: 5
+  speed: 0
   lifeTime: 0
   isBullet: 0
+  isGenetic: 1
 --- !u!1 &2710728259728776272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5547,7 +5551,7 @@ GameObject:
   - component: {fileID: 2614738729127519996}
   - component: {fileID: 5844174565145268159}
   m_Layer: 11
-  m_Name: 1234
+  m_Name: unitTerritory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6883,7 +6887,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2584f1c037440d14eb3638d3df9a8a31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6956,13 +6960,14 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   col: {fileID: 6700323999121133367}
   target: {fileID: 0}
-  maxHealth: 50
+  maxHealth: 150
   health: 0
   Bars: {fileID: 0}
   redBar: {fileID: 0}
   grayBar: {fileID: 0}
   isUseNav: 0
   isDissolve: 0
+  isControl: 0
   earthQuake: {fileID: 2490479899044354225}
   earthCol: {fileID: 4521076040109535165}
   attackPos: {x: 0, y: 0, z: 0}
@@ -11765,16 +11770,16 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isDie
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isAttack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isRun
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isLive
   m_SynchronizeLayers:
   - SynchronizeType: 0
