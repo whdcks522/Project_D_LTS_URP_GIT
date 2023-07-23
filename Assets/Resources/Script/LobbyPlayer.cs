@@ -28,8 +28,6 @@ public class LobbyPlayer : MonoBehaviour
     {
         StartCoroutine(Dissolve());
     }
-
-
     void FixedUpdate()
     {
 
@@ -43,8 +41,7 @@ public class LobbyPlayer : MonoBehaviour
             worldPosition.x += xValue;
             worldPosition.y += yValue;
             worldPosition.z = zValue;
-            target.position = worldPosition;
-        
+            target.position = worldPosition;     
     }
 
     public IEnumerator Dissolve()

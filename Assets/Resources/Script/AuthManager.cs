@@ -24,10 +24,18 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
         }
     }
 
+    AudioManager audioManager;
+
     public bool IsFirebaseReady { get; private set; }//현재 파이어베이스에 접근 가능한 환경인지
     public bool IsSignInOnProgress { get; private set; }//로그인 진행중인지 확인용(로그인중 로그인 요청 방지)
 
-    private void Awake() => Screen.SetResolution(1280, 720, false);
+    private void Awake() 
+    {
+        //해상도
+        Screen.SetResolution(1280, 720, false);
+        //초기화
+        audioManager = GetComponent<AudioManager>();
+    } 
 
 
     void Start()

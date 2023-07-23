@@ -11,7 +11,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     //마스터 서버에 접속한 순간 무언가를 실행
     public Text connecettionInfoText;
     public Button joinButton;
-    int State = 1;
+    public int State = 1;
     
     public override void OnConnectedToMaster()//연결 설정하면 //자동으로 실행됨
     {
@@ -35,6 +35,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     {
         if (State == 1)
         {
+            Debug.Log("A1");
             //로비에 진입함과 동시에 마스터 서버(=포톤 클라우드 서버, 매치매이킹을 위함)에 진입 시도
             PhotonNetwork.GameVersion = gameVersion;//게임 버전
             PhotonNetwork.ConnectUsingSettings();//설정 정보(ex) 게임 버전 등(이번에는 게임 버전만 가능))를 갖고 마스터 서버에 접속 시도----------->
@@ -44,6 +45,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         }
         else if (State == 2) 
         {
+            Debug.Log("A2");
             joinButton.interactable = false;
             if (PhotonNetwork.IsConnected) //누르는 순간 끊길 수도 있으모로, 안전 장치임
             {
@@ -61,17 +63,23 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
     public override void OnJoinRandomFailed(short returnCode, string message)//대부분 랜덤 방에 들어가려는데 방이 없어서 실패
     {
-        //새로 방을 만들고, 자신이 방장이 됨
-        connecettionInfoText.text = "5 빈 방이 없으므로, 직접 만듬";
-        //변수(방 이름, 조건(최대 2명))
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });//네트워크 상에서 새로운 방 제작 후, 들어감----------->
-        //***********************************************************
+        if (State == 2) 
+        {
+            Debug.Log("B");
+            //새로 방을 만들고, 자신이 방장이 됨
+            connecettionInfoText.text = "5 빈 방이 없으므로, 직접 만듬";
+            //변수(방 이름, 조건(최대 2명))
+            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });//네트워크 상에서 새로운 방 제작 후, 들어감----------->
+        }
     }
 
     public override void OnJoinedRoom()//룸에 참가 완료시 자동 실행(방 접속에 성공하거나, 직접 방을 만드는 경우)
     {
-        //  base.OnJoinedRoom();
-        connecettionInfoText.text = "6 방에 들어옴";//보통 안보인다고 하던데 난 보였던거 같은데 흠
+        Debug.Log("C");
+
+        connecettionInfoText.text = "6 방에 들어옴";
+
+        State = 1;
 
         //씬 매니저로 이동하면 나만 넘어가고, 다른 사람은 같이 안넘어감(각각 써서, 동기화가 안됨)
         PhotonNetwork.LoadLevel("TmpScene");//방장이 하면 나머지도 자동으로 끌려옴, 동기화도 자동으로 됨

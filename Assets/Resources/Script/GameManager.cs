@@ -229,6 +229,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    void AA()=> SceneManager.LoadScene("AuthScene");
+
     #region 현재 스테이지 클리어해서 다음 스테이지로
     [PunRPC]
     public void NextStage()//위에서 둘 다 불림
@@ -238,14 +240,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (curStage == enemySpawnInfoArray.Length)
         {
             if (SceneManager.GetActiveScene().name == "TmpScene")//테스트 중이라면 시작 창으로
-                PhotonNetwork.LoadLevel("AuthScene");
+            {
+                //PhotonNetwork.LeaveRoom();
+                SceneManager.LoadScene("AuthScene");
+                //Invoke("AA", 3f);
+                //PhotonNetwork.LoadLevel("AuthScene");
+            }     
             else if (SceneManager.GetActiveScene().name == "GameScene")//게임 중이라면 로비로
             {
                 PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("LobbyScene");
             }
-                
-            //PhotonNetwork.ConnectUsingSettings()
+
         }
         else 
         {

@@ -27,10 +27,11 @@ public class ClickMove : MonoBehaviourPunCallbacks
     //매터리얼 변환
     SkinnedMeshRenderer []skinnedMeshRenderer = new SkinnedMeshRenderer[2];
 
-    //[Header("UI")]
-    GameObject playerName;//플레이어 이름
+    [Header("UI")]
+    public GameObject playerName;//플레이어 이름
     bool isControl;
     bool isDissolve;
+    bool isShot;
 
     private void Awake()
     {
@@ -38,11 +39,15 @@ public class ClickMove : MonoBehaviourPunCallbacks
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         gameManager = GameManager.Instance;
-        spot = gameManager.gameObject.transform.GetChild(0);
+        
         particle = GetComponent<ParticleSystem>();
         col = GetComponent<CapsuleCollider>();
 
         photonView = GetComponent<PhotonView>();
+
+        if (photonView.IsMine)
+            spot = gameManager.gameObject.transform.GetChild(0);
+
         //네비매쉬
         nms = gameManager.GetComponent<NavMeshSurface>();
         //라인 렌더러
@@ -63,10 +68,11 @@ public class ClickMove : MonoBehaviourPunCallbacks
     private void Start()
     {
         //플레이어 이름
-        playerName = gameManager.Get("PlayerName");
+        //playerName = gameManager.Get("PlayerName");
         //플레이어 이름
         //playerName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
         playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
+
         if (photonView.IsMine) //자신의 것일 경우
         {
             //1번 관절
@@ -91,7 +97,14 @@ public class ClickMove : MonoBehaviourPunCallbacks
     private void LateUpdate()
     {
         //UI 위치 초기화
-        playerName.transform.position = Camera.main.WorldToScreenPoint(transform.GetChild(1).transform.position + Vector3.forward);
+        if (!isShot)
+        {
+            playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward);//transform.GetChild(1).
+        }
+        else 
+        {
+            isShot = false;
+        }
     }
 
     private void OnEnable() => Revive();
@@ -113,7 +126,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //시작 영역 활성화
         gameManager.chapterArea.SetActive(true);
         //경로 관리
-        spot.transform.position = transform.position;
+        if(photonView.IsMine)
+            spot.transform.position = transform.position;
         isControl = false;
         agent.isStopped = true;
         lr.enabled = false;
@@ -203,7 +217,12 @@ public class ClickMove : MonoBehaviourPunCallbacks
         bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
         //투사체 잔상 제거
         bullet.GetComponent<Bullet>().trailRenderer.Clear();
+        //UI관리를 위해 모두에게 알리기
+        photonView.RPC("ShotControl", RpcTarget.AllBuffered);
     }
+
+    [PunRPC]
+    void ShotControl()=> isShot = true;
     #endregion
 
     #region 쳐다보기
