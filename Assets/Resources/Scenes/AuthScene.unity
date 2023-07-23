@@ -1487,6 +1487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323181825}
   - component: {fileID: 1323181824}
+  - component: {fileID: 1323181826}
   m_Layer: 0
   m_Name: AuthManager
   m_TagString: Untagged
@@ -1526,6 +1527,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1323181826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323181823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6791b81be942148ab22fe909061173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 0}
+  bgmVolume: 0.5
+  sfxClips: []
+  sfxVolume: 0.5
+  channels: 0
 --- !u!1 &1468232148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connecettionInfoText: {fileID: 1710444014}
   joinButton: {fileID: 1722772153}
+  State: 1
 --- !u!4 &1665885862
 Transform:
   m_ObjectHideFlags: 0
@@ -2368,7 +2387,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
     m_FontSize: 60
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 60
@@ -2655,7 +2674,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
     m_FontSize: 60
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 60

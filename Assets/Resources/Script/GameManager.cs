@@ -241,8 +241,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (SceneManager.GetActiveScene().name == "TmpScene")//테스트 중이라면 시작 창으로
             {
-                //PhotonNetwork.LeaveRoom();
+                PhotonNetwork.LeaveRoom();
                 SceneManager.LoadScene("AuthScene");
+                PhotonNetwork.Disconnect();
                 //Invoke("AA", 3f);
                 //PhotonNetwork.LoadLevel("AuthScene");
             }     

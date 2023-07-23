@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
     public float sfxVolume;
     public int channels;//채널의 개수
     AudioSource[] sfxPlayers;
-    int channelsIndex;
+    int channelsIndex;//현재 실행 중 인 플레이어 번호
 
     public enum Sfx {Dead, Hit, LevelUp=3, Lose, Melee, Range = 7,Select, Win }//random으로 활용 가능함
     public enum Sfx2 { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7, Select, Win }
@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
+        bgmPlayer.Play();
 
         //효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");

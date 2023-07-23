@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Pun.Demo.Asteroids;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Bullet : MonoBehaviourPunCallbacks
 {
@@ -45,6 +46,15 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             Invoke("TimeOver", lifeTime);//총알 생성 시 일정 시간 후 삭제
         } 
+    }
+
+    private void FixedUpdate()
+    {
+        if (tag == "PlayerAttack") 
+        {
+            transform.Rotate(Vector3.up * 450 * Time.deltaTime);//right
+
+        }
     }
 
     void TimeOver() {
