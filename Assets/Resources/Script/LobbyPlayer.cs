@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+//using static AuthManager;
 
 public class LobbyPlayer : MonoBehaviour
 {
@@ -12,6 +15,9 @@ public class LobbyPlayer : MonoBehaviour
     public float zValue;
 
     SkinnedMeshRenderer[] skinnedMeshRenderer = new SkinnedMeshRenderer[2];
+    AudioManager audioManager;
+    AuthManager authManager;
+    public Image[] archiveImages;
 
     private void Awake()
     {
@@ -22,16 +28,31 @@ public class LobbyPlayer : MonoBehaviour
         skinnedMeshRenderer[0].material.SetColor("_ColorControl", new Color(0.427451f, 0.4980391f, 0.5098039f, 1));
         //2번 몸체
         skinnedMeshRenderer[1].material.SetColor("_ColorControl", new Color(0.345098f, 0.682353f, 0.7490196f, 1));
-    }
 
+        authManager = AuthManager.Instance;
+    }
+    
     void OnEnable()
     {
+        //왜곡장
         StartCoroutine(Dissolve());
+        //배경 음악 초기화
+        audioManager = authManager.GetComponent<AudioManager>();//이대로 두자
+        audioManager.PlayBgm(AudioManager.Bgm.Lobby);
+
+        int arrSize = System.Enum.GetValues(typeof(AuthManager.ArchiveType)).Length;
+        //업적 보이도록
+        for (int index = 0; index < arrSize; index++)
+        {
+            Debug.Log(index + ":"+authManager.originAchievements.Arr[index]);
+            if (authManager.originAchievements.Arr[index] == 1) 
+                archiveImages[index].color = Color.white;
+        }
     }
     void FixedUpdate()
     {
-
-            Vector3 clickPosition = Input.mousePosition;
+        #region 시야 조절
+        Vector3 clickPosition = Input.mousePosition;
             clickPosition.z = -mainCamera.transform.position.z; // 클릭 좌표의 z값을 카메라와 동일하게 설정합니다.
 
             // 클릭한 좌표를 카메라 좌표로 변환합니다.
@@ -41,9 +62,11 @@ public class LobbyPlayer : MonoBehaviour
             worldPosition.x += xValue;
             worldPosition.y += yValue;
             worldPosition.z = zValue;
-            target.position = worldPosition;     
+            target.position = worldPosition;
+        #endregion
     }
 
+    #region 왜곡장
     public IEnumerator Dissolve()
     {
         float firstValue = 1f;      //true는 InvisibleDissolve(2초)
@@ -66,4 +89,5 @@ public class LobbyPlayer : MonoBehaviour
         skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", targetValue);
         skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", targetValue);
     }
+    #endregion
 }

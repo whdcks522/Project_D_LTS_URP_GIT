@@ -29,9 +29,13 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     [Header("UI")]
     public GameObject playerName;//플레이어 이름
+    public GameObject darkThunder;//플레이어 이름
+    public GameObject blueThunder;//플레이어 이름
     bool isControl;
     bool isDissolve;
     bool isShot;
+    float curTime = 1f;
+    float maxTime = 1f;//사격 후 대기시간
 
     private void Awake()
     {
@@ -67,11 +71,15 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //플레이어 이름
-        //playerName = gameManager.Get("PlayerName");
-        //플레이어 이름
-        //playerName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
         playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
+        //스킬 바
+        if (photonView.IsMine)
+        {
+            darkThunder.gameObject.SetActive(true);
+            darkThunder.GetComponent<Image>().color = Color.gray;
+            blueThunder.gameObject.SetActive(true);
+        }
+        
 
         if (photonView.IsMine) //자신의 것일 경우
         {
@@ -99,11 +107,22 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //UI 위치 초기화
         if (!isShot)
         {
-            playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward);//transform.GetChild(1).
+            playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 0.5f);//transform.GetChild(1).
+            if (photonView.IsMine) 
+            {
+            darkThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 2.35f);
+            blueThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 2.35f);
+            }
         }
         else 
         {
             isShot = false;
+        }
+
+        if (photonView.IsMine) 
+        {
+            curTime += Time.deltaTime;
+            blueThunder.GetComponent<Image>().fillAmount = curTime / maxTime;
         }
     }
 
@@ -129,6 +148,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if(photonView.IsMine)
             spot.transform.position = transform.position;
         isControl = false;
+        agent.enabled = true;//111111111111111111111111
+        if(agent.enabled)
         agent.isStopped = true;
         lr.enabled = false;
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
@@ -140,9 +161,19 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     public void Activate()//2초후 부터 움직이도록
     {
+        //사격 시간 측정
+        curTime = maxTime;
+        //통제 가능
         isControl = true;
+        //2초 후부터 플레이어 이름 UI 활성화
         Color nameColor = playerName.GetComponent<Text>().color;
         playerName.GetComponent<Text>().color = new Color(nameColor.r, nameColor.g, nameColor.b, 1);
+        //이미지 관리
+        if (photonView.IsMine) 
+        {
+        darkThunder.GetComponent<Image>().color = Color.gray;
+        blueThunder.GetComponent<Image>().color = Color.white;
+        }
     }
 
     private void OnTriggerEnter(Collider other)//적이 충돌함
@@ -159,9 +190,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 //총알이면 비활성화
                 if (otherBullet.isBullet)
                     otherBullet.photonView.RPC("BulletOff", RpcTarget.AllBuffered);
-            }
-
-            
+            }    
         }
         else if (other.gameObject.tag == "StageStart" && photonView.IsMine)// && SceneManager.GetActiveScene().name == "TmpScene"
             gameManager.photonView.RPC("EnterStage", RpcTarget.AllBuffered);//모든 플레이어에게 입장을 알림
@@ -173,11 +202,18 @@ public class ClickMove : MonoBehaviourPunCallbacks
     {
         //핏자국
         particle.Play();
-
+        //피격 소리
+        gameManager.audioManager.PlaySfx(AudioManager.Sfx.Impact, true);
         //통제 불가
         isControl = false;
-        if(agent.enabled)
-        agent.isStopped = true;
+        //경로 설정
+        if (agent.enabled) 
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+            
+
         lr.enabled = false;
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
         if (draw != null)
@@ -188,9 +224,16 @@ public class ClickMove : MonoBehaviourPunCallbacks
         anim.SetBool("isRun", false);
         anim.SetBool("isLive", false);
         anim.SetTrigger("isDie");
-        //ui 종료
+        //플레이어 이름 관리
         Color nameColor = playerName.GetComponent<Text>().color;
         playerName.GetComponent<Text>().color = new Color(nameColor.r, nameColor.g, nameColor.b, 0);
+        //스킬 바 관리
+        if (photonView.IsMine) 
+        {
+            Color thunderColor = new Color(0, 0, 0, 0);
+            darkThunder.GetComponent<Image>().color = thunderColor;
+            blueThunder.GetComponent<Image>().color = thunderColor;
+        }    
     }
     #endregion
 
@@ -205,24 +248,16 @@ public class ClickMove : MonoBehaviourPunCallbacks
     #endregion
 
     #region 사격
-    void GunReload() 
-    {
-        //투사체 생성
-        GameObject bullet = gameManager.Get("PlayerBulletA");
-        //투사체 잔상 제거
-        bullet.GetComponent<Bullet>().trailRenderer.Clear();
-        //투사체 위치 조정
-        bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0) + transform.forward.normalized;
-        //투사체 네트워크를 통한 가속
-        bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
-        //투사체 잔상 제거
-        bullet.GetComponent<Bullet>().trailRenderer.Clear();
-        //UI관리를 위해 모두에게 알리기
-        photonView.RPC("ShotControl", RpcTarget.AllBuffered);
-    }
+    
 
     [PunRPC]
-    void ShotControl()=> isShot = true;
+    void ShotControl()
+    {
+        //플레이어 UI 관리를 위한 불값
+        isShot = true;
+        //소리 재생
+        gameManager.audioManager.PlaySfx(AudioManager.Sfx.PlayerBulletA, true);
+    }
     #endregion
 
     #region 쳐다보기
@@ -235,42 +270,58 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
             // 트리거는 무시한다
             spot.position = hit.point;
-        
     }
     #endregion
-    
+
     void Update()
     {
         if (photonView.IsMine && isControl && !gameManager.isChat)//로컬이 아니면 취소
         {
            
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && curTime >= maxTime)
             {
                 #region 플레이어공격A
+                //무반동 삭제
+                curTime = 0f;
+                
                 //일단 정지
                 agent.isStopped = true;
                 lr.enabled = false;
                 anim.SetBool("isRun", false);
                 anim.SetTrigger("isAttack");
-
+                //위치 고정
                 spot.position = transform.position;
                 agent.velocity = Vector3.zero;
                 rigid.velocity = Vector3.zero;
                 rigid.angularVelocity = Vector3.zero;
-
+                //목표 고정
                 targetControl();
                 
-                    //사격한 지점을 보도록
-                    transform.LookAt(spot.position);
-                    transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-                    //발사
-                    //photonView.RPC("GunReload", RpcTarget.AllBuffered, transform.rotation.eulerAngles);
-                GunReload();
+                //사격한 지점을 보도록
+                transform.LookAt(spot.position);
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+
+                //투사체 생성
+                GameObject bullet = gameManager.Get("PlayerBulletA");
+                //투사체 잔상 제거
+                bullet.GetComponent<Bullet>().trailRenderer.Clear();
+                //투사체 위치 조정
+                bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0) + transform.forward.normalized;
+                //투사체 네트워크를 통한 가속
+                bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
+                //투사체 잔상 제거
+                bullet.GetComponent<Bullet>().trailRenderer.Clear();
+                //UI관리를 위해 모두에게 알리기
+                photonView.RPC("ShotControl", RpcTarget.AllBuffered);
                 #endregion
             }
             
             else if (Input.GetMouseButton(1))
             {
+                if (Input.GetMouseButtonDown(1)) 
+                {
+                    gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
+                }
                 #region 마우스 이동
                 targetControl();
                

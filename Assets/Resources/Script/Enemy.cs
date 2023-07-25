@@ -285,7 +285,7 @@ public class Enemy : MonoBehaviourPunCallbacks
             }
         }
         
-        if (isAllDie)
+        if (isAllDie)//전멸 했을 경우
             gameManager.photonView.RPC("AbsoluteReviveStart", RpcTarget.AllBuffered);
         
     }

@@ -196,8 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bars: {fileID: 4733484504574735526, guid: 7cbed04d131cd7046b2873827e05cff3, type: 3}
   playerGroup: {fileID: 1002974325}
-  playerName: {fileID: 598041181245767048, guid: 72fd01054393d04488613ef97bbd5103,
-    type: 3}
   canvas: {fileID: 1812170311}
   chapterArea: {fileID: 2049329598}
   generatePos:
@@ -216,9 +214,13 @@ MonoBehaviour:
   MaxEnemiesCount: 0
   mouse: {fileID: 2049329599}
   isChat: 0
+  audioManager: {fileID: 0}
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: BossA
+    - enemyType: Dummy
+      generateIndex: 3
+  - enemySpawnInfo:
+    - enemyType: Dummy
       generateIndex: 6
 --- !u!114 &49552104
 MonoBehaviour:
@@ -1494,7 +1496,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8392157, g: 0.9465947, b: 1, a: 1}
+  m_Color: {r: 0.8679245, g: 0.53631186, b: 0.6720916, a: 1}
   m_Intensity: 0.43
   m_Range: 10
   m_SpotAngle: 30

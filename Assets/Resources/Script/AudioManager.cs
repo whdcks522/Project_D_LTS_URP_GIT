@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class AudioManager : MonoBehaviour
 {
     [Header("Bgm")]
-    public AudioClip bgmClip;
+    public AudioClip[] bgmClips;
     public float bgmVolume;
     AudioSource bgmPlayer;
 
@@ -17,8 +17,8 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelsIndex;//현재 실행 중 인 플레이어 번호
 
-    public enum Sfx {Dead, Hit, LevelUp=3, Lose, Melee, Range = 7,Select, Win }//random으로 활용 가능함
-    public enum Sfx2 { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7, Select, Win }
+    public enum Bgm {Auth, Lobby, Entrance, Chapter1, Chapter1_BossA}//random으로 활용 가능함
+    public enum Sfx { DoorOpen, DoorDrag = 6, Impact = 9 , Step = 15, PlayerBulletA = 18, Paper = 24}//29
 
     private void Awake()
     {
@@ -29,8 +29,6 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClip;
-        bgmPlayer.Play();
 
         //효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");
@@ -44,20 +42,34 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBgm(bool isPlay) 
+    public void PlayBgm(Bgm bgm) 
     {
-        if (isPlay) 
+        bgmPlayer.Stop();
+        switch (bgm) 
         {
-            bgmPlayer.Play();
+            case Bgm.Auth:
+                bgmPlayer.clip = bgmClips[0];
+                break;
+            case Bgm.Lobby:
+                bgmPlayer.clip = bgmClips[1];
+                break;
+            case Bgm.Entrance:
+                bgmPlayer.clip = bgmClips[2];
+                break;
+            case Bgm.Chapter1:
+                bgmPlayer.clip = bgmClips[3];
+                break;
+            case Bgm.Chapter1_BossA:
+                bgmPlayer.clip = bgmClips[4];
+                break;
         }
-        else 
-        {
-            bgmPlayer.Stop();
-        }
+        bgmPlayer.Play();
     }
 
+    
+
     //효과음 재생
-    public void PlaySfx(Sfx sfx) 
+    public void PlaySfx(Sfx sfx, bool isUseRan) 
     {
         for (int index = 0; index < sfxPlayers.Length; index++) 
         {
@@ -65,8 +77,29 @@ public class AudioManager : MonoBehaviour
             if (sfxPlayers[loopIndex].isPlaying) continue;//실행중이라면 continue
 
             int ranIndex = 0;
-            if (sfx == Sfx.Hit || sfx == Sfx.Melee) //Hit, Melee를 위함, 갯수가 차이나면 switch 사용
-                ranIndex = Random.Range(0, 2);//효과음 랜덤을 위함
+            if (isUseRan) 
+            {
+                int maxRanIndex = 1;//랜덤 최대치
+                switch (sfx)
+                {
+                    case Sfx.DoorOpen:
+                    case Sfx.Impact:
+                    case Sfx.PlayerBulletA:
+                        maxRanIndex = 6;
+                        break;
+
+                    case Sfx.Paper:
+                        maxRanIndex = 5;
+                        break;
+
+                    case Sfx.DoorDrag:
+                    case Sfx.Step:
+                        maxRanIndex = 3;
+                        break;
+                    
+                }
+                ranIndex = Random.Range(0, maxRanIndex);//효과음 랜덤을 위함
+            }
 
             channelsIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx + ranIndex];

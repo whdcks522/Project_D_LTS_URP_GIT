@@ -11,20 +11,21 @@ using UnityEngine.SceneManagement;
 
 public class AuthManager : MonoBehaviour//MonoBehaviour
 {
-    private static AuthManager instance = null;
+    private static AuthManager instance;// = null
     public static AuthManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new AuthManager();
+                instance = FindObjectOfType<AuthManager>();//new AuthManager();
             }
             return instance;
         }
     }
-
-    AudioManager audioManager;
+    public Text stateText;
+    public GameObject fireImage;
+    public AudioManager audioManager;
 
     public bool IsFirebaseReady { get; private set; }//현재 파이어베이스에 접근 가능한 환경인지
     public bool IsSignInOnProgress { get; private set; }//로그인 진행중인지 확인용(로그인중 로그인 요청 방지)
@@ -33,17 +34,15 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     {
         //해상도
         Screen.SetResolution(1280, 720, false);
-        //초기화
+        //배경 음악 초기화
         audioManager = GetComponent<AudioManager>();
     } 
 
 
     void Start()
     {
-        if (instance == null)
-                            instance = this;
-        else if (instance != this)
-                            Destroy(instance.gameObject);
+        audioManager.PlayBgm(AudioManager.Bgm.Auth);
+
         DontDestroyOnLoad(this.gameObject);
 
         emailField.text = "222@222.2";
@@ -57,6 +56,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
             var result = task.Result;//여기서는 또 되네(결과를 받아옴)
             if (result != DependencyStatus.Available)//사용 가능한 상태가 아니라면
             {
+                stateText.text = result.ToString();
                 Debug.LogError(result.ToString());
                 IsFirebaseReady = false;
             }
@@ -68,6 +68,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
                 firebaseAuth = FirebaseAuth.DefaultInstance;//인증을 집중적으로 관리하는 오브젝트를 가져옴
             }
             btnGroup.SetActive(IsFirebaseReady);//버튼 입력 가능한 것 다시 조정
+            fireImage.SetActive(!IsFirebaseReady);
         });//async이므로 비동기, 여기서 안멈추고 계속 다음 진행
     }
     public FirebaseApp firebaseApp;//파이어베이스 전체 어플리케이션 관리
@@ -83,22 +84,31 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     #region 회원가입
     public void Create() //회원가입
     {
+        fireImage.SetActive(true);
         firebaseAuth.CreateUserWithEmailAndPasswordAsync(emailField.text, passwordField.text).ContinueWith(task =>
         {
             if (task.IsCanceled) //회원가입 취소
             {
+                stateText.text = "회원가입 취소";
                 Debug.LogError("회원가입 취소");
+                fireImage.SetActive(false);
                 return;
             }
             if (task.IsFaulted) //회원가입 실패(이메일 오류, 비밀번호가 간단함, 이미 가입됨)
             {
+                stateText.text = "회원가입 실패";
                 Debug.LogError("회원가입 실패");
+                fireImage.SetActive(false);
                 return;
             }
             //취소나 실패가 아니면 회원가입
             AuthResult authResult = task.Result;
             FirebaseUser newUser = authResult.User;
+            stateText.text = "회원가입 완료";
             Debug.Log("회원가입 완료");
+            fireImage.SetActive(false);
+            //성공 효과음
+            audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
         });
     }
     #endregion
@@ -106,29 +116,44 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     #region 로그인
     public void Login()//로그인
     {
-         if (!IsFirebaseReady || IsSignInOnProgress || User != null) //1 = 대기중이 아닐 경우, 2 = 이미 진행 중 일 경우 3 = 이미 로그인 한 경우
+        if (!IsFirebaseReady || IsSignInOnProgress || User != null) //1 = 대기중이 아닐 경우, 2 = 이미 진행 중 일 경우 3 = 이미 로그인 한 경우
+        {
+            stateText.text = "로그인 오류";
+            Debug.LogError("로그인 오류");
             return;
+        }
         //로그인 진행 
         IsSignInOnProgress = true;
         btnGroup.SetActive(false);
+        fireImage.SetActive(true);
 
         firebaseAuth.SignInWithEmailAndPasswordAsync(emailField.text, passwordField.text).ContinueWithOnMainThread(task =>
         {
+            stateText.text = $"Sign in status: {task.Status}";
             Debug.Log($"Sign in status: {task.Status}");//현재 로그인의 상태
             IsSignInOnProgress = false;//여기까지 왔다는 것 자체가, 로그인 처리 자체는 완료라는 뜻
             btnGroup.SetActive(true);
+            fireImage.SetActive(false);
 
             if (task.IsFaulted) //어떤 오류가 발생했는지
             {
+                stateText.text = "Sign-in canceled(오류)" + task.Exception;
                 Debug.LogError("Sign-in canceled(오류)");
                 Debug.LogError(task.Exception);
             }
-            else if (task.IsCanceled) Debug.LogError("Sign-in canceled(취소)");//취소
+            else if (task.IsCanceled) 
+            {
+                stateText.text = "Sign-in canceled(취소)";
+                Debug.LogError("Sign-in canceled(취소)");//취소
+            } 
             else// 정상적인 경우 task에 이메일과 비밀번호에 대응되는 유저 정보가 저장됨
             {
                 AuthResult authResult = task.Result;
                 User = authResult.User;
+                stateText.text = "로그인";
                 Gone();
+                //성공 효과음
+                audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
             }
         }
         );
@@ -136,19 +161,37 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     #endregion
     public void Gone() //게임 시작
     {
-        playerEmail = User.Email;
-        playerId = User.UserId;
+        if (User != null)
+        {
+            stateText.text = "입장 중...";
+            audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+            //미리 설정
+            playerEmail = User.Email;
+            playerId = User.UserId;
 
-        //불러오기
-        LoadData();
-
-        if (User != null) //SceneManager.LoadScene("FakeScene");//
-            SceneManager.LoadScene("LobbyScene");
-        else Debug.Log("Game Start Error");
+            //불러오기
+            LoadData();
+            originAchievements.classEmail = playerEmail;
+            Invoke("RealGone", 2f);
+        }
+        else 
+        {
+            audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
+            stateText.text = "게임 시작 오류";
+            Debug.Log("Game Start Error");
+        }
     }
+
+    void RealGone() 
+    {
+        SceneManager.LoadScene("LobbyScene");
+    }
+
     public void LogOut()//로그아웃
     {
+        audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
         firebaseAuth.SignOut();
+        stateText.text = "로그아웃";
         Debug.Log("로그아웃");
     }
 
@@ -156,22 +199,22 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     {
         if (User == null)
         {
-            Debug.Log("User is not logged in. Unable to load data.");
+            Debug.Log("유저가 로그인 하지 않아, 데이터를 불러 올 수 없습니다");
             return;
         }
 
-        // Create a reference to the database
+        // 데이터 베이스에 대한 참조 생성
         DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        // Get the reference to the achievements data under the user's ID
-        DatabaseReference achievementsRef = databaseReference.Child("achievements").Child(playerId);
+        //유저 ID를 통해 업적 데이터에 대한 참조 획득
+        DatabaseReference achievementsRef = databaseReference.Child("achievements").Child(playerId);//playerId
 
-        // Read the data from the database
+        //데이터베이스로부터 데이터를 읽어옴
         achievementsRef.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
-                Debug.LogError("Failed to load data from the database: " + task.Exception.Flatten().InnerExceptions);
+                Debug.LogError("데이터베이스로부터 데이터를 읽는데 실패함: " + task.Exception.Flatten().InnerExceptions);
             }
             else if (task.IsCompleted)
             {
@@ -179,19 +222,25 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
                 if (dataSnapshot != null && dataSnapshot.Exists)
                 {
-                    // Get the JSON data from the snapshot
+                    // 스냅샷으로부터 JSON 데이터를 가져옴
                     string json = dataSnapshot.GetRawJsonValue();
 
-                    // Convert the JSON data back to the Achievements object
+                    //JSON을 업적 데이터로 전환
                     Achievements achievements = JsonUtility.FromJson<Achievements>(json);
-
-                    // Use the loaded data as needed
-                    Debug.Log("Achievements loaded successfully. x: " + achievements.x);
-                    Debug.Log("Achievements loaded successfully. x: " + achievements.y);
+                    /*
+                     int noShotIndex = (int)ArchiveType.NoShot;
+                    Debug.Log("NoShot의 인덱스 값: " + noShotIndex);
+                     */
+                    int arrSize = System.Enum.GetValues(typeof(ArchiveType)).Length;
+                    for (int index = 0; index < arrSize; index++) 
+                    {
+                        //Debug.Log((ArchiveType)index + ":" + achievements.Arr[index]);
+                        originAchievements.Arr[index] = achievements.Arr[index];
+                    }
                 }
                 else
                 {
-                    Debug.Log("No data found for the specified user.");
+                    Debug.Log("해당 유저에 대한 정보가 없음");
                 }
             }
         });
@@ -199,37 +248,40 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
     public void SaveJson() 
     {
+        Debug.Log("Save");
         if (User == null)
         {
-            Debug.Log("User is not logged in. Unable to save data.");
+            Debug.Log("유저가 로그인 하지 않아, 데이터를 저장 할 수 없습니다");
             return;
         }
 
-        // Create a reference to the database
+        // 데이터베이스에 대한 참조 생성
         DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        // Convert the Achievements object to JSON
-        string json = JsonUtility.ToJson(new Achievements());
+        //업적 정보를 JSON으로 전환
+        string json = JsonUtility.ToJson(originAchievements);
 
-        // Set the JSON data in the database under the user's ID
+        //유저 ID를 통해 JSON 데이터를 데이터베이스에 저장
         databaseReference.Child("achievements").Child(playerId).SetRawJsonValueAsync(json).ContinueWith(task =>//User.UserId
         {
             if (task.IsFaulted)
             {//task.Exception
-                Debug.LogError("Failed to save JSON data to the database: " + task.Exception.Flatten().InnerExceptions);//160번째 줄
+                Debug.LogError("JSON 데이터를 데이터베이스에 저장하는데 실패함: " + task.Exception.Flatten().InnerExceptions);//160번째 줄
             }
             else if (task.IsCompleted)
             {
-                Debug.Log("JSON data saved successfully.");
+                Debug.Log("JSON 데이터가 성공적으로 저장됨");
             }
         });
     }
     //#endregion
 
-    class Achievements 
+    public Achievements originAchievements = new Achievements();
+    public enum ArchiveType { Undead, NoShot, Chapter1}
+    [System.Serializable]
+    public class Achievements 
     {
-        //int[] a = { 0, 0, 0 };
-        public int x = 5;
-        public int y = 5;
+        public string classEmail = "";
+        public int[] Arr = new int[3];
     }
 }

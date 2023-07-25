@@ -10,13 +10,11 @@ public class AchiveManager : MonoBehaviour
     public GameObject uiNotice;
     enum Achive { UnlockPotate, UnLockBean}
     Achive[] achives;
-    WaitForSecondsRealtime wait;
 
     private void Awake()
     {
         //주어진 열거형(Enum)의 데이터를 모두 가져오는 함수
         achives = (Achive[])Enum.GetValues(typeof(Achive));//achives 초기화
-        wait = new WaitForSecondsRealtime(5);//컨트롤 스페이스바
         if (!PlayerPrefs.HasKey("MyData"))Init();//처음이라면 저장
     }
 
@@ -45,6 +43,7 @@ public class AchiveManager : MonoBehaviour
         }
     }
 
+    //저장하는 측
     private void LateUpdate()
     {
         foreach (Achive achive in achives) 
@@ -81,13 +80,6 @@ public class AchiveManager : MonoBehaviour
         }
     }
     
-    IEnumerator NoticeRoutine() //해금 알림
-    {
-        uiNotice.SetActive(true);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
-        yield return wait;
-        uiNotice.SetActive(false);
-    }
-    */
+  */
 
 }

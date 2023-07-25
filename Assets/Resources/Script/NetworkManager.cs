@@ -26,9 +26,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // ◀버튼 -2 , ▶버튼 -1 , 셀 숫자
     public void MyListClick(int num)
     {
-        if (num == -2) --currentPage;
-        else if (num == -1) ++currentPage;
-        else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
+
+
+        if (num == -2)
+        {
+            AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
+            --currentPage;
+        }
+        else if (num == -1)
+        {
+            AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
+            ++currentPage;
+        }
+        else 
+        {
+            AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+            PhotonNetwork.JoinRoom(myList[multiple + num].Name);
+        }
+        
         MyListRenewal();
     }
 
@@ -83,9 +98,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         Connect();
+        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
+
     }
 
- 
 
     public void Connect() => PhotonNetwork.ConnectUsingSettings();//AuthManager에서 이미 써서 필요 없음
 
@@ -101,7 +117,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         myList.Clear();
     }
 
-    public void Disconnect() => PhotonNetwork.Disconnect();
+    public void Disconnect() 
+    {
+        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+        PhotonNetwork.Disconnect();
+    } 
     public override void OnDisconnected(DisconnectCause cause)//*********************8
     {
         SceneManager.LoadScene("AuthScene");
@@ -110,11 +130,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region 방
     //**********************************룸 이름이 비어있다면
-    public void CreateRoom() => PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 2 });//수정함
-    public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
+    public void CreateRoom() //방 생성
+    {
+        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+        PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 2 });//수정함
+    }
+    public void JoinRandomRoom()//랜덤 방 입장
+    {
+        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+        PhotonNetwork.JoinRandomRoom();
+    } 
     public override void OnJoinedRoom()
     {
-        StartCoroutine(lobbyPlayer.Dissolve());
         PhotonNetwork.LoadLevel("GameScene");
     }
 
@@ -127,9 +154,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //PhotonNetwork.CurrentRoom.MaxPlayers: 방 최대 사람 수
     #endregion
     //----------
-    public void callAuthManager()//저장하기 인듯
+    public void callAuthManager(bool isMaximize)//저장하기 인듯
     {
-        if (AuthManager.Instance.User != null) AuthManager.Instance.SaveJson();
-        else { Debug.Log("LobbyError"); }
+        if (isMaximize) 
+        {
+            AuthManager.Instance.originAchievements.Arr[0] = 0;
+            AuthManager.Instance.originAchievements.Arr[1] = 0;
+            AuthManager.Instance.originAchievements.Arr[2] = 0;
+        }
+        if (AuthManager.Instance.User != null) 
+        {
+            AuthManager.Instance.SaveJson();
+            AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+        } 
+        else {
+            AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
+            Debug.Log("LobbyError"); 
+        }
     }
 }

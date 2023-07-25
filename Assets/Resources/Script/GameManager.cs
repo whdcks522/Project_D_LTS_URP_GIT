@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using static AuthManager;
 using Random = UnityEngine.Random;
 //using static UnityEditor.Progress;
 
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     #endregion
    
     //오브젝트 풀링
-    string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", "PlayerName", 
-        "BossA", "EnemyBulletB"};//, "MinePlayer"
+    string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", 
+        "BossA", "EnemyBulletB"};
     List<GameObject>[] pools;//실제로 주소가 저장될 곳
 
     [Header("적 관련")]
@@ -38,7 +39,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     
     [Header("플레이어 관련")]
     public GameObject playerGroup; //플레이어가 생성될 부모
-    public GameObject playerName;//플레이어 이름
     [Header("스테이지 관련")]
     public GameObject canvas;//캔버스
     public GameObject chapterArea;//닿으면 게임 시작
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     PhotonView photonView;
     bool isAllreadyAbs;
     public bool isChat;
-
+    public AudioManager audioManager;
     #region 적 정보 클래스
     [Serializable]
     public class EnemySpawnInfo
@@ -93,11 +93,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         pools = new List<GameObject>[resourceNames.Length];
         for (int index = 0; index < pools.Length; index++)//풀 하나하나 초기화
             pools[index] = new List<GameObject>();
-
+        //포톤 뷰
         photonView = GetComponent<PhotonView>();
+        //배경 음악 초기화
+        audioManager = AuthManager.Instance.GetComponent<AudioManager>();
 
         //적 목록 리스트 초기화
         enemySpawnList = new List<EnemySpawnInfo>();
+        //적 목록 확인
         enemySpawnListControl();
     }
 
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //시작하는 물리적 위치를 이동
         minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, Random.Range(-4, 2));
         #endregion
+        audioManager.PlayBgm(AudioManager.Bgm.Entrance);
     }
 
 
@@ -152,13 +156,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (name == "Bars")//적 체력 바 
             {
-
                 select = Instantiate(Bars, transform);
-                select.transform.parent = canvas.transform;
-            }
-            else if (name == "PlayerName") //플레이어 이름
-            {
-                select = Instantiate(playerName, transform);
                 select.transform.parent = canvas.transform;
             }
             else
@@ -173,6 +171,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     public void AbsoluteReviveStart() {
+        audioManager.PlayBgm(AudioManager.Bgm.Entrance);
         StartCoroutine(AbsoluteRevive());
     } 
     #region 플레이어 전원 사망 시, 특수 부활
@@ -229,7 +228,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    void AA()=> SceneManager.LoadScene("AuthScene");
+    void TmpEnd() 
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("AuthScene");
+        PhotonNetwork.Disconnect();
+    }
 
     #region 현재 스테이지 클리어해서 다음 스테이지로
     [PunRPC]
@@ -237,22 +241,19 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
             //다음 스테이지로
             curStage++;
-        if (curStage == enemySpawnInfoArray.Length)
+        if (curStage == enemySpawnInfoArray.Length)//챕터 올 클리어
         {
             if (SceneManager.GetActiveScene().name == "TmpScene")//테스트 중이라면 시작 창으로
             {
-                PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene("AuthScene");
-                PhotonNetwork.Disconnect();
-                //Invoke("AA", 3f);
-                //PhotonNetwork.LoadLevel("AuthScene");
+                Invoke("TmpEnd", 1f);
             }     
             else if (SceneManager.GetActiveScene().name == "GameScene")//게임 중이라면 로비로
             {
+                AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
+                AuthManager.Instance.SaveJson();
                 PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("LobbyScene");
             }
-
         }
         else 
         {
@@ -268,6 +269,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             mouse.VisibleDissolve();
             //적 리스트 초기화
             enemySpawnListControl();
+            //대기실 소리
+            audioManager.PlayBgm(AudioManager.Bgm.Entrance);
+            //퇴장 효과음
+            audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
         }  
     }
     #endregion
@@ -285,6 +290,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         mouse.InvisibleDissolve();
         //쥐 UI 종료
         mouse.isMaxfalse();
+        //일반 전투 배경 음악
+        if (curStage != enemySpawnInfoArray.Length - 1)
+        {
+            audioManager.PlayBgm(AudioManager.Bgm.Chapter1);
+        }
+        else  //보스 전투 배경 음악
+        {
+            audioManager.PlayBgm(AudioManager.Bgm.Chapter1_BossA);
+        }
+        //입장 효과음
+        audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+
         //적 소환
         {
             foreach (var spawnInfo in enemySpawnList)

@@ -8064,7 +8064,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   col: {fileID: 0}
   target: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 50
   health: 0
   Bars: {fileID: 0}
   redBar: {fileID: 0}
@@ -8115,7 +8115,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: isRun
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: isDie
   - Type: 9
     SynchronizeType: 1

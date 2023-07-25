@@ -27,26 +27,22 @@ public class ChatManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RoomRenewal()
     {
-        ListText.text = "참가자 : ";
-        RoomInfoText.text = "방 정보 : ";
+        ListText.text = "";//참가자 : 
+        RoomInfoText.text = "";//방 정보 : 
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
-        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " / " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + PhotonNetwork.CurrentRoom.MaxPlayers + "최대";
+        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " / " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + " 최대 " + PhotonNetwork.CurrentRoom.MaxPlayers + "명";
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         RoomRenewal();
-        //PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-        //위에거 처럼 쓰면 모두에게 보이나 봄
         ChatRPC("<color=red>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         RoomRenewal();
-        //PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-        //위에거 처럼 쓰면 모두에게 보이나 봄
         ChatRPC("<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");//yellow
     }
 

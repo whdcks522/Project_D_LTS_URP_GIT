@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 429749025}
   - component: {fileID: 429749027}
   m_Layer: 5
-  m_Name: TextImage
+  m_Name: Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2131,8 +2131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bars: {fileID: 4733484504574735526, guid: 7cbed04d131cd7046b2873827e05cff3, type: 3}
   playerGroup: {fileID: 109184106}
-  playerName: {fileID: 598041181245767048, guid: 72fd01054393d04488613ef97bbd5103,
-    type: 3}
   canvas: {fileID: 783228458}
   chapterArea: {fileID: 1408540422}
   generatePos:
@@ -2151,10 +2149,11 @@ MonoBehaviour:
   MaxEnemiesCount: 0
   mouse: {fileID: 1347148263}
   isChat: 0
+  audioManager: {fileID: 0}
   enemySpawnInfoArray:
   - enemySpawnInfo:
     - enemyType: Dummy
-      generateIndex: 5
+      generateIndex: 3
   - enemySpawnInfo:
     - enemyType: Dummy
       generateIndex: 6
@@ -2913,7 +2912,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8392157, g: 0.9465947, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.4268129, b: 0.35857958, a: 1}
   m_Intensity: 0.43
   m_Range: 10
   m_SpotAngle: 30
@@ -3066,7 +3065,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 10
     m_Right: 0
-    m_Top: 0
+    m_Top: 10
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
