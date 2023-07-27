@@ -133,7 +133,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //오브젝트 활성화
         gameObject.SetActive(true);
         //위치 초기화
-        transform.position = gameManager.playerGroup.transform.position + new Vector3(0,0,Random.Range(-4, 2));
+        transform.position = gameManager.playerGroup.transform.position + new Vector3(0,0,Random.Range(-4f, 2f));
         //죽었을 때 충돌하지 않도록
         col.enabled = true;
         //애니메이션
@@ -198,7 +198,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     #region 곧죽음
     [PunRPC]
-    void SoonDie()//죽는 애니메이션에서 사용 
+    void SoonDie()//죽는 애니메이션에서 사용 (둘 다 사용함)
     {
         //핏자국
         particle.Play();
@@ -212,8 +212,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
             agent.isStopped = true;
             agent.enabled = false;
         }
-            
-
         lr.enabled = false;
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
         if (draw != null)

@@ -215,12 +215,13 @@ MonoBehaviour:
   mouse: {fileID: 2049329599}
   isChat: 0
   audioManager: {fileID: 0}
+  archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: Dummy
+    - enemyType: EnemyC
       generateIndex: 3
   - enemySpawnInfo:
-    - enemyType: Dummy
+    - enemyType: EnemyC
       generateIndex: 6
 --- !u!114 &49552104
 MonoBehaviour:

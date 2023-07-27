@@ -6008,10 +6008,10 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: isRevive
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: isDie
   - Type: 9
     SynchronizeType: 1

@@ -11773,7 +11773,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: isDie
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: isAttack
   - Type: 4
     SynchronizeType: 1
