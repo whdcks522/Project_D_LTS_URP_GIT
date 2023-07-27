@@ -247,9 +247,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     #endregion
 
-    #region 사격
-    
-
+    #region 사격제어
     [PunRPC]
     void ShotControl()
     {
@@ -313,6 +311,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 bullet.GetComponent<Bullet>().trailRenderer.Clear();
                 //UI관리를 위해 모두에게 알리기
                 photonView.RPC("ShotControl", RpcTarget.AllBuffered);
+                //업적 관리
+                gameManager.archiveNoShot = false;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
                 #endregion
             }
             

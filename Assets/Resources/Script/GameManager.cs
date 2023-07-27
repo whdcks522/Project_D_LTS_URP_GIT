@@ -11,7 +11,6 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using static AuthManager;
 using Random = UnityEngine.Random;
-//using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -54,6 +53,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     bool isAllreadyAbs;
     public bool isChat;
     public AudioManager audioManager;
+    //네트워크 통신 관련
+    [Header("업적 관련")]
+    bool archiveUnDead = true;//챕터 중, 한 번도 죽지 않을 것(죽으면 false)(0)
+    public bool archiveNoShot = true;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
     #region 적 정보 클래스
     [Serializable]
     public class EnemySpawnInfo
@@ -170,8 +173,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     #endregion
 
     [PunRPC]
-    public void AbsoluteReviveStart() {
+    public void AbsoluteReviveStart() 
+    {
+        //업적
+        archiveUnDead = false;
+        //배경음악
         audioManager.PlayBgm(AudioManager.Bgm.Entrance);
+
         StartCoroutine(AbsoluteRevive());
     } 
     #region 플레이어 전원 사망 시, 특수 부활
@@ -249,8 +257,23 @@ public class GameManager : MonoBehaviourPunCallbacks
             }     
             else if (SceneManager.GetActiveScene().name == "GameScene")//게임 중이라면 로비로
             {
+                //챕터 중, 한 번도 죽지 않을 것(업적 0)
+                if(archiveUnDead)
+                    AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Undead] = 1;
+
+                //챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(업적 1)
+                if (archiveNoShot)
+                    AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.NoShot] = 1;
+
+                //챕터 1 클리어(업적 2)
                 AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
+
+
+                //업적 저장
                 AuthManager.Instance.SaveJson();
+
+                //로비로 이동
+                Debug.Log("LeaveRoom");
                 PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("LobbyScene");
             }
@@ -277,6 +300,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
+
     #region 스테이지 시작
     [PunRPC]
     public void EnterStage() //둘 다 실행함
@@ -290,15 +314,24 @@ public class GameManager : MonoBehaviourPunCallbacks
         mouse.InvisibleDissolve();
         //쥐 UI 종료
         mouse.isMaxfalse();
-        //일반 전투 배경 음악
-        if (curStage != enemySpawnInfoArray.Length - 1)
+
+
+        if (curStage != enemySpawnInfoArray.Length - 1)//일반 전투
         {
+            if (curStage == 0)//첫 전투 일 경우
+            {
+                //ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();
+                //roomProperties.Add("IsAllowedToEnter", false);
+                //PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);
+            }
+
             audioManager.PlayBgm(AudioManager.Bgm.Chapter1);
         }
-        else  //보스 전투 배경 음악
+        else  //보스 전투
         {
             audioManager.PlayBgm(AudioManager.Bgm.Chapter1_BossA);
         }
+        
         //입장 효과음
         audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
 

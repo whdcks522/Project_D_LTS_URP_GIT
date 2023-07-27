@@ -40,8 +40,8 @@ public class LobbyPlayer : MonoBehaviour
         audioManager = authManager.GetComponent<AudioManager>();//이대로 두자
         audioManager.PlayBgm(AudioManager.Bgm.Lobby);
 
+        //업적 관리
         int arrSize = System.Enum.GetValues(typeof(AuthManager.ArchiveType)).Length;
-        //업적 보이도록
         for (int index = 0; index < arrSize; index++)
         {
             Debug.Log(index + ":"+authManager.originAchievements.Arr[index]);

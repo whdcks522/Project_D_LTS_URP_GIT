@@ -27,18 +27,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void MyListClick(int num)
     {
 
-
-        if (num == -2)
+        if (num == -2)//왼쪽 화살표
         {
             AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
             --currentPage;
         }
-        else if (num == -1)
+        else if (num == -1)//오른쪽 화살표
         {
             AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
             ++currentPage;
         }
-        else 
+        else //입장 버튼
         {
             AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
             PhotonNetwork.JoinRoom(myList[multiple + num].Name);
@@ -50,11 +49,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void MyListRenewal()
     {
-        
-        // 최대페이지
+        // 최대 페이지
         maxPage = (myList.Count % CellBtn.Length == 0) ? myList.Count / CellBtn.Length : myList.Count / CellBtn.Length + 1;
 
-        // 이전, 다음버튼
+        // 이전, 다음버튼 활성화, 비활성화
         PreviousBtn.interactable = (currentPage <= 1) ? false : true;
         NextBtn.interactable = (currentPage >= maxPage) ? false : true;
 
@@ -66,7 +64,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             CellBtn[i].transform.GetChild(0).GetComponent<Text>().text = (multiple + i < myList.Count) ? myList[multiple + i].Name : "";
             CellBtn[i].transform.GetChild(1).GetComponent<Text>().text = (multiple + i < myList.Count) ? myList[multiple + i].PlayerCount + "/" + myList[multiple + i].MaxPlayers : "";
         }
-        
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)//서버에서 자동으로 룸의 목록을 가져오는 그거인가 봄
@@ -83,7 +80,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             else if (myList.IndexOf(roomList[i]) != -1) myList.RemoveAt(myList.IndexOf(roomList[i]));
         }
         MyListRenewal();
-
     }
     #endregion
 
@@ -122,28 +118,66 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
         PhotonNetwork.Disconnect();
     } 
-    public override void OnDisconnected(DisconnectCause cause)//*********************8
+    public override void OnDisconnected(DisconnectCause cause)
     {
         SceneManager.LoadScene("AuthScene");
     }
     #endregion
 
     #region 방
-    //**********************************룸 이름이 비어있다면
+    
     public void CreateRoom() //방 생성
     {
         AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
         PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 2 });//수정함
     }
+
+    /*
+     public void CreateRoom()
+    {
+        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+
+        string roomName = RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text;
+
+        RoomOptions roomOptions = new RoomOptions
+        {
+            MaxPlayers = 2,
+            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { "IsAllowedToEnter", true } },
+            CustomRoomPropertiesForLobby = new string[] { "IsAllowedToEnter" },
+        };
+
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
+    }
+    */
     public void JoinRandomRoom()//랜덤 방 입장
     {
         AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
         PhotonNetwork.JoinRandomRoom();
-    } 
+    }
+    
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("GameScene");
     }
+
+    /*
+    public override void OnJoinedRoom()
+    {
+        // 룸 입장 전에 RoomOptions에서 설정한 bool 변수를 체크하여 조건에 따라 입장 허용 여부를 확인
+        bool canEnterRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToEnter"];
+        if (canEnterRoom)
+        {
+            Debug.Log("Win");
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+        else
+        {
+            Debug.Log("Fail");
+            WelcomeText.text = "이미 진행 중이므로, 룸에 입장 할 수 없습니다.";
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+    */
 
     public override void OnCreateRoomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }//같은 이름의 룸을 만들면 실패
     public override void OnJoinRandomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }//같은 이름의 룸을 만들면 실패

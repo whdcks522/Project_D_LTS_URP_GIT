@@ -8064,7 +8064,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   col: {fileID: 0}
   target: {fileID: 0}
-  maxHealth: 50
+  maxHealth: 200
   health: 0
   Bars: {fileID: 0}
   redBar: {fileID: 0}

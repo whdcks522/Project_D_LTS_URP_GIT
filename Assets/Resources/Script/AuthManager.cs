@@ -45,8 +45,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
 
-        emailField.text = "222@222.2";
-        passwordField.text = "222@222.2";
+        //emailField.text = "222@222.2";
+        //passwordField.text = "222@222.2";
 
         //준비가 안됐는데 사용하면 안되므로
         btnGroup.SetActive(false);
@@ -85,6 +85,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     public void Create() //회원가입
     {
         fireImage.SetActive(true);
+        stateText.text = "회원가입 중...";
+        Debug.Log("회원가입 중...");
         firebaseAuth.CreateUserWithEmailAndPasswordAsync(emailField.text, passwordField.text).ContinueWith(task =>
         {
             if (task.IsCanceled) //회원가입 취소
@@ -104,12 +106,13 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
             //취소나 실패가 아니면 회원가입
             AuthResult authResult = task.Result;
             FirebaseUser newUser = authResult.User;
-            stateText.text = "회원가입 완료";
-            Debug.Log("회원가입 완료");
-            fireImage.SetActive(false);
-            //성공 효과음
-            audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+            
         });
+        stateText.text = "회원가입 완료";
+        Debug.Log("회원가입 완료");
+        fireImage.SetActive(false);
+        //성공 효과음
+        audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
     }
     #endregion
 
@@ -172,7 +175,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
             //불러오기
             LoadData();
             originAchievements.classEmail = playerEmail;
-            Invoke("RealGone", 2f);
+            Invoke("RealGone", 2.5f);
         }
         else 
         {
@@ -227,14 +230,10 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
                     //JSON을 업적 데이터로 전환
                     Achievements achievements = JsonUtility.FromJson<Achievements>(json);
-                    /*
-                     int noShotIndex = (int)ArchiveType.NoShot;
-                    Debug.Log("NoShot의 인덱스 값: " + noShotIndex);
-                     */
+
                     int arrSize = System.Enum.GetValues(typeof(ArchiveType)).Length;
                     for (int index = 0; index < arrSize; index++) 
                     {
-                        //Debug.Log((ArchiveType)index + ":" + achievements.Arr[index]);
                         originAchievements.Arr[index] = achievements.Arr[index];
                     }
                 }
@@ -248,7 +247,6 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
     public void SaveJson() 
     {
-        Debug.Log("Save");
         if (User == null)
         {
             Debug.Log("유저가 로그인 하지 않아, 데이터를 저장 할 수 없습니다");

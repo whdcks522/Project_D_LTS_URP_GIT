@@ -9,12 +9,15 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class ChatManager : MonoBehaviourPunCallbacks
 {
+    [Header("채팅")]
     public Text ListText;
     public Text RoomInfoText;
     public Text[] ChatText;
     public InputField ChatInput;
     public PhotonView PV;
     GameManager gameManager;
+    //[Header("접속 관리")]
+
 
     private void Awake()
     {
@@ -31,19 +34,25 @@ public class ChatManager : MonoBehaviourPunCallbacks
         RoomInfoText.text = "";//방 정보 : 
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
-        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " / " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + " 최대 " + PhotonNetwork.CurrentRoom.MaxPlayers + "명";
+        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " / 현재  " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + " 최대  " + PhotonNetwork.CurrentRoom.MaxPlayers + "명";
     }
 
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    //public override void 
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)//각각인가봄
     {
+        //여기선 못막음
+
+        Debug.Log("Enter");
         RoomRenewal();
-        ChatRPC("<color=red>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
+        ChatRPC(newPlayer.NickName + "님이 참가하셨습니다", "");
     }
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)//각각인가봄
     {
+        Debug.Log("Exit");
         RoomRenewal();
-        ChatRPC("<color=red>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");//yellow
+        ChatRPC(otherPlayer.NickName + "님이 퇴장하셨습니다", "");
     }
 
     //PhotonNetwork.PlayerList[]:배열로 하나 하나 접근
@@ -55,7 +64,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Return))//엔터키 누를 시
         {
-            if (!gameManager.isChat) //열기
+            if (!gameManager.isChat && ChatInput.text == "") //열기
             {
                 gameManager.isChat = true;
                 ChatInput.Select();
@@ -66,7 +75,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
                 gameManager.isChat = false;
                 ChatInput.DeactivateInputField();
 
-                PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+                PV.RPC("ChatRPC", RpcTarget.All,  PhotonNetwork.NickName + " : " + ChatInput.text, AuthManager.Instance.playerEmail);
                 ChatInput.text = "";
             }
         }
@@ -75,28 +84,53 @@ public class ChatManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom() 
     {
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("LobbyScene");
-        photonView.RPC("RoomRenewal", RpcTarget.AllBuffered);
+        //if (gameManager.photonView.IsMine) //방장이면서 게임 시작중이면 나갈 수 없도록
+        {
+            //ChatRPC( "방장은 게임 진행 중 나갈 수 없습니다.", true);
+
+        }
+        //else 
+        {
+            Debug.Log("LeaveRoom");
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("LobbyScene");
+            photonView.RPC("RoomRenewal", RpcTarget.AllBuffered);
+        }
     }
 
     #region 채팅
 
     [PunRPC] // RPC는 플레이어가 속해있는 방 모든 인원에게 전달한다
-    void ChatRPC(string msg)
+    void ChatRPC(string msg, string chatMail)
     {
         bool isInput = false;
         for (int i = 0; i < ChatText.Length; i++)
+        { 
             if (ChatText[i].text == "")
             {
                 isInput = true;//들어가짐
-                ChatText[i].text = msg;
+                if(chatMail == "")//중립일 경우 흰색
+                    ChatText[i].text = "<color=#FFFFFFFF>" + msg + "</color>";
+                else if(chatMail == AuthManager.Instance.playerEmail)//자신으로 보일 경우 파란색
+                    ChatText[i].text = "<color=#58AFBFFF>" + msg + "</color>";
+                else//남으로 보일 경우 빨간색
+                    ChatText[i].text = "<color=#9C6359FF>" + msg + "</color>";
+
                 break;
             }
+        }
         if (!isInput) // 꽉차면 한칸씩 위로 올림
         {
-            for (int i = 1; i < ChatText.Length; i++) ChatText[i - 1].text = ChatText[i].text;//한칸씩 올림
-            ChatText[ChatText.Length - 1].text = msg;
+            for (int i = 1; i < ChatText.Length; i++) 
+                ChatText[i - 1].text = ChatText[i].text;//한칸씩 올림
+
+            //텅 빈 맨 마지막 갱신
+            if (chatMail == "")
+                ChatText[ChatText.Length - 1].text = "<color=#FFFFFFFF>" + msg + "</color>";
+            else if (chatMail == AuthManager.Instance.playerEmail)
+                ChatText[ChatText.Length - 1].text = "<color=#58AFBFFF>" + msg + "</color>";
+            else
+                ChatText[ChatText.Length - 1].text = "<color=#9C6359FF>" + msg + "</color>";
         }
     }
     #endregion

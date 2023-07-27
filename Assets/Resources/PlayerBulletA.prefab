@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 0}
   trailRenderer: {fileID: 0}
-  dmg: 200
+  dmg: 20
   speed: 15
   lifeTime: 1.3
   isBullet: 1
