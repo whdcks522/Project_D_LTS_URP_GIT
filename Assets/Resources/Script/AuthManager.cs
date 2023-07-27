@@ -284,4 +284,11 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
         public string classEmail = "";
         public int[] Arr = new int[3];
     }
+
+    public void Set333()
+    {
+        emailField.text = "333@333.3";
+        passwordField.text = "333@333.3";
+        Login();
+    }
 }

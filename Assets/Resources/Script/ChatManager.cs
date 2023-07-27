@@ -41,18 +41,17 @@ public class ChatManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)//각각인가봄
     {
-        //여기선 못막음
-
-        Debug.Log("Enter");
-        RoomRenewal();
-        ChatRPC(newPlayer.NickName + "님이 참가하셨습니다", "");
+        bool canEnterRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToEnter"];
+        if (canEnterRoom) //게임 시작 전에만 보임
+        {
+            RoomRenewal();
+            ChatRPC(newPlayer.NickName + "님이 참가하셨습니다", "");
+        }
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)//각각인가봄
     {
-        Debug.Log("Exit");
         RoomRenewal();
-        ChatRPC(otherPlayer.NickName + "님이 퇴장하셨습니다", "");
     }
 
     //PhotonNetwork.PlayerList[]:배열로 하나 하나 접근
@@ -84,17 +83,29 @@ public class ChatManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom() 
     {
-        //if (gameManager.photonView.IsMine) //방장이면서 게임 시작중이면 나갈 수 없도록
+        bool canEnterRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToEnter"];
+        bool canExitRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToExit"];
+        //방장은 무조건 못나감
+        if (gameManager.photonView.IsMine)//전투중이 아닐 경우, 방장만 못나감
         {
-            //ChatRPC( "방장은 게임 진행 중 나갈 수 없습니다.", true);
-
+            ChatRPC("방장은 게임 진행 중 나갈 수 없습니다.", "");
         }
-        //else 
+        //방장이 아니면 전투 중일 때만 못나감
+        else if(!canExitRoom)//전투중이 아닐 경우, 방장만 못나감
         {
+            ChatRPC("전투 중 나갈 수 없습니다.", "");
+        }
+        else 
+        {
+            photonView.RPC("ChatRPC", RpcTarget.AllBuffered, PhotonNetwork.NickName + "님이 퇴장하셨습니다", "");
+
             Debug.Log("LeaveRoom");
+
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("LobbyScene");
-            photonView.RPC("RoomRenewal", RpcTarget.AllBuffered);
+
+           // photonView.RPC("RoomRenewal", RpcTarget.AllBuffered);
+            
         }
     }
 
