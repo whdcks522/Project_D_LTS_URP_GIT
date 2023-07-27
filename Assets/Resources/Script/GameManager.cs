@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 Invoke("TmpEnd", 1f);
             }     
-            else if (SceneManager.GetActiveScene().name == "GameScene")//게임 중이라면 로비로
+            else if (SceneManager.GetActiveScene().name == "Chap1_Scene")//게임 중이라면 로비로
             {
                 //챕터 중, 한 번도 죽지 않을 것(업적 0)
                 if(archiveUnDead)
@@ -314,6 +314,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         mouse.InvisibleDissolve();
         //쥐 UI 종료
         mouse.isMaxfalse();
+
+        //GenericPropertyJSON:{"name":"data","type":-1,"children":[{"name":"enemySpawnInfo","type":-1,"arraySize":3,"arrayType":"EnemySpawnInfo","children":[{"name":"Array","type":-1,"arraySize":3,"arrayType":"EnemySpawnInfo","children":[{"name":"size","type":12,"val":3},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":2}]},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":6}]},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":8}]}]}]}]}
 
 
         if (curStage != enemySpawnInfoArray.Length - 1)//일반 전투

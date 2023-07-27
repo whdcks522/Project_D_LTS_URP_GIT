@@ -45,8 +45,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
 
-        //emailField.text = "222@222.2";
-        //passwordField.text = "222@222.2";
+        emailField.text = "222@222.2";
+        passwordField.text = "222@222.2";
 
         //준비가 안됐는데 사용하면 안되므로
         btnGroup.SetActive(false);
@@ -175,7 +175,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
             //불러오기
             LoadData();
             originAchievements.classEmail = playerEmail;
-            Invoke("RealGone", 2.5f);
+            Invoke("RealGone", 3f);
         }
         else 
         {
@@ -231,12 +231,14 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
                     //JSON을 업적 데이터로 전환
                     Achievements achievements = JsonUtility.FromJson<Achievements>(json);
 
+                    //클래스 객체에 저장
                     int arrSize = System.Enum.GetValues(typeof(ArchiveType)).Length;
                     for (int index = 0; index < arrSize; index++) 
                     {
                         originAchievements.Arr[index] = achievements.Arr[index];
                     }
                 }
+
                 else
                 {
                     Debug.Log("해당 유저에 대한 정보가 없음");
