@@ -2267,10 +2267,10 @@ MonoBehaviour:
   archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: EnemyA
+    - enemyType: BossB
       generateIndex: 3
   - enemySpawnInfo:
-    - enemyType: EnemyA
+    - enemyType: BossB
       generateIndex: 9
 --- !u!114 &1009842273
 MonoBehaviour:
@@ -2331,9 +2331,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 100000
   speed: 0
+  secondSpeed: 0
   lifeTime: 0
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 0
+  parent: {fileID: 0}
+  bulletType: 0
 --- !u!850595691 &1049238726
 LightingSettings:
   m_ObjectHideFlags: 0

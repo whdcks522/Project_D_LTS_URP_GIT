@@ -5,6 +5,7 @@ using Photon.Pun.Demo.Asteroids;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Bullet : MonoBehaviourPunCallbacks
 {
@@ -16,10 +17,13 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     public int dmg;
     public int speed;
+    public int secondSpeed;//가속치
     public float lifeTime;
+    public float secondLifeTime;
     public bool isBullet;//충돌 시 사라질 것인가
     public bool isGenetic;//선천적인 것인가?
-    public enum BulletType { Normal, Accel, Curve }
+    public Enemy parent;
+    public enum BulletType { Normal, Accel ,Curve }
     public BulletType bulletType;
 
 
@@ -42,23 +46,11 @@ public class Bullet : MonoBehaviourPunCallbacks
         if (other.gameObject.tag == "AbsoluteAttack") gameObject.SetActive(false);
     }
 
-    private void FixedUpdate()
-    {
-        //플레이어 공격은 회전
-        //if (tag == "PlayerAttack")
-         //   transform.Rotate(Vector3.up * 450 * Time.deltaTime);//right
-        
-    }
-
     private void OnEnable()
     {
         if (lifeTime != 0)//수명이 0이 아닌경우 일정 시간 후 삭제
         {
             Invoke("TimeOver", lifeTime);
-        }
-        if (false) 
-        {
-            Invoke("Accel", lifeTime/3f);
         }
     }
 
@@ -73,18 +65,67 @@ public class Bullet : MonoBehaviourPunCallbacks
         rigid.velocity *= 5;
     }
 
-    void TimeOver() 
+    void TimeOver() //생성 후, 처음으로 수명이 다 될 경우
     {
-       photonView.RPC("BulletOff", RpcTarget.AllBuffered); 
+        //기존 총알 종료
+        if (BulletType.Normal == bulletType)
+            photonView.RPC("BulletOff", RpcTarget.AllBuffered);
+
+        #region 가속일 경우 새로 생성
+        else if (BulletType.Accel == bulletType)
+        {
+            rigid.velocity *= secondSpeed;
+
+            //금방 삭제
+            Invoke("BulletOffStart", secondLifeTime);
+
+            //폭발
+            GameObject bullet = gameManager.Get("EnemyBulletB");
+            //폭발 위치 조정 
+            bullet.transform.position = transform.position;
+            //폭발 네트워크
+            bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
+        }
+        #endregion
+
+        #region 커브일 경우 새로 생성
+        else if (BulletType.Curve == bulletType) 
+        {
+            //부모를 통해 타겟의 위치 확인
+            Vector3 targetPos = parent.target.transform.position;
+            //투사체 방향 조정
+            transform.rotation = Quaternion.LookRotation(targetPos - transform.position);
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            //투사체 네트워크를 통한 가속 조정
+            photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
+            //투사체 방향 재조정
+            transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0);
+            //금방 삭제
+            Invoke("BulletOffStart", secondLifeTime);
+
+            //폭발
+            GameObject bullet = gameManager.Get("EnemyBulletB");
+            //폭발 위치 조정 
+            bullet.transform.position = transform.position;
+            //폭발 네트워크
+            bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
+        }
+        #endregion
     }
 
-    [PunRPC]
-    public void BulletOff() 
+    void BulletOffStart()//정말로 종료
+    {
+        photonView.RPC("BulletOff", RpcTarget.AllBuffered);
+    }
+
+        [PunRPC]
+    public void BulletOff() //총알 비활성화
     {
         gameObject.SetActive(false);
     }
 
-    [PunRPC]
+    
+    [PunRPC]//총알 활성화 후, 방향 조정
     public void RPCActivate(Vector3 vec)
     {
         gameObject.SetActive(true);

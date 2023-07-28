@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
    
     //오브젝트 풀링
     string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", 
-        "BossA", "EnemyBulletB", "BossB"};
+        "BossA", "EnemyBulletB", "BossB", "EnemyBulletC", "EnemyBulletD"};
     List<GameObject>[] pools;//실제로 주소가 저장될 곳
 
     [Header("적 관련")]

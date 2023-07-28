@@ -832,9 +832,12 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 3
   speed: 0
+  secondSpeed: 0
   lifeTime: 0
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 1
+  parent: {fileID: 0}
   bulletType: 0
 --- !u!1 &3694496949919541368
 GameObject:
@@ -2765,9 +2768,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.67
-  m_Height: 2.01
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!199 &2637813179169572455
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -7659,7 +7662,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   col: {fileID: 0}
   target: {fileID: 0}
-  maxHealth: 0
+  maxHealth: 200
   health: 0
   Bars: {fileID: 0}
   redBar: {fileID: 0}
@@ -7667,6 +7670,7 @@ MonoBehaviour:
   isUseNav: 1
   isDissolve: 0
   isControl: 0
+  curActionNum: 0
   trail: {fileID: 1445516505808458728}
   box: {fileID: 3629297690566934405}
 --- !u!114 &8694336439055703093
@@ -7684,9 +7688,6 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 0
-    Name: isThree
   - Type: 4
     SynchronizeType: 0
     Name: isLive
@@ -7698,10 +7699,13 @@ MonoBehaviour:
     Name: isDie
   - Type: 9
     SynchronizeType: 0
-    Name: isThrow
+    Name: isSpin
   - Type: 9
     SynchronizeType: 0
-    Name: isSpin
+    Name: isSlash
+  - Type: 9
+    SynchronizeType: 0
+    Name: isBurst
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -19878,9 +19878,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 3
   speed: 0
+  secondSpeed: 0
   lifeTime: 1
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 0
+  parent: {fileID: 0}
+  bulletType: 0
 --- !u!54 &8543203183260940617
 Rigidbody:
   m_ObjectHideFlags: 0

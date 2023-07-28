@@ -218,7 +218,7 @@ MonoBehaviour:
   archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: BossA
+    - enemyType: BossB
       generateIndex: 6
   - enemySpawnInfo:
     - enemyType: BossB

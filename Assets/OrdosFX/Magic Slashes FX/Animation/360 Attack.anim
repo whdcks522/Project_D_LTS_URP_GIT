@@ -110002,7 +110002,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.96666664
-    functionName: Slash
+    functionName: Slash360
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

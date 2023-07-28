@@ -199,9 +199,12 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 20
   speed: 15
+  secondSpeed: 0
   lifeTime: 1.3
+  secondLifeTime: 0
   isBullet: 1
   isGenetic: 0
+  parent: {fileID: 0}
   bulletType: 0
 --- !u!54 &8543203183260940617
 Rigidbody:
