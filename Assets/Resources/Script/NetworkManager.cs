@@ -17,6 +17,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button NextBtn;
     public Text StatusText;
     public Text ErrorText;
+    public Dropdown chapDropdown;
     public LobbyPlayer lobbyPlayer;
     
 
@@ -100,6 +101,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Connect();
         AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
 
+        //챕터 선택을 위한 드롭다운 값 조절
+        chapDropdown.value = 0;
     }
 
 
@@ -140,16 +143,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 2 });//수정함
 
         //최신 방식
-        string roomName = RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text;
+        string sceneName = "";
+        if (chapDropdown.value == 0) sceneName = "Chap1 ";
+        else if (chapDropdown.value == 1) sceneName = "Chap2 ";
 
-        /*
-        RoomOptions roomOptions = new RoomOptions
-        {
-            MaxPlayers = 2,
-            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { "IsAllowedToEnter", true } },
-            CustomRoomPropertiesForLobby = new string[] { "IsAllowedToEnter" },
-        };
-        */
+        string roomName = RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text;
 
         RoomOptions roomOptions = new RoomOptions
         {
@@ -157,12 +155,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
         {
             { "IsAllowedToEnter", true },
-            { "IsAllowedToExit", true } // "IsAllowedToExit" 조건 추가
+            { "IsAllowedToExit", true },
+            { "SceneName", sceneName } // 이동하고자 하는 Scene의 이름 저장
         },
-            CustomRoomPropertiesForLobby = new string[] { "IsAllowedToEnter", "IsAllowedToExit" } // 로비에서도 이 속성을 보여주기 위해 추가
+            CustomRoomPropertiesForLobby = new string[] { "IsAllowedToEnter", "IsAllowedToExit", "SceneName" } // 로비에서도 이 속성을 보여주기 위해 추가
         };
 
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
+
+        PhotonNetwork.CreateRoom(sceneName + roomName, roomOptions);
     }
 
     public override void OnJoinedRoom()
@@ -174,7 +174,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         bool canEnterRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToEnter"];
         if (canEnterRoom)
         {
-            PhotonNetwork.LoadLevel("Chap1_Scene");
+            //들어갈 룸의 Scene 이름 확인
+            string sceneName = (string)PhotonNetwork.CurrentRoom.CustomProperties["SceneName"];
+            //좌표 설정
+            if (sceneName == "Chap1 ") sceneName = "Chap1_Scene";
+            else if (sceneName == "Chap2 ") sceneName = "Chap2_Scene";
+            //실제로 입장
+            PhotonNetwork.LoadLevel(sceneName);
         }
         else
         {

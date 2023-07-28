@@ -70,6 +70,7 @@ MonoBehaviour:
   - RoomRenewal
   - ShotControl
   - LockRoom
+  - RPCAccel
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

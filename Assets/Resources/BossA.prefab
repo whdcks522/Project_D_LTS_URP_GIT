@@ -2034,6 +2034,7 @@ MonoBehaviour:
   lifeTime: 0
   isBullet: 0
   isGenetic: 1
+  bulletType: 0
 --- !u!1 &6752956489409427708
 GameObject:
   m_ObjectHideFlags: 0

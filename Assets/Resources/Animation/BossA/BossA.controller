@@ -11,6 +11,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isThrow
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isLive
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1153859210560674198}
   m_Solo: 0
@@ -235,42 +238,42 @@ AnimatorController:
   m_Name: BossA
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isThree
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: isLive
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isDie
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: isThree
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: isThrow
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isSpin
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -402,16 +405,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6846502602879266822}
-    m_Position: {x: 390, y: -200, z: 0}
+    m_Position: {x: 390, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -488257544385209808}
     m_Position: {x: 330, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7953029014290392418}
-    m_Position: {x: 620, y: -200, z: 0}
+    m_Position: {x: 630, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3476054358467928317}
-    m_Position: {x: 150, y: -200, z: 0}
+    m_Position: {x: 150, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 477860451963256895}
     m_Position: {x: 660, y: 60, z: 0}
@@ -658,6 +661,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: isSpin
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isLive
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6465866954258094786}

@@ -76,6 +76,7 @@ using UnityEngine.UIElements;
             }
         }
     }
+
     [PunRPC]
     public void ControlAttack(int index) //공격 활성화
     {
@@ -186,7 +187,6 @@ using UnityEngine.UIElements;
             targetPos = target.transform.position;
         }
     }
-
     #endregion
 
     #region 회전격

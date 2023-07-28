@@ -166,6 +166,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     {
         if (User != null)
         {
+            fireImage.SetActive(true);
             stateText.text = "입장 중...";
             audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
             //미리 설정
@@ -187,6 +188,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
     void RealGone() 
     {
+        fireImage.SetActive(false);
         SceneManager.LoadScene("LobbyScene");
     }
 

@@ -16,6 +16,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
     public InputField ChatInput;
     public PhotonView PV;
     GameManager gameManager;
+    AudioManager audioManager;
     //[Header("접속 관리")]
 
 
@@ -26,6 +27,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
 
         gameManager = GameManager.Instance;
+        audioManager = AuthManager.Instance.GetComponent<AudioManager>();
     }
     [PunRPC]
     public void RoomRenewal()
@@ -34,7 +36,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
         RoomInfoText.text = "";//방 정보 : 
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
-        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " / 현재  " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + " 최대  " + PhotonNetwork.CurrentRoom.MaxPlayers + "명";
+        RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " (" + PhotonNetwork.CurrentRoom.PlayerCount + "/"+ PhotonNetwork.CurrentRoom.MaxPlayers + ")";
     }
 
     //public override void 
@@ -88,11 +90,13 @@ public class ChatManager : MonoBehaviourPunCallbacks
         //방장은 무조건 못나감
         if (gameManager.photonView.IsMine)//전투중이 아닐 경우, 방장만 못나감
         {
+            audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
             ChatRPC("방장은 게임 진행 중 나갈 수 없습니다.", "");
         }
         //방장이 아니면 전투 중일 때만 못나감
         else if(!canExitRoom)//전투중이 아닐 경우, 방장만 못나감
         {
+            audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
             ChatRPC("전투 중 나갈 수 없습니다.", "");
         }
         else 

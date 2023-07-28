@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
    
     //오브젝트 풀링
     string[] resourceNames = { "Dummy", "PlayerBulletA", "EnemyA", "Bars", "EnemyB", "EnemyBulletA", "EnemyC", 
-        "BossA", "EnemyBulletB"};
+        "BossA", "EnemyBulletB", "BossB"};
     List<GameObject>[] pools;//실제로 주소가 저장될 곳
 
     [Header("적 관련")]
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 Invoke("TmpEnd", 1f);
             }     
-            else if (SceneManager.GetActiveScene().name == "Chap1_Scene")//게임 중이라면 로비로
+            else if (SceneManager.GetActiveScene().name.Contains("_Scene"))//게임 중이라면 로비로
             {
                 //챕터 중, 한 번도 죽지 않을 것(업적 0)
                 if(archiveUnDead)
@@ -266,7 +266,8 @@ public class GameManager : MonoBehaviourPunCallbacks
                     AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.NoShot] = 1;
 
                 //챕터 1 클리어(업적 2)
-                AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
+                if (SceneManager.GetActiveScene().name == "Chap1_Scene")
+                    AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
 
 
                 //업적 저장

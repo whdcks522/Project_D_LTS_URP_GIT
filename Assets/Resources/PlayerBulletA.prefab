@@ -202,6 +202,7 @@ MonoBehaviour:
   lifeTime: 1.3
   isBullet: 1
   isGenetic: 0
+  bulletType: 0
 --- !u!54 &8543203183260940617
 Rigidbody:
   m_ObjectHideFlags: 0

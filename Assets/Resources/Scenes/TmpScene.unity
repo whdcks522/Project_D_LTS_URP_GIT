@@ -218,10 +218,10 @@ MonoBehaviour:
   archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: EnemyC
-      generateIndex: 3
+    - enemyType: BossA
+      generateIndex: 6
   - enemySpawnInfo:
-    - enemyType: EnemyC
+    - enemyType: BossB
       generateIndex: 6
 --- !u!114 &49552104
 MonoBehaviour:
@@ -294,6 +294,7 @@ MonoBehaviour:
   lifeTime: 0
   isBullet: 0
   isGenetic: 0
+  bulletType: 0
 --- !u!43 &164924603
 Mesh:
   m_ObjectHideFlags: 0

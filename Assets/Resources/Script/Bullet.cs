@@ -19,8 +19,10 @@ public class Bullet : MonoBehaviourPunCallbacks
     public float lifeTime;
     public bool isBullet;//충돌 시 사라질 것인가
     public bool isGenetic;//선천적인 것인가?
-    
-    
+    public enum BulletType { Normal, Accel, Curve }
+    public BulletType bulletType;
+
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -40,24 +42,39 @@ public class Bullet : MonoBehaviourPunCallbacks
         if (other.gameObject.tag == "AbsoluteAttack") gameObject.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        if (lifeTime != 0)
-        {
-            Invoke("TimeOver", lifeTime);//총알 생성 시 일정 시간 후 삭제
-        } 
-    }
-
     private void FixedUpdate()
     {
-        if (tag == "PlayerAttack") 
-        {
-            transform.Rotate(Vector3.up * 450 * Time.deltaTime);//right
+        //플레이어 공격은 회전
+        //if (tag == "PlayerAttack")
+         //   transform.Rotate(Vector3.up * 450 * Time.deltaTime);//right
+        
+    }
 
+    private void OnEnable()
+    {
+        if (lifeTime != 0)//수명이 0이 아닌경우 일정 시간 후 삭제
+        {
+            Invoke("TimeOver", lifeTime);
+        }
+        if (false) 
+        {
+            Invoke("Accel", lifeTime/3f);
         }
     }
 
-    void TimeOver() {
+    void Accel() 
+    {
+        photonView.RPC("RPCAccel", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void RPCAccel()
+    {
+        rigid.velocity *= 5;
+    }
+
+    void TimeOver() 
+    {
        photonView.RPC("BulletOff", RpcTarget.AllBuffered); 
     }
 
