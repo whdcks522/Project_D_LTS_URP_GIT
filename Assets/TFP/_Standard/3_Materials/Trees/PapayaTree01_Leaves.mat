@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PapayaTree01_Leaves
-  m_Shader: {fileID: 4800000, guid: 201af1dd904ba734a9565138284d3a5d, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _DETAIL_MULX2 _EMISSION _LEAFTUMBLING _LEAFTURBULENCE
-    _METALLICGLOSSMAP _NORMALMAP
+  m_Shader: {fileID: 4800000, guid: b21dd9ef5428e47d88f72f8f830c7e26, type: 3}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _DETAIL_MULX2 _EMISSION _METALLICGLOSSMAP
+    _NORMALMAP
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -20,10 +20,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 13744e997bb6d5341bed69b101f738db, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,7 +33,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 1860760ebcc21314da652673270733d9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e57aea0dd3c9cf4480d839227a6379e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -85,19 +81,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientReflection: 1
     - _AnimateNormal: 1
-    - _ApplyNormal: 1
     - _BumpScale: 1
-    - _Cull: 0
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EdgeFlutterInfluence: 0.1
-    - _EnableLeafTumbling: 1
     - _EnableLeafTurbulence: 1
-    - _EnableNormalRotation: 0
     - _EnableTransFade: 0
     - _FadeOutWind: 0
     - _GlossMapScale: 1
@@ -106,15 +97,13 @@ Material:
     - _IsBark: 0
     - _LEAFTURBULENCE: 1
     - _LODTerrain: 1
-    - _LeafTurbulence: 0.05
+    - _LeafTurbulence: 0.3
     - _Metallic: 0
     - _Mode: 3
     - _NormalInfluence: 0.3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowCulling: 0
     - _ShadowStrength: 0.8
-    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Snow: 5
     - _SnowMultiplier: 1.75
@@ -133,12 +122,9 @@ Material:
     - _WetnessMaxSmoothness: 0.8
     - _ZWrite: 0
     m_Colors:
-    - _BaseWindMultipliers: {r: 0.5, g: 0.5, b: 0.25, a: 0}
     - _Color: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 0.9, g: 0.5, b: 0, a: 0.1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Translucency: {r: 2, g: 2, b: 0, a: 0}
     - _TranslucencyColor: {r: 0.73, g: 0.85, b: 0.40999997, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}

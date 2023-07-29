@@ -215,6 +215,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             AuthManager.Instance.originAchievements.Arr[0] = 0;
             AuthManager.Instance.originAchievements.Arr[1] = 0;
             AuthManager.Instance.originAchievements.Arr[2] = 0;
+            AuthManager.Instance.originAchievements.Arr[3] = 0;
         }
         if (AuthManager.Instance.User != null) 
         {

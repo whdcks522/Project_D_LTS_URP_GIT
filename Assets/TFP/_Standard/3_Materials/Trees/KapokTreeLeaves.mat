@@ -8,9 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: KapokTreeLeaves
-  m_Shader: {fileID: 4800000, guid: 201af1dd904ba734a9565138284d3a5d, type: 3}
-  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _LEAFTUMBLING _LEAFTURBULENCE _METALLICGLOSSMAP
-    _NORMALMAP _NORMALROTATION
+  m_Shader: {fileID: 4800000, guid: b21dd9ef5428e47d88f72f8f830c7e26, type: 3}
+  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -20,10 +19,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: c9193b6906b6d7240bc9198ca82ede76, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 4760a683beeebac4c807d30d1ba78a36, type: 3}
+        m_Texture: {fileID: 2800000, guid: cebbdf5b5c4f3bb43a0ebe0fe0843e32, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -85,19 +80,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientReflection: 1
     - _AnimateNormal: 1
-    - _ApplyNormal: 1
     - _BumpScale: 1
-    - _Cull: 0
     - _Culling: 0
-    - _Cutoff: 0.5
+    - _Cutoff: 0.75
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeFlutterInfluence: 0.2
-    - _EnableLeafTumbling: 1
     - _EnableLeafTurbulence: 1
-    - _EnableNormalRotation: 1
     - _EnableTransFade: 0
     - _FadeOutWind: 0
     - _GlossMapScale: 1
@@ -112,15 +102,13 @@ Material:
     - _NormalInfluence: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowCulling: 0
-    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Snow: 6
     - _SnowMultiplier: 1.75
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TimeOffset: 1
-    - _TranslucencyStrength: 0.6
+    - _TranslucencyStrength: 0.5
     - _TumbleFrequency: 0.25
     - _TumbleStrength: -0.02
     - _UVSec: 0
@@ -130,9 +118,6 @@ Material:
     - _WetnessMaxSmoothness: 0.8
     - _ZWrite: 1
     m_Colors:
-    - _BaseWindMultipliers: {r: 0.5, g: 0.75, b: 1, a: 0}
     - _Color: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 0.9, g: 0.5, b: 0, a: 0.1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Translucency: {r: 1.5, g: 2, b: 0, a: 0}

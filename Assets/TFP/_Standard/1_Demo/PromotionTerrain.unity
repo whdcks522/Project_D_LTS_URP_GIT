@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18245871, g: 0.2281711, b: 0.30726042, a: 1}
+  m_IndirectSpecularColor: {r: 0.4494685, g: 0.49953812, b: 0.5756887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -320,10 +320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
-      propertyPath: m_Name
-      value: Rock001_LOD (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 938.40955
@@ -371,6 +367,10 @@ PrefabInstance:
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -11.809001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001_LOD (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
@@ -652,10 +652,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
-      propertyPath: m_Name
-      value: Rock001_LOD (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 909.71
@@ -711,6 +707,10 @@ PrefabInstance:
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99828005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001_LOD (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
@@ -998,10 +998,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1682493145401158, guid: adb5ab27fb2616643a8fedba224ac484, type: 3}
-      propertyPath: m_Name
-      value: RopeBridge02_LOD (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4039400363741374, guid: adb5ab27fb2616643a8fedba224ac484, type: 3}
       propertyPath: m_LocalPosition.x
       value: 946.667
@@ -1049,6 +1045,10 @@ PrefabInstance:
     - target: {fileID: 4039400363741374, guid: adb5ab27fb2616643a8fedba224ac484, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682493145401158, guid: adb5ab27fb2616643a8fedba224ac484, type: 3}
+      propertyPath: m_Name
+      value: RopeBridge02_LOD (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb5ab27fb2616643a8fedba224ac484, type: 3}
@@ -1117,7 +1117,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 8cbaa490a31e0824f8b2ccf60ec10fe5, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -1686,10 +1686,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1624808911507792, guid: 27b3256bc474fd64cadaf73b6e84a218, type: 3}
-      propertyPath: m_Name
-      value: RockCliff002 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4233754354535418, guid: 27b3256bc474fd64cadaf73b6e84a218, type: 3}
       propertyPath: m_LocalPosition.x
       value: 900.72
@@ -1746,6 +1742,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 6.349999
       objectReference: {fileID: 0}
+    - target: {fileID: 1624808911507792, guid: 27b3256bc474fd64cadaf73b6e84a218, type: 3}
+      propertyPath: m_Name
+      value: RockCliff002 (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27b3256bc474fd64cadaf73b6e84a218, type: 3}
 --- !u!1001 &1251931221
@@ -1755,10 +1755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
-      propertyPath: m_Name
-      value: Rock001_LOD (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 904.17
@@ -1815,6 +1811,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.2000003
       objectReference: {fileID: 0}
+    - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001_LOD (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
 --- !u!4 &1264120261 stripped
@@ -1836,10 +1836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 838153876}
     m_Modifications:
-    - target: {fileID: 1606275242488638, guid: b8eec13d8cdec3041b5a59293e1e10c4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4151992580329766, guid: b8eec13d8cdec3041b5a59293e1e10c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1871,6 +1867,10 @@ PrefabInstance:
     - target: {fileID: 4151992580329766, guid: b8eec13d8cdec3041b5a59293e1e10c4, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606275242488638, guid: b8eec13d8cdec3041b5a59293e1e10c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 182737265337101780, guid: b8eec13d8cdec3041b5a59293e1e10c4,
         type: 3}
@@ -1998,9 +1998,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 3
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1382194150
 MeshRenderer:
@@ -2020,7 +2020,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd345f4b86f65374e8586f3e5a64c6ad, type: 2}
+  - {fileID: 2100000, guid: 4d9b4fe362c2c454c9304fb5ede6f87e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2215,10 +2215,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1407773291}
     m_Modifications:
-    - target: {fileID: 1441349451000700, guid: 6510186159104704c9ca4058456aff35, type: 3}
-      propertyPath: m_Name
-      value: RopeBridge01_LOD (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4332477080464938, guid: 6510186159104704c9ca4058456aff35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 915.063
@@ -2266,6 +2262,10 @@ PrefabInstance:
     - target: {fileID: 4332477080464938, guid: 6510186159104704c9ca4058456aff35, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441349451000700, guid: 6510186159104704c9ca4058456aff35, type: 3}
+      propertyPath: m_Name
+      value: RopeBridge01_LOD (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6510186159104704c9ca4058456aff35, type: 3}
@@ -2430,9 +2430,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 0
-  serializedVersion: 4
+  serializedVersion: 3
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1979729177
 MeshRenderer:

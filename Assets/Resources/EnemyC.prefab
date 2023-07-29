@@ -5376,9 +5376,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 5
   speed: 0
+  secondSpeed: 0
   lifeTime: 0
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 1
+  parent: {fileID: 0}
+  bulletType: 0
 --- !u!1 &2710728259728776272
 GameObject:
   m_ObjectHideFlags: 0

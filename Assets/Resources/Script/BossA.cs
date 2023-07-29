@@ -14,7 +14,7 @@ using UnityEngine.UIElements;
     public TrailRenderer trail;
     public BoxCollider box;
     Vector3 targetPos;
-
+    AudioManager audioManager;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -30,6 +30,8 @@ using UnityEngine.UIElements;
 
         nms = gameManager.GetComponent<NavMeshSurface>();
         agent = GetComponent<NavMeshAgent>();
+
+        audioManager = gameManager.audioManager;
     }
 
     private void FixedUpdate()
@@ -80,6 +82,8 @@ using UnityEngine.UIElements;
     [PunRPC]
     public void ControlAttack(int index) //공격 활성화
     {
+        //소리 재생
+        audioManager.PlaySfx(AudioManager.Sfx.BossA, true);
         //공격 경로 활성화
         trail.enabled = true;
         trail.Clear();

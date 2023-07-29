@@ -1989,11 +1989,36 @@ MonoBehaviour:
   archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: Dummy
-      generateIndex: 3
+    - enemyType: EnemyA
+      generateIndex: 2
+    - enemyType: EnemyA
+      generateIndex: 8
   - enemySpawnInfo:
-    - enemyType: Dummy
+    - enemyType: EnemyA
+      generateIndex: 1
+    - enemyType: EnemyA
+      generateIndex: 3
+    - enemyType: EnemyA
+      generateIndex: 7
+    - enemyType: EnemyA
       generateIndex: 9
+  - enemySpawnInfo:
+    - enemyType: EnemyA
+      generateIndex: 2
+    - enemyType: EnemyA
+      generateIndex: 8
+    - enemyType: EnemyB
+      generateIndex: 6
+  - enemySpawnInfo:
+    - enemyType: EnemyA
+      generateIndex: 6
+    - enemyType: EnemyB
+      generateIndex: 3
+    - enemyType: EnemyB
+      generateIndex: 9
+  - enemySpawnInfo:
+    - enemyType: BossA
+      generateIndex: 6
 --- !u!114 &1009842273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,9 +2078,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 100000
   speed: 0
+  secondSpeed: 0
   lifeTime: 0
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 0
+  parent: {fileID: 0}
+  bulletType: 0
 --- !u!850595691 &1049238726
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -3573,6 +3602,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961080111645925756, guid: 1db1ce72675ed3f4cb02957c8147996e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.09
       objectReference: {fileID: 0}
     - target: {fileID: 3398925697489394963, guid: 1db1ce72675ed3f4cb02957c8147996e,
         type: 3}

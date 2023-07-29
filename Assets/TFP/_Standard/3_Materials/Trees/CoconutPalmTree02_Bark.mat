@@ -5,10 +5,9 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: CoconutPalmTree02_Bark
-  m_Shader: {fileID: 4800000, guid: 8a891dcd5cbbbc04788f800d4370c2d9, type: 3}
+  m_Shader: {fileID: 4800000, guid: b21dd9ef5428e47d88f72f8f830c7e26, type: 3}
   m_ShaderKeywords: _DETAIL_MULX2 _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
@@ -19,16 +18,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 146bb0839c8acb649a1388fd7d72c43a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpOcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 05ecb2ba4b0af064f805819aef1c6e24, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpSpecAOMap:
@@ -89,7 +80,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AnimateNormal: 1
-    - _ApplyNormal: 1
     - _BumpScale: 1
     - _Culling: 2
     - _Cutoff: 0
@@ -111,7 +101,6 @@ Material:
     - _NormalInfluence: 0.8
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Snow: 5
     - _SnowMultiplier: 1.75
@@ -128,8 +117,6 @@ Material:
     - _WetnessMaxSmoothness: 0.8
     - _ZWrite: 1
     m_Colors:
-    - _BaseWindMultipliers: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 0.9, g: 0.5, b: 0, a: 0.1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

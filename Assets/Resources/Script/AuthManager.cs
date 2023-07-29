@@ -36,6 +36,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
         Screen.SetResolution(1280, 720, false);
         //배경 음악 초기화
         audioManager = GetComponent<AudioManager>();
+        //업적을 위한 클래스 객체
+        originAchievements = new Achievements();
     } 
 
 
@@ -278,13 +280,13 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     }
     //#endregion
 
-    public Achievements originAchievements = new Achievements();
-    public enum ArchiveType { Undead, NoShot, Chapter1}
+    public Achievements originAchievements;
+    public enum ArchiveType { Undead, NoShot, Chapter1, Chapter2}
     [System.Serializable]
     public class Achievements 
     {
         public string classEmail = "";
-        public int[] Arr = new int[3];
+        public int[] Arr = new int[System.Enum.GetValues(typeof(ArchiveType)).Length];//배열의 길이만큼
     }
 
     public void Set333()

@@ -4,12 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: sky
-  m_Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
+  m_Shader: {fileID: 4800000, guid: 0d945672dd6237b4da85f3baae1c5976, type: 3}
+  m_ShaderKeywords: _SUNDISK_SIMPLE
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -61,20 +60,19 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Exposure: 0.5
+    - _Exposure: 0.2
     - _Glossiness: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SrcBlend: 1
-    - _SunDisk: 2
+    - _SunDisk: 1
     - _SunSize: 0.05
-    - _SunSizeConvergence: 5
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 0.5481647, g: 0.5566038, b: 0.43845677, a: 1}
-    - _SkyTint: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
+    - _GroundColor: {r: 0.8248151, g: 0.8308824, b: 0.72091264, a: 1}
+    - _SkyTint: {r: 0.86764705, g: 0.86764705, b: 0.86764705, a: 1}

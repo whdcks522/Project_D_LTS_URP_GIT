@@ -76,8 +76,10 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             darkThunder.gameObject.SetActive(true);
-            darkThunder.GetComponent<Image>().color = Color.gray;
+            darkThunder.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0);
+
             blueThunder.gameObject.SetActive(true);
+            blueThunder.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         }
         
 
@@ -88,7 +90,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
             //2번 몸체
             skinnedMeshRenderer[1].material.SetColor("_ColorControl", new Color(0.345098f, 0.682353f, 0.7490196f, 1));
             //플레이어 이름 색
-            playerName.GetComponent<Text>().color = new Color(0.08f, 0.22f, 0.25f, 0);
+            playerName.GetComponent<Text>().color = new Color(0.596f, 0.910f, 0.980f, 0);//new Color(0.08f, 0.22f, 0.25f, 0);
         }
         else if (!photonView.IsMine) //자신의 것이 아닐 경우
         {
@@ -97,7 +99,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
             //2번 몸체
             skinnedMeshRenderer[1].material.SetColor("_ColorControl", new Color(0.9254902f, 0.5843138f, 0.5490196f, 1));
             //플레이어 이름 색
-            playerName.GetComponent<Text>().color = new Color(0.25f, 0.22f, 0.08f, 0);
+            playerName.GetComponent<Text>().color = new Color(0.98f, 0.596f, 0.643f, 0);//new Color(0.25f, 0.22f, 0.08f, 0);
         }
         transform.parent = gameManager.playerGroup.transform;
     }
@@ -110,8 +112,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
             playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 0.5f);//transform.GetChild(1).
             if (photonView.IsMine) 
             {
-            darkThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 2.35f);
-            blueThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 2.35f);
+            darkThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 0.7f);
+            blueThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 0.7f);
             }
         }
         else 
@@ -192,7 +194,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
                     otherBullet.photonView.RPC("BulletOff", RpcTarget.AllBuffered);
             }    
         }
-        else if (other.gameObject.tag == "StageStart" && photonView.IsMine)// && SceneManager.GetActiveScene().name == "TmpScene"
+        else if (other.gameObject.tag == "StageStart" && photonView.IsMine)
             gameManager.photonView.RPC("EnterStage", RpcTarget.AllBuffered);//모든 플레이어에게 입장을 알림
     }
 

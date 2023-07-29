@@ -19879,7 +19879,7 @@ MonoBehaviour:
   dmg: 3
   speed: 0
   secondSpeed: 0
-  lifeTime: 1
+  lifeTime: 0.8
   secondLifeTime: 0
   isBullet: 0
   isGenetic: 0

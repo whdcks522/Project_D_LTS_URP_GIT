@@ -10,11 +10,12 @@ using UnityEngine.UIElements;
 
 public class BossB : Enemy
 {
-    public int curActionNum;
+    int curActionNum;
     public TrailRenderer trail;
     public BoxCollider box;
     Vector3 burstVec;
     bool isLook = true;
+    AudioManager audioManager;
 
     private void OnDisable()
     {
@@ -43,6 +44,8 @@ public class BossB : Enemy
 
         nms = gameManager.GetComponent<NavMeshSurface>();
         agent = GetComponent<NavMeshAgent>();
+
+        audioManager = gameManager.audioManager;
     }
 
     private void FixedUpdate()
@@ -94,6 +97,8 @@ public class BossB : Enemy
     [PunRPC]
     public void ControlAttack(int index) //공격 활성화
     {
+        //소리 재생
+        audioManager.PlaySfx(AudioManager.Sfx.BossB, true);
         //공격 경로 활성화
         trail.enabled = true;
         trail.Clear();
@@ -156,7 +161,7 @@ public class BossB : Enemy
     }
     #endregion
 
-    public void Slash()
+    public void Slash(int value)
     {
         if (gameManager.photonView.IsMine)
         {
@@ -167,14 +172,14 @@ public class BossB : Enemy
                 //투사체 위치 조정 
                 bullet.transform.position = transform.position + transform.right * i;
                 //투사체 방향 조정
-                bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+                bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 10 * i * value, 0);
                 //커브를 위한 부모 설정
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.parent = this;
                 //투사체 네트워크를 통한 가속 조정
                 bulletScript.photonView.RPC("RPCActivate", RpcTarget.AllBuffered, bullet.transform.forward);
                 //투사체 방향 재조정
-                bullet.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0);
+                bullet.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y + 20 * i * value, 0);
                 //파티클
                 ParticleSystem bulletParticle = bullet.GetComponent<ParticleSystem>();
                 bulletParticle.Stop();

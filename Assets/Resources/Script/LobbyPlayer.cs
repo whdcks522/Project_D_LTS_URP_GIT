@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-//using static AuthManager;
+
 
 public class LobbyPlayer : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class LobbyPlayer : MonoBehaviour
     SkinnedMeshRenderer[] skinnedMeshRenderer = new SkinnedMeshRenderer[2];
     AudioManager audioManager;
     AuthManager authManager;
-    public Image[] archiveImages;
+
+    //诀利 包府
+    public GameObject archiveGameObject;
 
     private void Awake()
     {
@@ -41,14 +44,21 @@ public class LobbyPlayer : MonoBehaviour
         audioManager.PlayBgm(AudioManager.Bgm.Lobby);
 
         //诀利 包府
+        Image[] archiveImages = archiveGameObject.GetComponentsInChildren<Image>();
         int arrSize = System.Enum.GetValues(typeof(AuthManager.ArchiveType)).Length;
         for (int index = 0; index < arrSize; index++)
         {
-            Debug.Log(index + ":"+authManager.originAchievements.Arr[index]);
+            //Debug.Log(index + ":"+authManager.originAchievements.Arr[index]);
             if (authManager.originAchievements.Arr[index] == 1) 
                 archiveImages[index].color = Color.white;
         }
     }
+
+    public void DropDownSet()
+    {
+        audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
+    }
+
     void FixedUpdate()
     {
         #region 矫具 炼例

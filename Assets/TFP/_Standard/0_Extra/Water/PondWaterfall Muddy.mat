@@ -140,7 +140,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DepthRefractionBlend: 1
@@ -173,9 +172,6 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
-    - _TessMax: 25
-    - _TessMin: 10
-    - _TessValue: 32
     - _Tesselation: 1
     - _TesselationAmount: 0.75
     - _Tiling: 2
@@ -185,7 +181,7 @@ Material:
     - _VSpeed: -0.002
     - _VisibilityDepth: 0.15
     - _WaterColorDepth: 0.5
-    - _WaveHeight: 0.25
+    - _WaveHeight: 1
     - _WaveHeightFoam: 0
     - _WaveSizeBalance: 0.5
     - _WaveSpeed: 1.5

@@ -17,8 +17,8 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelsIndex;//현재 실행 중 인 플레이어 번호
 
-    public enum Bgm {Auth, Lobby, Entrance, Chapter1, Chapter1_BossA}//random으로 활용 가능함
-    public enum Sfx { DoorOpen, DoorDrag = 6, Impact = 9 , Step = 15, PlayerBulletA = 18, Paper = 24}//29
+    public enum Bgm {Auth, Lobby, Entrance, Chapter1, Chapter1_BossA, Chapter2, Chapter2_BossB}//random으로 활용 가능함
+    public enum Sfx { DoorOpen, DoorDrag = 6, Impact = 9 , Step = 15, PlayerBulletA = 18, Paper = 24, BossA = 29, BossB = 31 }//29
 
     private void Awake()
     {
@@ -62,6 +62,12 @@ public class AudioManager : MonoBehaviour
             case Bgm.Chapter1_BossA:
                 bgmPlayer.clip = bgmClips[4];
                 break;
+            case Bgm.Chapter2:
+                bgmPlayer.clip = bgmClips[5];
+                break;
+            case Bgm.Chapter2_BossB:
+                bgmPlayer.clip = bgmClips[6];
+                break;
         }
         bgmPlayer.Play();
     }
@@ -94,9 +100,12 @@ public class AudioManager : MonoBehaviour
 
                     case Sfx.DoorDrag:
                     case Sfx.Step:
+                    case Sfx.BossB:
                         maxRanIndex = 3;
                         break;
-                    
+                    case Sfx.BossA:
+                        maxRanIndex = 2;
+                        break;
                 }
                 ranIndex = Random.Range(0, maxRanIndex);//효과음 랜덤을 위함
             }

@@ -3,14 +3,13 @@
 --- !u!226 &22600000
 BillboardAsset:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: BananaPlantCover01_BillboardAsset
   serializedVersion: 2
   width: 4.1279864
   bottom: -0.09705067
-  height: 8.25
+  height: 4.1279864
   imageTexCoords:
   - {x: 0, y: 0, z: 0.25, w: 0.5}
   vertices:

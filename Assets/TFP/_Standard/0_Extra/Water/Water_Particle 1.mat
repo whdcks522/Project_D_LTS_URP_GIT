@@ -57,7 +57,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Alpha: 1
-    - _AlphaCutoff: 0.5
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
@@ -93,8 +92,7 @@ Material:
     - _TransShadow: 0.9
     - _Translucency: 1
     - _Transmission: 0.5
-    - _TransmissionAmount: 0.8
-    - _TransmissionShadow: 1
+    - _TransmissionAmount: 1
     - _ZWrite: 0
     - __dirty: 0
     m_Colors:

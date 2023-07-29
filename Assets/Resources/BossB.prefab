@@ -991,7 +991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4282300678146296667}
   m_LocalRotation: {x: 0.7454039, y: 0.6048664, z: 0.2750065, w: -0.053676464}
-  m_LocalPosition: {x: -0.084, y: -0.007, z: -0.038}
+  m_LocalPosition: {x: -0.569, y: 0.063, z: -0.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2709,8 +2709,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.32
-  m_Speed: 2.5
-  m_Acceleration: 3
+  m_Speed: 1.5
+  m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 240
   m_StoppingDistance: 0
@@ -7670,7 +7670,6 @@ MonoBehaviour:
   isUseNav: 1
   isDissolve: 0
   isControl: 0
-  curActionNum: 0
   trail: {fileID: 1445516505808458728}
   box: {fileID: 3629297690566934405}
 --- !u!114 &8694336439055703093

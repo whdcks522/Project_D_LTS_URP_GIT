@@ -269,6 +269,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                 if (SceneManager.GetActiveScene().name == "Chap1_Scene")
                     AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
 
+                //챕터 2 클리어(업적 2)
+                if (SceneManager.GetActiveScene().name == "Chap2_Scene")
+                    AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter2] = 1;
+
 
                 //업적 저장
                 AuthManager.Instance.SaveJson();
@@ -329,29 +333,30 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
 
-        //GenericPropertyJSON:{"name":"data","type":-1,"children":[{"name":"enemySpawnInfo","type":-1,"arraySize":3,"arrayType":"EnemySpawnInfo","children":[{"name":"Array","type":-1,"arraySize":3,"arrayType":"EnemySpawnInfo","children":[{"name":"size","type":12,"val":3},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":2}]},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":6}]},{"name":"data","type":-1,"children":[{"name":"enemyType","type":3,"val":"EnemyA"},{"name":"generateIndex","type":0,"val":8}]}]}]}]}
-
+       
         //입장 시, 퇴장 불가능 하도록 룸 설정
         ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();//-----------------
 
-        if (curStage != enemySpawnInfoArray.Length - 1)//일반 전투
+        if (curStage != enemySpawnInfoArray.Length - 1)//일반 전투일 경우
         {
             if (curStage == 0)//첫 전투 일 경우
             {
                 roomProperties.Add("IsAllowedToEnter", false);//--------------
             }
-
-            audioManager.PlayBgm(AudioManager.Bgm.Chapter1);
+            if(SceneManager.GetActiveScene().name == "Chap1_Scene")//챕터 1 노래
+                        audioManager.PlayBgm(AudioManager.Bgm.Chapter1);
+            else if (SceneManager.GetActiveScene().name == "Chap2_Scene")//챕터 1 노래
+                audioManager.PlayBgm(AudioManager.Bgm.Chapter2);
         }
-        else  //보스 전투
+        else  //보스 전투일 경우
         {
-            audioManager.PlayBgm(AudioManager.Bgm.Chapter1_BossA);
+            if (SceneManager.GetActiveScene().name == "Chap1_Scene")//챕터 1 보스 노래
+                audioManager.PlayBgm(AudioManager.Bgm.Chapter1_BossA);
+            else if (SceneManager.GetActiveScene().name == "Chap2_Scene")//챕터 2 보스 노래
+                audioManager.PlayBgm(AudioManager.Bgm.Chapter2_BossB);
         }
-        roomProperties.Add("IsAllowedToExit", false);//-------------------
-        PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);//모두에게 적용됨-------
-
-
-        
+        roomProperties.Add("IsAllowedToExit", false);//전투 중 못나가도록
+        PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);//모두에게 적용됨-------       
     }
     #endregion
 

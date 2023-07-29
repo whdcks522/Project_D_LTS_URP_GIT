@@ -5,12 +5,10 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: JatobaTreeBranch01
-  m_Shader: {fileID: 4800000, guid: 201af1dd904ba734a9565138284d3a5d, type: 3}
-  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _LEAFTUMBLING _LEAFTURBULENCE _METALLICGLOSSMAP
-    _NORMALMAP _NORMALROTATION
+  m_Shader: {fileID: 4800000, guid: b21dd9ef5428e47d88f72f8f830c7e26, type: 3}
+  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -20,10 +18,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 03948d7570ba351418d0703fd364d573, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: edc2d2b6180101c4cb63a4ff4a6ae41e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 69a75b3c0f331a542b6237dea94852c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -85,19 +79,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientReflection: 1
     - _AnimateNormal: 1
-    - _ApplyNormal: 1
     - _BumpScale: 1
-    - _Cull: 0
     - _Culling: 0
     - _Cutoff: 0.35
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeFlutterInfluence: 0.25
-    - _EnableLeafTumbling: 1
     - _EnableLeafTurbulence: 1
-    - _EnableNormalRotation: 1
     - _EnableTransFade: 0
     - _FadeOutWind: 0
     - _GlossMapScale: 1
@@ -106,14 +95,12 @@ Material:
     - _IsBark: 0
     - _LEAFTURBULENCE: 1
     - _LODTerrain: 1
-    - _LeafTurbulence: 0.1
+    - _LeafTurbulence: 0.2
     - _Metallic: 0
     - _Mode: 0
     - _NormalInfluence: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShadowCulling: 0
-    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Snow: 5
     - _SnowMultiplier: 1.75
@@ -130,9 +117,6 @@ Material:
     - _WetnessMaxSmoothness: 0.8
     - _ZWrite: 1
     m_Colors:
-    - _BaseWindMultipliers: {r: 0.5, g: 0.75, b: 1, a: 0}
     - _Color: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 0.9, g: 0.5, b: 0, a: 0.1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Translucency: {r: 2, g: 2, b: 0, a: 0}

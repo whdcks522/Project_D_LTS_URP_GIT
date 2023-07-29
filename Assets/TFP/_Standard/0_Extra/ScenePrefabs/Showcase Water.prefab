@@ -199,9 +199,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1290684565893234408}
     m_Modifications:
+    - target: {fileID: 1002014094698400, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042000054032630, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001
+      objectReference: {fileID: 0}
     - target: {fileID: 1531364189026198, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_Name
-      value: Rock001_LOD (1)
+      value: Rock001_LOD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722688966124156, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858475142398114, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
+      propertyPath: m_Name
+      value: Rock001
       objectReference: {fileID: 0}
     - target: {fileID: 4450537969943752, guid: 45ac0ca5add9db34c93235d8e6805db4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -286,9 +302,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1290684565893234408}
     m_Modifications:
+    - target: {fileID: 1002014094698400, guid: 2801147de2d60604899295ca467aefb7, type: 3}
+      propertyPath: m_Name
+      value: RockPileMedium01
+      objectReference: {fileID: 0}
     - target: {fileID: 1531364189026198, guid: 2801147de2d60604899295ca467aefb7, type: 3}
       propertyPath: m_Name
-      value: RockPileMedium01 (1)
+      value: RockPileMedium01_LOD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722688966124156, guid: 2801147de2d60604899295ca467aefb7, type: 3}
+      propertyPath: m_Name
+      value: RockPileMedium01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858475142398114, guid: 2801147de2d60604899295ca467aefb7, type: 3}
+      propertyPath: m_Name
+      value: RockPileMedium01
       objectReference: {fileID: 0}
     - target: {fileID: 4450537969943752, guid: 2801147de2d60604899295ca467aefb7, type: 3}
       propertyPath: m_LocalPosition.x

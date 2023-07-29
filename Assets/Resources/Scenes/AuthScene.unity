@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.012412374, g: 0.030031838, b: 0.043398824, a: 1}
+  m_IndirectSpecularColor: {r: 0.012258646, g: 0.029926399, b: 0.04339984, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -357,6 +357,7 @@ Transform:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 612950390}
+  - {fileID: 1011288075}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1714,13 +1715,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011288073}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.759849, y: 6.5110884, z: -97.6512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 258105645}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047335273
 GameObject:
@@ -1896,7 +1897,7 @@ MonoBehaviour:
   playerId: 
   originAchievements:
     classEmail: 
-    Arr: 000000000000000000000000
+    Arr: 
 --- !u!4 &1323181825
 Transform:
   m_ObjectHideFlags: 0
@@ -1930,6 +1931,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 63f3ca2a636d7b547994c8e06597c54d, type: 3}
   - {fileID: 8300000, guid: d3952da411d20474da886bfe3190282f, type: 3}
   - {fileID: 8300000, guid: 313670a597451d7418d7818525272cfe, type: 3}
+  - {fileID: 8300000, guid: bd12fe07ab4b0ea4783081d2bc20bf50, type: 3}
+  - {fileID: 8300000, guid: b4b3a467b03d10a4b9bc2e162f7afaaa, type: 3}
   bgmVolume: 0.5
   sfxClips:
   - {fileID: 8300000, guid: 2e859d35aa19baf44a3f3b04c10eb81b, type: 3}
@@ -1961,6 +1964,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4882d53423a98f24ead263ab845b6ee5, type: 3}
   - {fileID: 8300000, guid: 59c8a10e55e10b045a4ab2818c313f39, type: 3}
   - {fileID: 8300000, guid: c3ab270dcb7dac44ba0b80a3634a7ba1, type: 3}
+  - {fileID: 8300000, guid: 1e41d4e0eafefa6469d9444baf1c2437, type: 3}
+  - {fileID: 8300000, guid: d2dbcb8560f526f4784d636e0088b115, type: 3}
+  - {fileID: 8300000, guid: 9c9ca0410326d2540982ca55ee866431, type: 3}
+  - {fileID: 8300000, guid: f3a0367193523334382970aa67a1574c, type: 3}
+  - {fileID: 8300000, guid: df6e1cf4dceea164291d060254f66c50, type: 3}
   sfxVolume: 0.5
   channels: 3
 --- !u!1 &1468232148

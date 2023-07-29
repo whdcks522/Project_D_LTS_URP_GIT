@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9164748737394871863
+--- !u!114 &-7039718216226580815
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,8 +29,8 @@ Material:
   m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -126,15 +126,13 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AmbientReflection: 1
     - _AnimateNormal: 1
-    - _ApplyNormal: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 2
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -142,9 +140,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EdgeFlutterInfluence: 0.1
-    - _EnableLeafTumbling: 1
     - _EnableLeafTurbulence: 1
-    - _EnableNormalRotation: 0
     - _EnableTransFade: 0
     - _EnvironmentReflections: 1
     - _FadeOutWind: 0
@@ -164,7 +160,6 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SamplePivot: 0
-    - _ShadowCulling: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Spec: 1
@@ -187,7 +182,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
-    - _BaseWindMultipliers: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 0.83823526, g: 0.49558175, b: 0.0184905, a: 0.15686275}
     - _DryColor: {r: 0.64705884, g: 0.466263, b: 0.19506921, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -196,6 +190,5 @@ Material:
     - _MinMaxScales: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularReflectivity: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    - _Translucency: {r: 1, g: 8, b: 0, a: 0}
     - _WindMultiplier: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

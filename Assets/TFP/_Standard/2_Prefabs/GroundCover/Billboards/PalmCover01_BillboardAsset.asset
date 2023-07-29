@@ -3,14 +3,13 @@
 --- !u!226 &22600000
 BillboardAsset:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: PalmCover01_BillboardAsset
   serializedVersion: 2
   width: 6.050304
   bottom: -0.1910572
-  height: 12.1
+  height: 6.050304
   imageTexCoords:
   - {x: 0, y: 0, z: 0.25, w: 0.5}
   vertices:

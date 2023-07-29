@@ -76,7 +76,9 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 3
   speed: 5
+  secondSpeed: 0
   lifeTime: 3.5
+  secondLifeTime: 0
   isBullet: 1
   isGenetic: 0
   parent: {fileID: 0}

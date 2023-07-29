@@ -3,14 +3,13 @@
 --- !u!226 &22600000
 BillboardAsset:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: BananaTree01_BillboardAsset
   serializedVersion: 2
   width: 6.407924
   bottom: -0.2809162
-  height: 12.81
+  height: 6.407924
   imageTexCoords:
   - {x: 0, y: 0, z: 0.25, w: 0.5}
   vertices:

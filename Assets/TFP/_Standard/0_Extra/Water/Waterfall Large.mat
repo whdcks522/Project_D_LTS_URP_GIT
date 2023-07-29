@@ -69,7 +69,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Alpha: 1
-    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -93,15 +92,12 @@ Material:
     - _Speed: 1.5
     - _SrcBlend: 1
     - _TessPhongStrength: 0.5
-    - _TessValue: 16
     - _TesselationAmount: 0.25
     - _TransAmbient: 0.4
     - _TransDirect: 1
-    - _TransNormal: 0
     - _TransNormalDistortion: 0
     - _TransScattering: 1.5
-    - _TransShadow: 0.8
-    - _TransStrength: 2
+    - _TransShadow: 0.9
     - _Translucency: 1.5
     - _UVSec: 0
     - _VertexFadeAmount: 1
