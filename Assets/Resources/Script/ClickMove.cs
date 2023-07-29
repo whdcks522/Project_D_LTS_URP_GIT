@@ -71,20 +71,20 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
-        //스킬 바
-        if (photonView.IsMine)
+        if (SceneManager.GetActiveScene().name == "BookScene") 
+            return;
+
+            playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
+        
+        if (photonView.IsMine) //자신의 것일 경우
         {
+            //스킬 바
             darkThunder.gameObject.SetActive(true);
             darkThunder.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0);
 
             blueThunder.gameObject.SetActive(true);
             blueThunder.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-        }
-        
 
-        if (photonView.IsMine) //자신의 것일 경우
-        {
             //1번 관절
             skinnedMeshRenderer[0].material.SetColor("_ColorControl", new Color(0.427451f, 0.4980391f, 0.5098039f, 1));
             //2번 몸체
@@ -106,14 +106,17 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
     private void LateUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "BookScene") 
+            return;
+
         //UI 위치 초기화
         if (!isShot)
         {
             playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 0.5f);//transform.GetChild(1).
             if (photonView.IsMine) 
             {
-            darkThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 0.7f);
-            blueThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 0.7f);
+            darkThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 1.2f);
+            blueThunder.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.right * 1.2f);
             }
         }
         else 
@@ -128,7 +131,11 @@ public class ClickMove : MonoBehaviourPunCallbacks
         }
     }
 
-    private void OnEnable() => Revive();
+    private void OnEnable() 
+    {
+        if (SceneManager.GetActiveScene().name != "BookScene")
+            Revive();
+    } 
    
     public void Revive()
     {

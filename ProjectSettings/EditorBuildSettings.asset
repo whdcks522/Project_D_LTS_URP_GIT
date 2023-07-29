@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/TmpScene.unity
     guid: ec8e075a07d3dca4da7348c21adb66b1
   - enabled: 1
+    path: Assets/Resources/Scenes/BookScene.unity
+    guid: 2e1c4b332a34e5f4dbeb7ef4a871455c
+  - enabled: 1
     path: Assets/Resources/Scenes/LobbyScene.unity
     guid: 02f24cf325978da458e6e19261cc3fe9
   - enabled: 1

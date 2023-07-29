@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달리 포톤.pun의 이벤트를 감지
@@ -21,7 +22,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
     public override void OnConnectedToMaster()//연결 설정하면 //자동으로 실행됨
     {
-        Debug.Log("B");
         if (State == 1) 
         {
             stateText.text = "2온라인: 마스터 서버에 접속 됨";
@@ -36,7 +36,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
     public override void OnDisconnected(DisconnectCause cause)//연결 실패했거나, 이미 접속 중인데 끊김 //자동 실행됨
     {
-        Debug.Log("C");
         if (State == 2) 
         {
             //joinButton.interactable = false;
@@ -49,12 +48,11 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     public void OnConnect()//조인 버튼 실행했을 때
     {
         fireImage.SetActive(true);
-        Debug.Log("0");
+
         if (State == 1)
         {
             audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
 
-            Debug.Log("A");
             //로비에 진입함과 동시에 마스터 서버(=포톤 클라우드 서버, 매치매이킹을 위함)에 진입 시도
             PhotonNetwork.GameVersion = gameVersion;//게임 버전
             PhotonNetwork.ConnectUsingSettings();//설정 정보(ex) 게임 버전 등(이번에는 게임 버전만 가능))를 갖고 마스터 서버에 접속 시도----------->
@@ -64,7 +62,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         }
         else if (State == 2) 
         {
-            Debug.Log("D");
             //joinButton.interactable = false;
             if (PhotonNetwork.IsConnected) //누르는 순간 끊길 수도 있으모로, 안전 장치임
             {
@@ -82,7 +79,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
     public override void OnJoinRandomFailed(short returnCode, string message)//대부분 랜덤 방에 들어가려는데 방이 없어서 실패
     {
-        Debug.Log("E");
         if (State == 2) 
         {
 
@@ -95,13 +91,17 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
     public override void OnJoinedRoom()//룸에 참가 완료시 자동 실행(방 접속에 성공하거나, 직접 방을 만드는 경우)
     {
-        Debug.Log("F");
-
         audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
 
         stateText.text = "6 방에 들어옴";
         joinButton.interactable = true;
         //씬 매니저로 이동하면 나만 넘어가고, 다른 사람은 같이 안넘어감(각각 써서, 동기화가 안됨)
         PhotonNetwork.LoadLevel("TmpScene");//방장이 하면 나머지도 자동으로 끌려옴, 동기화도 자동으로 됨
+    }
+
+    //책으로 이동
+    public void LoadBook() 
+    {
+        SceneManager.LoadScene("BookScene");
     }
 }
