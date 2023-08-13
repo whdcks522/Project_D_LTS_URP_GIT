@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviourPunCallbacks
     public Image redBar;
     public Image grayBar;
     
-
     public bool isUseNav;
     public bool isDissolve;
 
@@ -53,15 +52,18 @@ public class Enemy : MonoBehaviourPunCallbacks
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+
+        //부모 설정
+        transform.parent = gameManager.transform;
     }
 
     private void Start()
     {
         //ai를 이용하는 경우만
-        if (isUseNav) 
+        if (isUseNav)
             nms.BuildNavMesh();
-        //부모 설정
-        transform.parent = gameManager.transform;
+
+
     }
 
     private void Update()
@@ -83,6 +85,7 @@ public class Enemy : MonoBehaviourPunCallbacks
         redBar.transform.position = Camera.main.WorldToScreenPoint(transform.GetChild(1).transform.position + Vector3.forward);
         grayBar.transform.position = Camera.main.WorldToScreenPoint(transform.GetChild(1).transform.position + Vector3.forward);
     }
+
     /*
     [PunRPC]
     public void OriginControlStart(Vector3 vec) 
@@ -101,6 +104,7 @@ public class Enemy : MonoBehaviourPunCallbacks
         }
     }
     */
+
     private void OnEnable()
     {
         //체력 회복
@@ -111,8 +115,6 @@ public class Enemy : MonoBehaviourPunCallbacks
         grayBar = Bars.transform.GetChild(0).GetComponent<Image>();
         redBar = Bars.transform.GetChild(1).GetComponent<Image>();
         redBar.fillAmount = 1;
-        //타겟 설정
-        //photonView.RPC("TargetChange", RpcTarget.AllBuffered);
 
         if (photonView.IsMine) //타켓이 없을 질 경우 새로 정함
             TargetChange();
@@ -125,7 +127,7 @@ public class Enemy : MonoBehaviourPunCallbacks
         isDissolve = true;
         
         if (isUseNav)
-        { 
+        {
             anim.SetBool("isRun", false);
             //AI
             agent.enabled = false;          
@@ -136,6 +138,9 @@ public class Enemy : MonoBehaviourPunCallbacks
     #region 생성 후, 1.5초부터 움직임
     public void Activate()//1.5초후 부터 움직이도록
     {
+        if (!gameObject.activeSelf) 
+            return;
+
         //체력바 관리
         Color grayColor = grayBar.color;
         Color redColor = redBar.color;
@@ -145,7 +150,6 @@ public class Enemy : MonoBehaviourPunCallbacks
         isControl = true;
         //애니메이션
         anim.SetBool("isLive", true);
-
 
         if (isUseNav)//AI를 이용한다면
         {

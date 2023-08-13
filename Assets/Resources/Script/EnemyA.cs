@@ -25,7 +25,9 @@ public class EnemyA : Enemy
 
         nms = gameManager.GetComponent<NavMeshSurface>();
         agent = GetComponent<NavMeshAgent>();
-        
+
+        //부모 설정
+        transform.parent = gameManager.transform;
     }
 
     private void FixedUpdate()

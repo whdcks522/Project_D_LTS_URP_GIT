@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 10278686}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18188589}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18283907}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Cover.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,6 +220,50 @@ Transform:
   m_Father: {fileID: 1348071988}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &26871197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 26871199}
+  - component: {fileID: 26871198}
+  m_Layer: 0
+  m_Name: BookManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &26871198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26871197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ccfbd7680369d478b5d2fe9329359d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &26871199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26871197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &30131538
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 30131539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32250364}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +328,7 @@ Transform:
   m_Father: {fileID: 1503569229}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &35813213
+--- !u!1 &33641200
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,171 +336,32 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 35813219}
-  - component: {fileID: 35813218}
-  - component: {fileID: 35813217}
-  - component: {fileID: 35813216}
-  - component: {fileID: 35813215}
-  - component: {fileID: 35813214}
-  m_Layer: 13
-  m_Name: GameManager
-  m_TagString: AbsoluteAttack
+  - component: {fileID: 33641201}
+  m_Layer: 0
+  m_Name: Bundle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &35813214
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 33, y: 33, z: 33}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &35813215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7079b5380a8735439a01f1b5c6c40bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  trailRenderer: {fileID: 0}
-  dmg: 100000
-  speed: 0
-  secondSpeed: 0
-  lifeTime: 0
-  secondLifeTime: 0
-  isBullet: 0
-  isGenetic: 0
-  parent: {fileID: 0}
-  bulletType: 0
---- !u!114 &35813216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
---- !u!114 &35813217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13eb54f9de86c684bac6b80826143729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bars: {fileID: 4733484504574735526, guid: 7cbed04d131cd7046b2873827e05cff3, type: 3}
-  playerGroup: {fileID: 0}
-  canvas: {fileID: 0}
-  chapterArea: {fileID: 0}
-  generatePos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  mouseText: 
-  curStage: 0
-  EnemiesCount: 0
-  MaxEnemiesCount: 0
-  mouse: {fileID: 0}
-  isChat: 0
-  audioManager: {fileID: 0}
-  archiveNoShot: 1
-  enemySpawnInfoArray:
-  - enemySpawnInfo:
-    - enemyType: Dummy
-      generateIndex: 2
-    - enemyType: Dummy
-      generateIndex: 8
---- !u!114 &35813218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!4 &35813219
+--- !u!4 &33641201
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35813213}
+  m_GameObject: {fileID: 33641200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1545668586}
+  - {fileID: 534669905}
+  - {fileID: 1378772106}
+  - {fileID: 1788019611}
+  - {fileID: 1614057319}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44902460
 GameObject:
@@ -467,7 +372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 44902461}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 45486681}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51113366}
   - component: {fileID: 51113367}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookAnimated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 68661348}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 70155747}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 70536468}
   - component: {fileID: 70536469}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 81530450}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +688,7 @@ GameObject:
   - component: {fileID: 82292782}
   - component: {fileID: 82292781}
   - component: {fileID: 82292780}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Jump To Beginning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +704,7 @@ RectTransform:
   m_GameObject: {fileID: 82292778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2116804730}
@@ -809,7 +714,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &82292780
 MonoBehaviour:
@@ -867,6 +772,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 26871198}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: Paper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &82292781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -914,7 +831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 88624552}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 88782690}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100124509}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 124726367}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1044,7 +961,7 @@ GameObject:
   - component: {fileID: 136123230}
   - component: {fileID: 136123229}
   - component: {fileID: 136123228}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1029,7 @@ GameObject:
   - component: {fileID: 140204742}
   - component: {fileID: 140204741}
   - component: {fileID: 140204740}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookStandinClosedBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,7 +1056,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1193,7 +1110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 172963809}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1144,7 @@ GameObject:
   - component: {fileID: 175957672}
   - component: {fileID: 175957671}
   - component: {fileID: 175957670}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookStandinOpenBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1254,7 +1171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   - {fileID: 2100000, guid: f4c4998190025e74c9bdb4959ac0e559, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1309,7 +1226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 182058900}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1341,7 +1258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187734403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1374,7 +1291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194672157}
   - component: {fileID: 194672158}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1470,7 +1387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 221163397}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 238148947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Target.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1535,7 +1452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244211023}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1567,7 +1484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 247112510}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1600,7 +1517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 275140085}
   - component: {fileID: 275140086}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1698,7 +1615,7 @@ GameObject:
   - component: {fileID: 302054670}
   - component: {fileID: 302054669}
   - component: {fileID: 302054668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1767,7 +1684,7 @@ GameObject:
   - component: {fileID: 305992067}
   - component: {fileID: 305992066}
   - component: {fileID: 305992065}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Turn Forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1783,7 +1700,7 @@ RectTransform:
   m_GameObject: {fileID: 305992063}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1680514639}
@@ -1793,7 +1710,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &305992065
 MonoBehaviour:
@@ -1851,6 +1768,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 26871198}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: Paper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &305992066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1864,7 +1793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1898,7 +1827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 317153627}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1931,7 +1860,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 325234769}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +1892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 342050006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Base.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1995,7 +1924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 370574330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2027,7 +1956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 377444504}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2059,7 +1988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 396676464}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Cover.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2090,7 +2019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412112571}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2123,7 +2052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416710953}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2155,7 +2084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469109691}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Standins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2191,7 +2120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 471069471}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2226,7 +2155,7 @@ GameObject:
   - component: {fileID: 498088932}
   - component: {fileID: 498088931}
   - component: {fileID: 498088930}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Closed Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2249,9 +2178,9 @@ RectTransform:
   m_Father: {fileID: 988634480}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -167.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498088930
@@ -2362,7 +2291,7 @@ GameObject:
   - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2433,13 +2362,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1, y: 0.52, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 33641201}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
@@ -2494,7 +2423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 540882998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2529,7 +2458,7 @@ GameObject:
   - component: {fileID: 576600967}
   - component: {fileID: 576600966}
   - component: {fileID: 576600965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2597,7 +2526,7 @@ GameObject:
   - component: {fileID: 578896171}
   - component: {fileID: 578896170}
   - component: {fileID: 578896169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookStandinClosedFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2624,7 +2553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2678,7 +2607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 580614283}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2709,7 +2638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 585231361}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2743,7 +2672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 595634157}
   - component: {fileID: 595634156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2770,7 +2699,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   - {fileID: 2100000, guid: f4c4998190025e74c9bdb4959ac0e559, type: 2}
   - {fileID: 2100000, guid: c2b6f3277b8c9ad49800a9e8c3db15d4, type: 2}
   - {fileID: 2100000, guid: b29b5ff1823e9e9498d7e7ff83790c21, type: 2}
@@ -2884,7 +2813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618937843}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pages.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2918,7 +2847,7 @@ GameObject:
   - component: {fileID: 619691677}
   - component: {fileID: 619691679}
   - component: {fileID: 619691678}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2996,7 +2925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 624995708}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3028,7 +2957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 626703425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3061,7 +2990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636561679}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3093,7 +3022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641064755}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3125,7 +3054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 654076602}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3148,6 +3077,86 @@ Transform:
   m_Father: {fileID: 471069471}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &670575097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670575098}
+  - component: {fileID: 670575100}
+  - component: {fileID: 670575099}
+  m_Layer: 0
+  m_Name: OldText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &670575098
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670575097}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1979328730}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 280, y: 8}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &670575099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670575097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uC801\uB4E4\uC744 \uBAA8\uB450 \uACF5\uB7B5"
+--- !u!222 &670575100
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670575097}
+  m_CullTransparentMesh: 1
 --- !u!1 &674748038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,7 +3166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674748039}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3189,7 +3198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 676871240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Base.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3221,7 +3230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 678740359}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3317,7 +3326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690001538}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3341,6 +3350,89 @@ Transform:
   m_Father: {fileID: 2038553980}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &700703459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2637996650089757421, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6529376640007243877, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109807753774179678, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27e9afd9c229c294090596998c58bb25, type: 3}
 --- !u!1 &714016469
 GameObject:
   m_ObjectHideFlags: 0
@@ -3350,7 +3442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 714016470}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3382,7 +3474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 714508466}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pages.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3415,7 +3507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 716587243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3448,7 +3540,7 @@ GameObject:
   - component: {fileID: 729891082}
   - component: {fileID: 729891084}
   - component: {fileID: 729891083}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3526,7 +3618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738800332}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3561,7 +3653,7 @@ GameObject:
   - component: {fileID: 744859649}
   - component: {fileID: 744859648}
   - component: {fileID: 744859647}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookStandinOpenMiddle_High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3588,7 +3680,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   - {fileID: 2100000, guid: f4c4998190025e74c9bdb4959ac0e559, type: 2}
   - {fileID: 2100000, guid: c2b6f3277b8c9ad49800a9e8c3db15d4, type: 2}
   - {fileID: 2100000, guid: b29b5ff1823e9e9498d7e7ff83790c21, type: 2}
@@ -3646,7 +3738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774465102}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3679,7 +3771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 789050195}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3714,13 +3806,13 @@ GameObject:
   - component: {fileID: 803829209}
   - component: {fileID: 803829211}
   - component: {fileID: 803829210}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Page Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &803829209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3805,7 +3897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806121503}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3837,7 +3929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808823183}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.08_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3868,7 +3960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 827887176}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spine_LRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3902,7 +3994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 866525286}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3936,7 +4028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871888926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +4060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 893065591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cover.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4000,7 +4092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 899689131}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4033,7 +4125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909653446}
   - component: {fileID: 909653447}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4132,7 +4224,7 @@ GameObject:
   - component: {fileID: 930222246}
   - component: {fileID: 930222245}
   - component: {fileID: 930222244}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Open Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4155,9 +4247,9 @@ RectTransform:
   m_Father: {fileID: 988634480}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -91.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930222244
@@ -4264,7 +4356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 938308722}
   - component: {fileID: 938308723}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 938628945}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4393,7 +4485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 940591281}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.10_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4424,7 +4516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 958219995}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4456,7 +4548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 961289475}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4488,7 +4580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973035623}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4522,7 +4614,7 @@ GameObject:
   - component: {fileID: 987386093}
   - component: {fileID: 987386095}
   - component: {fileID: 987386094}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4562,7 +4654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.5566038, g: 0.023629395, b: 0.023629395, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4570,12 +4662,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 710893cb65d9db545b7ad2828494677e, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 225
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4601,13 +4693,13 @@ GameObject:
   m_Component:
   - component: {fileID: 988634480}
   - component: {fileID: 988634481}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: State Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988634480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4630,7 +4722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70.94998, y: -85.399994}
+  m_AnchoredPosition: {x: 70.94995, y: -85.399994}
   m_SizeDelta: {x: 175.9, y: 185.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &988634481
@@ -4668,7 +4760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005008127}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4702,7 +4794,7 @@ GameObject:
   - component: {fileID: 1018772519}
   - component: {fileID: 1018772521}
   - component: {fileID: 1018772520}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4780,7 +4872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1032934259}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4813,7 +4905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083956474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089417268}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4877,6 +4969,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3360, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_Speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_Acceleration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4011, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: sceneViewId
       value: 2
@@ -4884,22 +4984,22 @@ PrefabInstance:
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
@@ -4909,7 +5009,7 @@ PrefabInstance:
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.266
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
@@ -4962,7 +5062,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1450, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
@@ -4975,7 +5076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1116375360}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5007,7 +5108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1125342456}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5039,7 +5140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1147967883}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5072,7 +5173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165329654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5106,7 +5207,7 @@ GameObject:
   - component: {fileID: 1177410633}
   - component: {fileID: 1177410635}
   - component: {fileID: 1177410634}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5146,7 +5247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.5566038, g: 0.023629395, b: 0.023629395, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5154,12 +5255,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 710893cb65d9db545b7ad2828494677e, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 225
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5184,7 +5285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177829433}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5216,7 +5317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1182381148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Book_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5248,7 +5349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183399651}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5280,7 +5381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1192385116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5312,7 +5413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235882430}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5344,7 +5445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1237712273}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5377,7 +5478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258102701}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5410,7 +5511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314582594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5445,7 +5546,7 @@ GameObject:
   - component: {fileID: 1321459461}
   - component: {fileID: 1321459460}
   - component: {fileID: 1321459459}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Turn Backward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5461,7 +5562,7 @@ RectTransform:
   m_GameObject: {fileID: 1321459457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 987386093}
@@ -5471,7 +5572,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1321459459
 MonoBehaviour:
@@ -5529,6 +5630,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 26871198}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: Paper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1321459460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5542,7 +5655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5576,7 +5689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322235783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spine_RRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5609,7 +5722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327878676}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5645,7 +5758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348071988}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Cover.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5679,7 +5792,7 @@ GameObject:
   - component: {fileID: 1350002674}
   - component: {fileID: 1350002673}
   - component: {fileID: 1350002672}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5745,7 +5858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350006003}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5777,7 +5890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350729256}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cover.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5813,7 +5926,7 @@ GameObject:
   - component: {fileID: 1356151700}
   - component: {fileID: 1356151699}
   - component: {fileID: 1356151698}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Open Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5836,9 +5949,9 @@ RectTransform:
   m_Father: {fileID: 988634480}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -53.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1356151698
@@ -5944,7 +6057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363542574}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5977,7 +6090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370694937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6088,13 +6201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378772104}
-  m_LocalRotation: {x: 0.41937983, y: -0.11460565, z: -0.053219132, w: 0.8989737}
+  m_LocalRotation: {x: 0.41937986, y: -0.11460566, z: -0.053219136, w: 0.89897376}
   m_LocalPosition: {x: 0.017624669, y: 0.592, z: 0.06825256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 33641201}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 47.887, y: -21.952002, z: -16.621}
 --- !u!114 &1378772107
 MonoBehaviour:
@@ -6128,7 +6241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1384924398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6160,7 +6273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387596890}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6184,6 +6297,139 @@ Transform:
   m_Father: {fileID: 2125293447}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1396440681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396440682}
+  - component: {fileID: 1396440685}
+  - component: {fileID: 1396440684}
+  - component: {fileID: 1396440683}
+  m_Layer: 0
+  m_Name: BookUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1396440682
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396440681}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1979328730}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -60, y: 115}
+  m_SizeDelta: {x: 150, y: 150}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1396440683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396440681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+    m_PressedColor: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1396440684}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 26871198}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: LoadBook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1396440684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396440681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b742388d2f7855d41ab77f2ffbe4e558, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1396440685
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396440681}
+  m_CullTransparentMesh: 1
 --- !u!1 &1405344656
 GameObject:
   m_ObjectHideFlags: 0
@@ -6193,7 +6439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1405344657}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6229,7 +6475,7 @@ GameObject:
   - component: {fileID: 1454196747}
   - component: {fileID: 1454196746}
   - component: {fileID: 1454196745}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Closed Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6252,9 +6498,9 @@ RectTransform:
   m_Father: {fileID: 988634480}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454196745
@@ -6360,7 +6606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1469225122}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Thickness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6393,7 +6639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470319222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6425,7 +6671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475592702}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6457,7 +6703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1482815321}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6491,7 +6737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503569229}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6523,7 +6769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1517744879}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6555,7 +6801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1532104612}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6587,7 +6833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537652961}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6610,37 +6856,6 @@ Transform:
   m_Father: {fileID: 187734403}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1545668585
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1545668586}
-  m_Layer: 0
-  m_Name: Spot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1545668586
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545668585}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 35813219}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1570876650
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,7 +6865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570876651}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6685,7 +6900,7 @@ GameObject:
   - component: {fileID: 1579945706}
   - component: {fileID: 1579945705}
   - component: {fileID: 1579945704}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Open Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6708,9 +6923,9 @@ RectTransform:
   m_Father: {fileID: 988634480}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -129.29999}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1579945704
@@ -6807,7 +7022,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579945702}
   m_CullTransparentMesh: 0
---- !u!1 &1612587414
+--- !u!1 &1614057315
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6815,24 +7030,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1612587418}
-  - component: {fileID: 1612587417}
-  - component: {fileID: 1612587416}
-  - component: {fileID: 1612587415}
+  - component: {fileID: 1614057319}
+  - component: {fileID: 1614057318}
+  - component: {fileID: 1614057317}
+  - component: {fileID: 1614057316}
   m_Layer: 10
-  m_Name: Plane
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1612587415
+--- !u!64 &1614057316
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612587414}
+  m_GameObject: {fileID: 1614057315}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -6848,13 +7063,13 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1612587416
+--- !u!23 &1614057317
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612587414}
+  m_GameObject: {fileID: 1614057315}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -6868,7 +7083,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 22c394ea002e86742a66c868631796e4, type: 3}
+  - {fileID: -876546973899608171, guid: 1b6b29f912fbdc845a71827507f91dd5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6890,28 +7105,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1612587417
+--- !u!33 &1614057318
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612587414}
+  m_GameObject: {fileID: 1614057315}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1612587418
+--- !u!4 &1614057319
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612587414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.031724416, y: 0.028, z: -0.019}
-  m_LocalScale: {x: 0.1, y: 1, z: 0.055}
+  m_GameObject: {fileID: 1614057315}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.03269735, y: -0.99, z: 0.8808193}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 33641201}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1616970013
 GameObject:
@@ -6922,7 +7137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1616970014}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.10_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6953,7 +7168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1629413229}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6985,7 +7200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1654665056}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spine_Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7019,7 +7234,7 @@ GameObject:
   - component: {fileID: 1680514639}
   - component: {fileID: 1680514641}
   - component: {fileID: 1680514640}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7059,7 +7274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.5566038, g: 0.023629395, b: 0.023629395, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7067,12 +7282,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 710893cb65d9db545b7ad2828494677e, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 225
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -7097,7 +7312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1701129180}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.08_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7185,7 +7400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704362242
 GameObject:
@@ -7196,7 +7411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1704362243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Target.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7227,7 +7442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733563514}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Target.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7261,7 +7476,7 @@ GameObject:
   - component: {fileID: 1754425544}
   - component: {fileID: 1754425543}
   - component: {fileID: 1754425542}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7318,6 +7533,102 @@ Transform:
   m_Father: {fileID: 1327878676}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1758478476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758478477}
+  - component: {fileID: 1758478480}
+  - component: {fileID: 1758478479}
+  - component: {fileID: 1758478478}
+  m_Layer: 5
+  m_Name: TitleText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1758478477
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758478476}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1979328730}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -524, y: 190}
+  m_SizeDelta: {x: 100, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1758478478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758478476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1758478479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758478476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "\uB3CC\uC544\uAC00\uAE30"
+--- !u!222 &1758478480
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758478476}
+  m_CullTransparentMesh: 1
 --- !u!1 &1773803387
 GameObject:
   m_ObjectHideFlags: 0
@@ -7327,7 +7638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1773803388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7358,7 +7669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1775915307}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7389,7 +7700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1787860998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7451,13 +7762,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788019609}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 33641201}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811847936
 GameObject:
@@ -7468,7 +7779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811847937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7501,7 +7812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1825758571}
   - component: {fileID: 1825758572}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Page Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7527,11 +7838,11 @@ RectTransform:
   m_Father: {fileID: 1979328730}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70.95, y: -368}
-  m_SizeDelta: {x: 143.9, y: 34.7}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 400, y: 40}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1825758572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7549,8 +7860,8 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
+  m_ChildAlignment: 4
+  m_Spacing: 80
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -7567,7 +7878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834366855}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7602,7 +7913,7 @@ GameObject:
   - component: {fileID: 1848656783}
   - component: {fileID: 1848656785}
   - component: {fileID: 1848656784}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7680,7 +7991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1849447222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7713,7 +8024,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852379152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7745,7 +8056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1869032157}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7780,7 +8091,7 @@ GameObject:
   - component: {fileID: 1870884295}
   - component: {fileID: 1870884294}
   - component: {fileID: 1870884293}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Jump To End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7796,7 +8107,7 @@ RectTransform:
   m_GameObject: {fileID: 1870884291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1177410633}
@@ -7806,7 +8117,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1870884293
 MonoBehaviour:
@@ -7864,6 +8175,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 26871198}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: Paper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1870884294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7877,15 +8200,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7911,7 +8234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1873213736}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7944,7 +8267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1874489699}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.L.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7976,7 +8299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878695988}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.R.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8011,7 +8334,7 @@ GameObject:
   - component: {fileID: 1885245605}
   - component: {fileID: 1885245604}
   - component: {fileID: 1885245603}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BookStandinOpenFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8038,7 +8361,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   - {fileID: 2100000, guid: bdb38526121b86447b50668e29efe201, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -8095,13 +8418,13 @@ GameObject:
   - component: {fileID: 1895750801}
   - component: {fileID: 1895750803}
   - component: {fileID: 1895750802}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: States Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1895750801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8175,7 +8498,7 @@ GameObject:
   - component: {fileID: 1904062859}
   - component: {fileID: 1904062861}
   - component: {fileID: 1904062860}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8253,7 +8576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917603678}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Controller_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8284,7 +8607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1921723523}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Cover.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8316,7 +8639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1943119559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Bottom.R.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8351,7 +8674,7 @@ GameObject:
   - component: {fileID: 1979328729}
   - component: {fileID: 1979328728}
   - component: {fileID: 1979328727}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8408,7 +8731,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 534669904}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -8437,8 +8760,11 @@ RectTransform:
   - {fileID: 803829209}
   - {fileID: 988634480}
   - {fileID: 1825758571}
+  - {fileID: 1396440682}
+  - {fileID: 670575098}
+  - {fileID: 1758478477}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8454,7 +8780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1983953977}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8486,7 +8812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016816008}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8520,7 +8846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2019705704}
   - component: {fileID: 2019705703}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8551,11 +8877,11 @@ MonoBehaviour:
   - {fileID: 175957669}
   - {fileID: 140204739}
   materials:
-  - {fileID: 2100000, guid: 13d8a7cc0299e7044b3f718384d32c04, type: 2}
+  - {fileID: 2100000, guid: 12a6cbdd77c2f9142aca65e397c68bca, type: 2}
   - {fileID: 2100000, guid: f4c4998190025e74c9bdb4959ac0e559, type: 2}
   - {fileID: 2100000, guid: bdb38526121b86447b50668e29efe201, type: 2}
-  - {fileID: 2100000, guid: 12f7bdeef3cb5c34e984083f8ded8ce4, type: 2}
-  - {fileID: 2100000, guid: 9b6383a24a89210448fbf6a6b02e2727, type: 2}
+  - {fileID: 2100000, guid: b29b5ff1823e9e9498d7e7ff83790c21, type: 2}
+  - {fileID: 2100000, guid: c2b6f3277b8c9ad49800a9e8c3db15d4, type: 2}
   materialMappings:
   - materialType: 0
     mappings:
@@ -8637,25 +8963,14 @@ MonoBehaviour:
   - materialType: 7
     mappings: []
   pageData:
-  - material: {fileID: 2100000, guid: 12f7bdeef3cb5c34e984083f8ded8ce4, type: 2}
-  - material: {fileID: 2100000, guid: 9b6383a24a89210448fbf6a6b02e2727, type: 2}
-  - material: {fileID: 2100000, guid: bb7511f0559481c44a50856c09b8e0fb, type: 2}
-  - material: {fileID: 2100000, guid: af743ea3c3a72494dbb93c20c847eaaf, type: 2}
-  - material: {fileID: 2100000, guid: 98e03e39c368d9c428e965d74827e81a, type: 2}
-  - material: {fileID: 2100000, guid: 6c2d687187323b74b920bc30e2612149, type: 2}
-  - material: {fileID: 2100000, guid: 6bc66bf44e553154ab991aeb7e278973, type: 2}
-  - material: {fileID: 2100000, guid: 88b271d7817293443bc54ada7c7aed17, type: 2}
-  - material: {fileID: 2100000, guid: aeced1a8f58b6db43b0b076c899313e4, type: 2}
-  - material: {fileID: 2100000, guid: 8e1329d3bb9d7ad40ae2e741d8a1b2af, type: 2}
-  - material: {fileID: 2100000, guid: cf6f1e0ce5be2e64fbca664f814981c2, type: 2}
-  - material: {fileID: 2100000, guid: 511a20a02d2e2154e87dd7f5654c2600, type: 2}
-  - material: {fileID: 2100000, guid: e920fd9038b607a49afce8756e18fe6a, type: 2}
-  - material: {fileID: 2100000, guid: 8c8507bc69e12814e80fb06d05950b76, type: 2}
-  - material: {fileID: 2100000, guid: acc59189e92793f46b8cd5c1ead5f06d, type: 2}
-  - material: {fileID: 2100000, guid: 5678fa9b97a343a49a4419f665ec8a9a, type: 2}
-  - material: {fileID: 2100000, guid: 296b0ecfd57f9cc459d1f7097fa38b77, type: 2}
-  - material: {fileID: 2100000, guid: d7e6fa7dce2fa524aa398c5dee51fd3c, type: 2}
-  - material: {fileID: 2100000, guid: 6cfe3127bcf1453478ad52991eeca3ab, type: 2}
+  - material: {fileID: 2100000, guid: b29b5ff1823e9e9498d7e7ff83790c21, type: 2}
+  - material: {fileID: 2100000, guid: c2b6f3277b8c9ad49800a9e8c3db15d4, type: 2}
+  - material: {fileID: 2100000, guid: bbb9cab8d0908af46b51724848af1e32, type: 2}
+  - material: {fileID: 2100000, guid: 20530b08c93bfe54492f4b7a3c496007, type: 2}
+  - material: {fileID: 2100000, guid: c8cc6ff6fbeaf584288ed5331cee9784, type: 2}
+  - material: {fileID: 2100000, guid: 764d974bddfa6204180bde21d1461c3f, type: 2}
+  - material: {fileID: 2100000, guid: acf997c7576b8ff48942b18f45893005, type: 2}
+  - material: {fileID: 2100000, guid: 8e7e1739d378d964eb0a33d0fbb4e0cc, type: 2}
   pages:
   - {fileID: 136123228}
   - {fileID: 576600965}
@@ -8673,16 +8988,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019705702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 51113366}
   - {fileID: 469109691}
   - {fileID: 1327878676}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2021894448
 GameObject:
@@ -8693,7 +9008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2021894449}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Target.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8724,7 +9039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036569264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8756,7 +9071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2038553980}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8789,7 +9104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068999563}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Page_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8821,7 +9136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075695764}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8854,7 +9169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098682207}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8885,7 +9200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111577513}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8919,7 +9234,7 @@ GameObject:
   - component: {fileID: 2116804730}
   - component: {fileID: 2116804732}
   - component: {fileID: 2116804731}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8959,7 +9274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.5566038, g: 0.023629395, b: 0.023629395, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8967,12 +9282,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 710893cb65d9db545b7ad2828494677e, type: 3}
+    m_FontSize: 25
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 225
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -8997,7 +9312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2122544673}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Deform_Pages_Top.L.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9029,7 +9344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125293447}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9062,7 +9377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2128945998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9094,7 +9409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138957391}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}

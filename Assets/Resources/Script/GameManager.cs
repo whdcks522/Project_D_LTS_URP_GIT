@@ -57,6 +57,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Header("업적 관련")]
     bool archiveUnDead = true;//챕터 중, 한 번도 죽지 않을 것(죽으면 false)(0)
     public bool archiveNoShot = true;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
+    //씬 관련
+    bool isTmpScene;
+    enum EnemyType {Dummy, EnemyA, EnemyB, BossA, EnemyC, BossB}
     #region 적 정보 클래스
     [Serializable]
     public class EnemySpawnInfo
@@ -105,10 +108,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         enemySpawnList = new List<EnemySpawnInfo>();
         //적 목록 확인
         enemySpawnListControl();
+
+        //tmpScene인지 확인하는 불값
+        isTmpScene = SceneManager.GetActiveScene().name == "TmpScene";
     }
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "BookScene")
+            return;
+
         #region 시작 시 플레이어 생성
         GameObject minePlayer = PhotonNetwork.Instantiate("MinePlayer", new Vector3(0, 2.5f, 0), Quaternion.identity);
         //하이라키 창에서 자식으로
@@ -116,23 +125,78 @@ public class GameManager : MonoBehaviourPunCallbacks
         //시작하는 물리적 위치를 이동
         minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, Random.Range(-4, 2));
         #endregion
-        audioManager.PlayBgm(AudioManager.Bgm.Entrance);
+        
+        //입장 브금
+         audioManager.PlayBgm(AudioManager.Bgm.Entrance);
+
+        if (!photonView.IsMine) //내 뒤론 모찌나간다
+            return;
+        
+
+            //오브젝트 풀링을 위한 적 전체 목록
+            Dictionary<string, int> enemyMap = new Dictionary<string, int>();
+
+        foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
+        {
+            enemyMap[enemyType.ToString()] = 0;
+            Debug.Log("EnemyType 열거형 항목: " + enemyType);
+        }
+
+        for (int index = 0; index < enemySpawnInfoArray.Length; index++) 
+        {
+            Dictionary<string, int> tmpEnemyMap = new Dictionary<string, int>();
+            //읽어내기
+            foreach (EnemySpawnInfo spawnInfo in enemySpawnInfoArray[index].enemySpawnInfo)
+            {
+                if (tmpEnemyMap.ContainsKey(spawnInfo.enemyType))
+                {
+                    tmpEnemyMap[spawnInfo.enemyType] += 1;
+                }
+                else
+                {
+                    tmpEnemyMap[spawnInfo.enemyType] = 1;
+                }
+            }
+            //갱신하기
+            foreach (KeyValuePair<string, int> kvp in tmpEnemyMap)
+            {
+                enemyMap[kvp.Key] = Math.Max(kvp.Value, enemyMap[kvp.Key]);
+            }
+        }
+
+        foreach (KeyValuePair<string, int> kvp in enemyMap)
+        {
+            Debug.Log("키: " + kvp.Key + ", 값: " + kvp.Value);
+            for(int i = 0; i < kvp.Value; i++) 
+            {
+                //적 미리 생성
+                int index = NametoIndex(kvp.Key);
+                GameObject enemy = PhotonNetwork.Instantiate(resourceNames[index], new Vector3(0, 0, 0), Quaternion.identity);
+                pools[index].Add(enemy);
+
+                enemy.SetActive(false);
+                enemy.GetComponent<Enemy>().Bars.SetActive(false);
+            }
+        }
     }
 
+    int NametoIndex(string _name) //오브젝트풀링에서 문자열을 순서로 변환
+    {
+        for(int i = 0; i < resourceNames.Length; i++) 
+        {
+            if (string.Equals(resourceNames[i], _name))
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
 
     #region 오브젝트 풀링
     public GameObject Get(string name) //있으면 적 부르고, 없으면 생성
     {
-        int index = 0;
-        for (int i = 0; i < resourceNames.Length; i++) 
-        {
-            if (string.Equals(resourceNames[i], name)) 
-            {
-                index = i;
-                break;
-            }
-        }
-       
+        int index = NametoIndex(name);
+
         GameObject select = null;
         foreach (GameObject item in pools[index])
         {
@@ -236,7 +300,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    void TmpEnd() 
+    void TmpEnd()//tmpScene일 경우 나감
     {
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("AuthScene");
@@ -247,11 +311,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void NextStage()//위에서 둘 다 불림
     {
-            //다음 스테이지로
+        //다음 스테이지로
+        if (!isTmpScene)
             curStage++;
+
         if (curStage == enemySpawnInfoArray.Length)//챕터 올 클리어
         {
-            if (SceneManager.GetActiveScene().name == "TmpScene")//테스트 중이라면 시작 창으로
+            if (isTmpScene)//테스트 중이라면 시작 창으로
             {
                 Invoke("TmpEnd", 1f);
             }     
@@ -269,12 +335,11 @@ public class GameManager : MonoBehaviourPunCallbacks
                 if (SceneManager.GetActiveScene().name == "Chap1_Scene")
                     AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter1] = 1;
 
-                //챕터 2 클리어(업적 2)
+                //챕터 2 클리어(업적 3)
                 if (SceneManager.GetActiveScene().name == "Chap2_Scene")
                     AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Chapter2] = 1;
 
-
-                //업적 저장
+                //업적 전체 저장
                 AuthManager.Instance.SaveJson();
 
                 PhotonNetwork.LeaveRoom();
@@ -301,9 +366,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
 
             //룸 설정
-            ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();//-----------------
+            ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();
             roomProperties.Add("IsAllowedToEnter", false);
-            roomProperties.Add("IsAllowedToExit", true);//--------------
+            roomProperties.Add("IsAllowedToExit", true);
             PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);//모두에게 적용됨-------
         }  
     }
@@ -326,16 +391,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         //입장 효과음
         audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
 
-        //적 소환
+        //적 소환, tmpScene의 경우, 드롭다운을 따라감
+        if (isTmpScene)
         {
-            foreach (var spawnInfo in enemySpawnList)
-                SpawnEnemy(spawnInfo.enemyType, spawnInfo.generateIndex);
+            SpawnEnemy(playerGroup.GetComponent<TrainManager>().DropDownTranslate(), 6);
         }
-
-
-       
+        else //챕터의 경우, 리스트를 따라감
+        {
+            //적 소환
+            {
+                foreach (var spawnInfo in enemySpawnList)
+                    SpawnEnemy(spawnInfo.enemyType, spawnInfo.generateIndex);
+            }
+        }
         //입장 시, 퇴장 불가능 하도록 룸 설정
-        ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();//-----------------
+        ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();
 
         if (curStage != enemySpawnInfoArray.Length - 1)//일반 전투일 경우
         {
@@ -343,9 +413,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 roomProperties.Add("IsAllowedToEnter", false);//--------------
             }
-            if(SceneManager.GetActiveScene().name == "Chap1_Scene")//챕터 1 노래
+
+            if(SceneManager.GetActiveScene().name == "Chap1_Scene")//챕터 1 일반 노래
                         audioManager.PlayBgm(AudioManager.Bgm.Chapter1);
-            else if (SceneManager.GetActiveScene().name == "Chap2_Scene")//챕터 1 노래
+            else if (SceneManager.GetActiveScene().name == "Chap2_Scene")//챕터 1 일반 노래
                 audioManager.PlayBgm(AudioManager.Bgm.Chapter2);
         }
         else  //보스 전투일 경우
@@ -356,7 +427,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 audioManager.PlayBgm(AudioManager.Bgm.Chapter2_BossB);
         }
         roomProperties.Add("IsAllowedToExit", false);//전투 중 못나가도록
-        PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);//모두에게 적용됨-------       
+        PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);    
     }
     #endregion
 

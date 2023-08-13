@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 2_Chapter1
   m_EditorClassIdentifier: 
   archiveType: 2
-  archiveTitle: Chapter12
   archiveDesc: "\uCC55\uD130 1 \uD074\uB9AC\uC5B4"
   archiveIcon: {fileID: 21300000, guid: 3e5c3fc18c79a4519b1997930056e995, type: 3}
+  archiveSfx: 29

@@ -72,7 +72,14 @@ public class ClickMove : MonoBehaviourPunCallbacks
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "BookScene") 
+        {
+            //1번 관절
+            skinnedMeshRenderer[0].material.SetColor("_ColorControl", new Color(0.427451f, 0.4980391f, 0.5098039f, 1));
+            //2번 몸체
+            skinnedMeshRenderer[1].material.SetColor("_ColorControl", new Color(0.345098f, 0.682353f, 0.7490196f, 1));
             return;
+        }
+            
 
             playerName.GetComponent<Text>().text = photonView.IsMine? PhotonNetwork.NickName : photonView.Owner.NickName;
         
@@ -156,8 +163,9 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //경로 관리
         if(photonView.IsMine)
             spot.transform.position = transform.position;
+
         isControl = false;
-        agent.enabled = true;//111111111111111111111111
+        agent.enabled = true;
         if(agent.enabled)
         agent.isStopped = true;
         lr.enabled = false;
@@ -282,13 +290,13 @@ public class ClickMove : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine && isControl && !gameManager.isChat)//로컬이 아니면 취소
         {
-           
+
             if (Input.GetKeyDown(KeyCode.Q) && curTime >= maxTime)
             {
                 #region 플레이어공격A
                 //무반동 삭제
                 curTime = 0f;
-                
+
                 //일단 정지
                 agent.isStopped = true;
                 lr.enabled = false;
@@ -301,7 +309,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 rigid.angularVelocity = Vector3.zero;
                 //목표 고정
                 targetControl();
-                
+
                 //사격한 지점을 보도록
                 transform.LookAt(spot.position);
                 transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -322,27 +330,62 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 gameManager.archiveNoShot = false;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
                 #endregion
             }
-            
+
             else if (Input.GetMouseButton(1))
             {
-                if (Input.GetMouseButtonDown(1)) 
+                if (Input.GetMouseButtonDown(1))
                 {
                     gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
                 }
                 #region 마우스 이동
                 targetControl();
-               
-                    //다시 움직이기시작함
-                    agent.isStopped = false;
-                    //목적지 설정
-                    agent.SetDestination(spot.position);//hit.point
-                    //애니메이션 실행
-                    anim.SetBool("isRun", true);
-                    //이미 실행중이라면 종료
-                    if (draw != null) StopCoroutine(draw);
-                    //경로 보이게 라인 렌더러 코루틴실행
-                    draw = StartCoroutine(DrawPath());
-               
+
+                //다시 움직이기시작함
+                agent.isStopped = false;
+                //목적지 설정
+                agent.SetDestination(spot.position);//hit.point
+                                                    //애니메이션 실행
+                anim.SetBool("isRun", true);
+                //이미 실행중이라면 종료
+                if (draw != null) StopCoroutine(draw);
+                //경로 보이게 라인 렌더러 코루틴실행
+                draw = StartCoroutine(DrawPath());
+
+            }
+            //도착함
+            else if (agent.remainingDistance < 0.15f)
+            {
+                //애니메이션
+                anim.SetBool("isRun", false);
+                //라인 렌더러 종료
+                lr.enabled = false;
+                if (draw != null) //정지중 다시 가려고하면 자동으로 꺼짐 방지
+                    StopCoroutine(draw);//시작했던 코루틴 종료-----------------------------------
+            }
+            #endregion
+        }
+        else if (SceneManager.GetActiveScene().name == "BookScene")
+        {
+            #region 책 씬에서 이동
+            if (Input.GetMouseButton(1))
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    gameManager.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
+                }
+                targetControl();
+
+                //다시 움직이기시작함
+                agent.isStopped = false;
+                //목적지 설정
+                agent.SetDestination(spot.position);//hit.point
+                                                    //애니메이션 실행
+                anim.SetBool("isRun", true);
+                //이미 실행중이라면 종료
+                if (draw != null) StopCoroutine(draw);
+                //경로 보이게 라인 렌더러 코루틴실행
+                draw = StartCoroutine(DrawPath());
+
             }
             //도착함
             else if (agent.remainingDistance < 0.15f)

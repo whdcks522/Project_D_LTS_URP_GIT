@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0_UnDead
   m_EditorClassIdentifier: 
   archiveType: 0
-  archiveTitle: UnDead0
   archiveDesc: "\uCC55\uD130 \uC911, \uD55C \uBC88\uB3C4 \uC8FD\uC9C0 \uC54A\uC744
     \uAC83"
   archiveIcon: {fileID: 21300000, guid: 0e30c5e3829ca4f0a817e85ea9b2ff24, type: 3}
+  archiveSfx: 24

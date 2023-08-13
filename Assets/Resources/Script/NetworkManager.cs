@@ -48,8 +48,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         MyListRenewal();
     }
-
-
     void MyListRenewal()
     {
         // 최대 페이지
@@ -93,7 +91,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             //네트워크 전체에서 룸에 있는 인원 빼면 로비에 있는 인원 수 나옴
         LobbyInfoText.text = (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms) + "명 로비 / "
             + PhotonNetwork.CountOfPlayersInRooms + "명 방 / "
-            + PhotonNetwork.CountOfPlayers + "명 접속 중";
+            + PhotonNetwork.CountOfPlayers + "명 접속 중";     
     }
 
     private void Start()
@@ -123,9 +121,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public void Disconnect() 
-    {
-        AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+    {  
         PhotonNetwork.Disconnect();
+        AuthManager.Instance.Destroy();
     } 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -194,10 +192,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         AuthManager.Instance.audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
         PhotonNetwork.JoinRandomRoom();
     }
-    
-    
-
-    
 
     public override void OnCreateRoomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }//같은 이름의 룸을 만들면 실패
     public override void OnJoinRandomFailed(short returnCode, string message) { ErrorText.text = "입장 할 방이 없습니다."; }//같은 이름의 룸을 만들면 실패( RoomInput.text = ""; CreateRoom(); )

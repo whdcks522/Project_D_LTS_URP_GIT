@@ -1224,9 +1224,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 0}
   dmg: 10
   speed: 0
+  secondSpeed: 0
   lifeTime: 0
+  secondLifeTime: 0
   isBullet: 0
   isGenetic: 1
+  parent: {fileID: 0}
+  bulletType: 0
 --- !u!135 &5689861066869093718
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
             {
                 instance = FindObjectOfType<AuthManager>();//new AuthManager();
             }
+            
             return instance;
         }
     }
@@ -30,12 +31,15 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
     public bool IsFirebaseReady { get; private set; }//현재 파이어베이스에 접근 가능한 환경인지
     public bool IsSignInOnProgress { get; private set; }//로그인 진행중인지 확인용(로그인중 로그인 요청 방지)
 
+    public void Destroy() 
+    {
+        Destroy(gameObject);
+    }
+
     private void Awake() 
     {
         //해상도
         Screen.SetResolution(1280, 720, false);
-        //배경 음악 초기화
-        audioManager = GetComponent<AudioManager>();
         //업적을 위한 클래스 객체
         originAchievements = new Achievements();
     } 
@@ -43,7 +47,9 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
     void Start()
     {
+        //효과음
         audioManager.PlayBgm(AudioManager.Bgm.Auth);
+        audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
 
         DontDestroyOnLoad(this.gameObject);
 
@@ -282,6 +288,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
     public Achievements originAchievements;
     public enum ArchiveType { Undead, NoShot, Chapter1, Chapter2}
+    //업적을 위한 클래스
     [System.Serializable]
     public class Achievements 
     {
@@ -289,6 +296,7 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
         public int[] Arr = new int[System.Enum.GetValues(typeof(ArchiveType)).Length];//배열의 길이만큼
     }
 
+    //테스트를 위한 임시 로그인
     public void Set333()
     {
         emailField.text = "333@333.3";

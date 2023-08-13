@@ -66,7 +66,7 @@ Transform:
   m_Children:
   - {fileID: 1292757763814086458}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6529376640007243877
 MonoBehaviour:
@@ -126,36 +126,8 @@ MonoBehaviour:
   archiveNoShot: 1
   enemySpawnInfoArray:
   - enemySpawnInfo:
-    - enemyType: EnemyA
-      generateIndex: 2
-    - enemyType: EnemyA
-      generateIndex: 8
-  - enemySpawnInfo:
-    - enemyType: EnemyA
-      generateIndex: 1
-    - enemyType: EnemyA
-      generateIndex: 3
-    - enemyType: EnemyA
-      generateIndex: 7
-    - enemyType: EnemyA
-      generateIndex: 9
-  - enemySpawnInfo:
-    - enemyType: EnemyA
-      generateIndex: 2
-    - enemyType: EnemyA
-      generateIndex: 8
-    - enemyType: EnemyB
-      generateIndex: 6
-  - enemySpawnInfo:
-    - enemyType: EnemyA
-      generateIndex: 6
     - enemyType: EnemyB
       generateIndex: 3
-    - enemyType: EnemyB
-      generateIndex: 9
-  - enemySpawnInfo:
-    - enemyType: BossA
-      generateIndex: 6
 --- !u!114 &2637996650089757421
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,10 @@ public class EnemyB : Enemy
         photonView = GetComponent<PhotonView>();
 
         //왜곡장을 위한 렌더러 
-        skinnedMeshRenderer = gameObject.transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>();    
+        skinnedMeshRenderer = gameObject.transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>();
+
+        //부모 설정
+        transform.parent = gameManager.transform;
     }
 
     private void FixedUpdate()

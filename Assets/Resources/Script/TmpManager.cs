@@ -13,17 +13,23 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     public Text stateText;
     public GameObject fireImage;
     public Button joinButton;
-    int State = 1;
+    int State = 0;
     AudioManager audioManager;
     private void Awake()
     {
         audioManager = AuthManager.Instance.GetComponent<AudioManager>();
     }
 
+    private void Start()
+    {
+        
+    }
+
     public override void OnConnectedToMaster()//연결 설정하면 //자동으로 실행됨
     {
         if (State == 1) 
         {
+            Debug.Log(State);
             stateText.text = "2온라인: 마스터 서버에 접속 됨";
             //플레이어 닉네임
             PhotonNetwork.LocalPlayer.NickName = "NickName" + Random.Range(0, 10000);//NickNameInput.text
@@ -48,9 +54,10 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     public void OnConnect()//조인 버튼 실행했을 때
     {
         fireImage.SetActive(true);
-
-        if (State == 1)
+        Debug.Log("OnConnectBtn" + State);
+        if (State == 0)
         {
+            State = 1;
             audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
 
             //로비에 진입함과 동시에 마스터 서버(=포톤 클라우드 서버, 매치매이킹을 위함)에 진입 시도
@@ -81,7 +88,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     {
         if (State == 2) 
         {
-
+            Debug.Log(State);
             //새로 방을 만들고, 자신이 방장이 됨
             stateText.text = "5 빈 방이 없으므로, 직접 만듬";
             //변수(방 이름, 조건(최대 2명))
@@ -97,11 +104,13 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         joinButton.interactable = true;
         //씬 매니저로 이동하면 나만 넘어가고, 다른 사람은 같이 안넘어감(각각 써서, 동기화가 안됨)
         PhotonNetwork.LoadLevel("TmpScene");//방장이 하면 나머지도 자동으로 끌려옴, 동기화도 자동으로 됨
+        State = 1;
     }
 
     //책으로 이동
     public void LoadBook() 
     {
+        audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
         SceneManager.LoadScene("BookScene");
     }
 }

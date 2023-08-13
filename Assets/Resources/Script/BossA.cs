@@ -32,6 +32,9 @@ using UnityEngine.UIElements;
         agent = GetComponent<NavMeshAgent>();
 
         audioManager = gameManager.audioManager;
+
+        //부모 설정
+        transform.parent = gameManager.transform;
     }
 
     private void FixedUpdate()

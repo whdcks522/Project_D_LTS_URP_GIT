@@ -39,8 +39,6 @@ public class ChatManager : MonoBehaviourPunCallbacks
         RoomInfoText.text += PhotonNetwork.CurrentRoom.Name + " (" + PhotonNetwork.CurrentRoom.PlayerCount + "/"+ PhotonNetwork.CurrentRoom.MaxPlayers + ")";
     }
 
-    //public override void 
-
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)//∞¢∞¢¿Œ∞°∫Ω
     {
         bool canEnterRoom = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsAllowedToEnter"];

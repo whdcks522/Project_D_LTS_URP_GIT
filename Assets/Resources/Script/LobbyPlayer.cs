@@ -18,18 +18,17 @@ public class LobbyPlayer : MonoBehaviour
     SkinnedMeshRenderer[] skinnedMeshRenderer = new SkinnedMeshRenderer[2];
     AudioManager audioManager;
     AuthManager authManager;
-
-    //¾÷Àû °ü¸®
+    public Animator archiveAnim;
+    //ì•„ì¹´ì´ë¸Œ ì´ ì±…ì„ì
     public GameObject archiveGameObject;
 
     private void Awake()
     {
-        //ÃÊ±âÈ­
+        //ì´ˆê¸°í™”
         skinnedMeshRenderer[0] = gameObject.transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>();
         skinnedMeshRenderer[1] = gameObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>();
-        //1¹ø °üÀı
+        //ìƒ‰ ë³€í™”
         skinnedMeshRenderer[0].material.SetColor("_ColorControl", new Color(0.427451f, 0.4980391f, 0.5098039f, 1));
-        //2¹ø ¸öÃ¼
         skinnedMeshRenderer[1].material.SetColor("_ColorControl", new Color(0.345098f, 0.682353f, 0.7490196f, 1));
 
         authManager = AuthManager.Instance;
@@ -37,38 +36,51 @@ public class LobbyPlayer : MonoBehaviour
     
     void OnEnable()
     {
-        //¿Ö°îÀå
+        //ì™œê³¡ì¥
         StartCoroutine(Dissolve());
-        //¹è°æ À½¾Ç ÃÊ±âÈ­
-        audioManager = authManager.GetComponent<AudioManager>();//ÀÌ´ë·Î µÎÀÚ
+        //ë°°ê²½ ìŒì•…
+        audioManager = authManager.GetComponent<AudioManager>();//ï¿½Ì´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         audioManager.PlayBgm(AudioManager.Bgm.Lobby);
 
-        //¾÷Àû °ü¸®
+        //ì—…ì  ì´ë¯¸ì§€ ê´€ë¦¬
         Image[] archiveImages = archiveGameObject.GetComponentsInChildren<Image>();
         int arrSize = System.Enum.GetValues(typeof(AuthManager.ArchiveType)).Length;
         for (int index = 0; index < arrSize; index++)
         {
-            //Debug.Log(index + ":"+authManager.originAchievements.Arr[index]);
             if (authManager.originAchievements.Arr[index] == 1) 
                 archiveImages[index].color = Color.white;
         }
     }
 
-    public void DropDownSet()
+    public void ArchiveAnimControl() 
+    {
+        if (archiveAnim.GetInteger("Dir") == -1)//ì™¼ìª½->ì˜¤ë¥¸ìª½
+        {
+            audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
+            archiveAnim.SetInteger("Dir", 1);
+        }
+        else//ì™¼ìª½<-ì˜¤ë¥¸ìª½
+        {
+            audioManager.PlaySfx(AudioManager.Sfx.DoorOpen, true);
+            archiveAnim.SetInteger("Dir", -1);
+        }         
+    }
+
+    public void DropDownSet()//ì±•í„° ì„ íƒ
     {
         audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
     }
 
     void FixedUpdate()
     {
-        #region ½Ã¾ß Á¶Àı
+        #region ì‹œì„  ê´€ë¦¬
         Vector3 clickPosition = Input.mousePosition;
-            clickPosition.z = -mainCamera.transform.position.z; // Å¬¸¯ ÁÂÇ¥ÀÇ z°ªÀ» Ä«¸Ş¶ó¿Í µ¿ÀÏÇÏ°Ô ¼³Á¤ÇÕ´Ï´Ù.
+            clickPosition.z = -mainCamera.transform.position.z; // Å¬ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ zï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Ş¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
-            // Å¬¸¯ÇÑ ÁÂÇ¥¸¦ Ä«¸Ş¶ó ÁÂÇ¥·Î º¯È¯ÇÕ´Ï´Ù.
+            //í´ë¦­ ì§€ì  ì €ì¥
             Vector3 worldPosition = mainCamera.ScreenToWorldPoint(clickPosition);
 
-            //À§Ä¡ Á¶Á¤
+            //í´ë¦­ ì§€ì  ë³´ì •
             worldPosition.x += xValue;
             worldPosition.y += yValue;
             worldPosition.z = zValue;
@@ -76,18 +88,18 @@ public class LobbyPlayer : MonoBehaviour
         #endregion
     }
 
-    #region ¿Ö°îÀå
+    #region ì™œê³¡ì¥
     public IEnumerator Dissolve()
     {
-        float firstValue = 1f;      //true´Â InvisibleDissolve(2ÃÊ)
-        float targetValue = 0f;     //false´Â VisibleDissolve(3ÃÊ)
+        float firstValue = 1f;      //trueï¿½ï¿½ InvisibleDissolve(2ï¿½ï¿½)
+        float targetValue = 0f;     //falseï¿½ï¿½ VisibleDissolve(3ï¿½ï¿½)
 
         float duration = 2f;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
-            float progress = elapsedTime / duration;//ÁøÇà·ü
+            float progress = elapsedTime / duration;//ï¿½ï¿½ï¿½ï¿½ï¿½
             float value = Mathf.Lerp(firstValue, targetValue, progress);
 
             elapsedTime += Time.deltaTime;
