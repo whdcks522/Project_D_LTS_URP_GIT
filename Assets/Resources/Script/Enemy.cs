@@ -206,7 +206,7 @@ public class Enemy : MonoBehaviourPunCallbacks
 
     #region 곧죽음
     [PunRPC]
-    public void SoonDie(bool hitbyPlayer)//죽는 애니메이션에서 사용 (이벤트로 넣지는 않음)
+    public void SoonDie(bool hitbyPlayer)//죽는 애니메이션을 실행할 때, 사용 (이벤트로 넣지는 않음)
     {
             //제어
             isControl = false;

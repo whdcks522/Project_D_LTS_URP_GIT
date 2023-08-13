@@ -60,19 +60,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool archiveNoShot = true;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
     //씬 관련
     bool isTmpScene;
-    enum EnemyType {Dummy, EnemyA, EnemyB, BossA, EnemyC, BossB}
+    public enum EnemyType {Dummy, EnemyA, EnemyB, BossA, EnemyC, BossB}
     #region 적 정보 클래스
-    [Serializable]
+    [Serializable]//필요하더라
     public class EnemySpawnInfo
     {
         public string enemyType;
         public int generateIndex;
-
-        public EnemySpawnInfo(string type, int index)
-        {
-            enemyType = type;
-            generateIndex = index;
-        }
+        public EnemyType enemyType2;
     }
 
     [Serializable]
@@ -81,9 +76,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         public EnemySpawnInfo[] enemySpawnInfo;
     }
 
-    private List<EnemySpawnInfo> enemySpawnList;//이번 스테이지에서 소환할 적의 목록
     public EnemySpawnInfoArray[] enemySpawnInfoArray;//챕터 전체에서 소환할 적의 목록
-
+    private List<EnemySpawnInfo> enemySpawnList;//이번 스테이지에서 소환할 적의 목록
     #endregion
 
     private void Awake()
@@ -151,11 +145,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             //읽어내기
             foreach (EnemySpawnInfo spawnInfo in enemySpawnInfoArray[index].enemySpawnInfo)
             {
-                if (tmpEnemyMap.ContainsKey(spawnInfo.enemyType))
+                if (tmpEnemyMap.ContainsKey(spawnInfo.enemyType))//이미 있다면 추가함
                 {
                     tmpEnemyMap[spawnInfo.enemyType] += 1;
                 }
-                else
+                else//처음이라면 생성함
                 {
                     tmpEnemyMap[spawnInfo.enemyType] = 1;
                 }
@@ -169,7 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         foreach (KeyValuePair<string, int> kvp in enemyMap)
         {
-            Debug.Log("키: " + kvp.Key + ", 값: " + kvp.Value);
+            //Debug.Log("키: " + kvp.Key + ", 값: " + kvp.Value);
             for(int i = 0; i < kvp.Value; i++) 
             {
                 //적 미리 생성

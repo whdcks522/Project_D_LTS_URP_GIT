@@ -43,7 +43,7 @@ public class TrainManager : MonoBehaviourPunCallbacks
         return "";
     }
 
-    public void TmpExit()//TmpScene에서 나가기 버튼
+    public void TmpExit()//TmpScene에서 나가기 버튼을 누름
     {
         photonView.RPC("GotoAuthScene", RpcTarget.AllBuffered);
     }
@@ -54,14 +54,10 @@ public class TrainManager : MonoBehaviourPunCallbacks
         Invoke("GotoAuthSceneEnd", 0.25f);
     }
 
-    void GotoAuthSceneEnd() 
+    void GotoAuthSceneEnd() //실제로 authScene로 나감
     {
-        Debug.Log("GotoAuthScene");
         AuthManager.Instance.Destroy();
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("AuthScene");
-        
-
-        
+        SceneManager.LoadScene("AuthScene");  
     }
 }

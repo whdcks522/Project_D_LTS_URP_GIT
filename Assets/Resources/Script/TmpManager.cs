@@ -20,16 +20,10 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         audioManager = AuthManager.Instance.GetComponent<AudioManager>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public override void OnConnectedToMaster()//연결 설정하면 //자동으로 실행됨
     {
         if (State == 1) 
         {
-            Debug.Log(State);
             stateText.text = "2온라인: 마스터 서버에 접속 됨";
             //플레이어 닉네임
             PhotonNetwork.LocalPlayer.NickName = "NickName" + Random.Range(0, 10000);//NickNameInput.text
@@ -37,7 +31,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
 
             OnConnect();
         }
-        
     }
 
     public override void OnDisconnected(DisconnectCause cause)//연결 실패했거나, 이미 접속 중인데 끊김 //자동 실행됨
@@ -54,7 +47,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     public void OnConnect()//조인 버튼 실행했을 때
     {
         fireImage.SetActive(true);
-        Debug.Log("OnConnectBtn" + State);
         if (State == 0)
         {
             State = 1;
@@ -88,7 +80,6 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     {
         if (State == 2) 
         {
-            Debug.Log(State);
             //새로 방을 만들고, 자신이 방장이 됨
             stateText.text = "5 빈 방이 없으므로, 직접 만듬";
             //변수(방 이름, 조건(최대 2명))

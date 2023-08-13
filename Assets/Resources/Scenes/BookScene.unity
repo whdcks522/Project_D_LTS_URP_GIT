@@ -3358,6 +3358,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2637996650089757421, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: m_NavMeshData
