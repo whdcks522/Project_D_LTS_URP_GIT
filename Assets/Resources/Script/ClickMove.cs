@@ -32,11 +32,13 @@ public class ClickMove : MonoBehaviourPunCallbacks
     public GameObject playerName;//플레이어 이름
     public GameObject darkThunder;//플레이어 이름
     public GameObject blueThunder;//플레이어 이름
-    bool isControl;
-    bool isDissolve;
+    bool isControl = false;
+    bool isDissolve;//왜곡중인가
     bool isShot;
     float curTime = 1f;
     float maxTime = 1f;//사격 후 대기시간
+    bool isFirstMove = true;//마우스로 이동 시, 첫 클릭 인식
+    bool isFirstClick = true;//죽고 나서도 계속 드래그 하고 있을 시, 이동하기 위함
 
     private void Awake()
     {
@@ -59,9 +61,9 @@ public class ClickMove : MonoBehaviourPunCallbacks
         lr = GetComponent<LineRenderer>();
         lr.startWidth = 0.8f;
         lr.endWidth = 0.03f;
-        //lr.material.color = new Color(0.3f, 0.7f, 0.3f);
-        lr.startColor = Color.green; //선 시작점 색
-        lr.endColor = Color.red; //선 끝점 색
+        lr.material.color = new Color(0.3f, 0.7f, 0.3f);
+        //lr.startColor = Color.green; //선 시작점 색
+        //lr.endColor = Color.red; //선 끝점 색
 
         //AI 경로
         nms.BuildNavMesh();
@@ -169,12 +171,13 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if(photonView.IsMine)
             spot.transform.position = transform.position;
 
-        isControl = false;
+        //isControl = false;
         agent.enabled = true;
         if(agent.enabled)
         agent.isStopped = true;
         lr.enabled = false;
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
+        isFirstClick = true;
         if (draw != null)
             StopCoroutine(draw);
         //2초부터 활성화
@@ -339,12 +342,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
             else if (Input.GetMouseButton(1))
             {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    
-                    gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
-                }
-                #region 마우스 이동
                 targetControl();
 
                 //다시 움직이기시작함
@@ -352,11 +349,23 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 //목적지 설정
                 agent.SetDestination(spot.position);//hit.point
                                                     //애니메이션 실행
+
+                if (Input.GetMouseButtonDown(1) || isFirstClick)
+                {
+                    Debug.Log("Press");
+                    
+                    gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
+                    isFirstMove = true;
+                    isFirstClick = false;
+
+                    //이미 실행중이라면 종료
+                    if (draw != null) StopCoroutine(draw);
+                    //경로 보이게 라인 렌더러 코루틴실행
+                    draw = StartCoroutine(DrawPath());
+                }
+                #region 마우스 이동
+                
                 anim.SetBool("isRun", true);
-                //이미 실행중이라면 종료
-                if (draw != null) StopCoroutine(draw);
-                //경로 보이게 라인 렌더러 코루틴실행
-                draw = StartCoroutine(DrawPath());
             }
             //도착함
             else if (agent.remainingDistance < 0.15f)
@@ -399,7 +408,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
     #region 이동 경로 보여주기
     IEnumerator DrawPath()
     {
-        bool isFirst = true;
+        Debug.Log("A");
+        
         while (isControl)
         {
             int cnt = agent.path.corners.Length;//가는 경로를 점으로 표기했을 때, 점의 갯수
@@ -408,16 +418,19 @@ public class ClickMove : MonoBehaviourPunCallbacks
             {
                 lr.SetPosition(i, agent.path.corners[i]);//점들을 표기
             }
+            Debug.Log("B");
             yield return null;
             if (!isControl) //false일때 나가기(죽었을 때, 이동 누르고 있으면 계속 경로 보이는 버그 해결)
             {
+                Debug.Log("isNotControl");
                 lr.enabled = false;
                 break;
             }
-            else if (isFirst)//첫 실행 이후에는 활성화가 꺼져야됨
+            else if (isFirstMove)//첫 실행 이후에는 활성화가 꺼져야됨
             {
+                Debug.Log("isFirstMove");
                 lr.enabled = true;
-                isFirst = false;
+                isFirstMove = false;
             }
         } 
     }
