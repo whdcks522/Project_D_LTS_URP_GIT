@@ -118,13 +118,19 @@ public class Bullet : MonoBehaviourPunCallbacks
         photonView.RPC("BulletOff", RpcTarget.AllBuffered);
     }
 
-        [PunRPC]
+    [PunRPC]
     public void BulletOff() //총알 비활성화
     {
         gameObject.SetActive(false);
     }
 
-    
+    [PunRPC]
+    public void TrailClear() //총알 비활성화
+    {
+        trailRenderer.Clear();
+    }
+
+
     [PunRPC]//총알 활성화 후, 방향 조정
     public void RPCActivate(Vector3 vec)
     {

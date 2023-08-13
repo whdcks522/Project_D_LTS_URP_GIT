@@ -252,7 +252,16 @@ public class Enemy : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    #region 오브젝트 풀링
+    #region 챕터 입장 시, 미리 생성을 하기 위함
+    [PunRPC]
+    public void RPCfirstInstantaite() 
+    {
+        gameObject.SetActive(false);
+        Bars.SetActive(false);
+    }
+    #endregion
+
+    #region 오브젝트 풀링으로 활성화
     [PunRPC]
     public void RPCActivate(Vector3 vec)//GameObject
     {

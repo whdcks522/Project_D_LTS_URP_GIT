@@ -92,7 +92,24 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
             //새로 방을 만들고, 자신이 방장이 됨
             stateText.text = "5 빈 방이 없으므로, 직접 만듬";
             //변수(방 이름, 조건(최대 2명))
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });//네트워크 상에서 새로운 방 제작 후, 들어감----------->
+             PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });//네트워크 상에서 새로운 방 제작 후, 들어감----------->
+            
+            //방 설정 하려다가 말음
+            /*
+            string sceneName = "TmpScene";
+            RoomOptions roomOptions = new RoomOptions
+            {
+                MaxPlayers = 2,
+                CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
+        {
+            { "IsAllowedToEnter", true },
+            { "IsAllowedToExit", true },
+            { "SceneName", sceneName } // 이동하고자 하는 Scene의 이름 저장
+        },
+                CustomRoomPropertiesForLobby = new string[] { "IsAllowedToEnter", "IsAllowedToExit", "SceneName" } // 로비에서도 이 속성을 보여주기 위해 추가
+            };
+            PhotonNetwork.CreateRoom(sceneName, roomOptions);
+            */
         }
     }
 

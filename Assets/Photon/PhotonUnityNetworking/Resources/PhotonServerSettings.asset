@@ -72,6 +72,8 @@ MonoBehaviour:
   - LockRoom
   - RPCAccel
   - GotoAuthScene
+  - RPCfirstInstantaite
+  - TrailClear
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -91,7 +91,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
             audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
             ChatRPC("방장은 게임 진행 중 나갈 수 없습니다.", "");
         }
-        //방장이 아니면 전투 중일 때만 못나감
+        //방장이 아닌 플레이어는, 전투 중일 때만 못나감
         else if(!canExitRoom)//전투중이 아닐 경우, 방장만 못나감
         {
             audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
@@ -101,13 +101,8 @@ public class ChatManager : MonoBehaviourPunCallbacks
         {
             photonView.RPC("ChatRPC", RpcTarget.AllBuffered, PhotonNetwork.NickName + "님이 퇴장하셨습니다", "");
 
-            Debug.Log("LeaveRoom");
-
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("LobbyScene");
-
-           // photonView.RPC("RoomRenewal", RpcTarget.AllBuffered);
-            
         }
     }
 

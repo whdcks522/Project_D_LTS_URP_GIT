@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using static AuthManager;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -136,10 +137,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             //오브젝트 풀링을 위한 적 전체 목록
             Dictionary<string, int> enemyMap = new Dictionary<string, int>();
 
-        foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
+        foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))//전체 맵에 적 타입 별로 0으로 설정
         {
             enemyMap[enemyType.ToString()] = 0;
-            Debug.Log("EnemyType 열거형 항목: " + enemyType);
         }
 
         for (int index = 0; index < enemySpawnInfoArray.Length; index++) 
@@ -174,13 +174,12 @@ public class GameManager : MonoBehaviourPunCallbacks
                 GameObject enemy = PhotonNetwork.Instantiate(resourceNames[index], new Vector3(0, 0, 0), Quaternion.identity);
                 pools[index].Add(enemy);
 
-                enemy.SetActive(false);
-                enemy.GetComponent<Enemy>().Bars.SetActive(false);
+                enemy.GetComponent<Enemy>().photonView.RPC("RPCfirstInstantaite", RpcTarget.AllBuffered);
             }
         }
     }
 
-    int NametoIndex(string _name) //오브젝트풀링에서 문자열을 순서로 변환
+    int NametoIndex(string _name) //오브젝트풀링에서 생성하는 문자열을 순서로 변환
     {
         for(int i = 0; i < resourceNames.Length; i++) 
         {
@@ -268,8 +267,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion 
 
-    
-
     public void SpawnEnemy(string str, int generateIndex) //둘 다 실행함
     {
         //소환 수 전달
@@ -295,17 +292,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     #region 적을 잡으면 개체 수 감소
     public void EneniesCountControl() //둘 다 사용함
     {
-        if (--EnemiesCount <= 0)
-            NextStage();
+        EnemiesCount--;
+
+        if (EnemiesCount <= 0 && photonView.IsMine)
+                photonView.RPC("NextStage", RpcTarget.AllBuffered);
+        //NextStage();
     }
     #endregion
-
-    void TmpEnd()//tmpScene일 경우 나감
-    {
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("AuthScene");
-        PhotonNetwork.Disconnect();
-    }
 
     #region 현재 스테이지 클리어해서 다음 스테이지로
     [PunRPC]
@@ -315,14 +308,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (!isTmpScene)
             curStage++;
 
-        if (curStage == enemySpawnInfoArray.Length)//챕터 올 클리어
+        if (curStage == enemySpawnInfoArray.Length && !isTmpScene)//챕터 올 클리어
         {
-            if (isTmpScene)//테스트 중이라면 시작 창으로
-            {
-                Invoke("TmpEnd", 1f);
-            }     
-            else if (SceneManager.GetActiveScene().name.Contains("_Scene"))//게임 중이라면 로비로
-            {
                 //챕터 중, 한 번도 죽지 않을 것(업적 0)
                 if(archiveUnDead)
                     AuthManager.Instance.originAchievements.Arr[(int)ArchiveType.Undead] = 1;
@@ -344,9 +331,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("LobbyScene");
-            }
         }
-        else 
+        else //중간 경로 클리어 시
         {
             //플레이어 관리
             int size = playerGroup.transform.childCount;//플레이어의 수
@@ -367,8 +353,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             //룸 설정
             ExitGames.Client.Photon.Hashtable roomProperties = new ExitGames.Client.Photon.Hashtable();
-            roomProperties.Add("IsAllowedToEnter", false);
-            roomProperties.Add("IsAllowedToExit", true);
+            //roomProperties.Add("IsAllowedToEnter", false);//입장은 맨 처음 빼고 더이상 못들어옴
+            roomProperties.Add("IsAllowedToExit", true);//대기 중에는 나갈 수 있도록
             PhotonNetwork.CurrentRoom.SetCustomProperties(roomProperties);//모두에게 적용됨-------
         }  
     }

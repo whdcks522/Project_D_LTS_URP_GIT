@@ -149,7 +149,10 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //오브젝트 활성화
         gameObject.SetActive(true);
         //위치 초기화
-        transform.position = gameManager.playerGroup.transform.position + new Vector3(0,0,Random.Range(-4f, 2f));
+        if(gameManager.photonView.IsMine)
+            transform.position = gameManager.playerGroup.transform.position + new Vector3(0, 0, 2);
+        else
+            transform.position = gameManager.playerGroup.transform.position + new Vector3(0, 0, -2);
         //죽었을 때 충돌하지 않도록
         col.enabled = true;
         //애니메이션
@@ -316,14 +319,12 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
                 //투사체 생성
                 GameObject bullet = gameManager.Get("PlayerBulletA");
-                //투사체 잔상 제거
-                bullet.GetComponent<Bullet>().trailRenderer.Clear();
                 //투사체 위치 조정
                 bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0) + transform.forward.normalized;
                 //투사체 네트워크를 통한 가속
                 bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
                 //투사체 잔상 제거
-                bullet.GetComponent<Bullet>().trailRenderer.Clear();
+                bullet.GetComponent<Bullet>().photonView.RPC("TrailClear", RpcTarget.AllBuffered);
                 //UI관리를 위해 모두에게 알리기
                 photonView.RPC("ShotControl", RpcTarget.AllBuffered);
                 //업적 관리
