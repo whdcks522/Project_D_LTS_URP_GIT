@@ -43,6 +43,12 @@ public class TrainManager : MonoBehaviourPunCallbacks
         return "";
     }
 
+    public void DropDownSet()//소환할 적 선택
+    {
+        gameManager.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
+    }
+
+    #region TmpScene에서 나가기
     public void TmpExit()//TmpScene에서 나가기 버튼을 누름
     {
         photonView.RPC("GotoAuthScene", RpcTarget.AllBuffered);
@@ -60,4 +66,5 @@ public class TrainManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("AuthScene");  
     }
+    #endregion
 }

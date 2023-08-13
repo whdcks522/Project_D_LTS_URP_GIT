@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     GameManager gameManager;
     Rigidbody rigid;
 
+    [Header("투사체 관련 변수값")]
     public int dmg;
     public int speed;
     public int secondSpeed;//가속치
@@ -23,7 +24,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     public bool isBullet;//충돌 시 사라질 것인가
     public bool isGenetic;//선천적인 것인가?
     public Enemy parent;
-    public enum BulletType { Normal, Accel ,Curve }
+    public enum BulletType {Normal, Accel, Curve}
     public BulletType bulletType;
 
 

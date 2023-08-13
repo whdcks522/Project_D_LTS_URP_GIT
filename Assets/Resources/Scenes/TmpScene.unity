@@ -714,8 +714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &732031018
 MonoBehaviour:
@@ -738,13 +738,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: 710893cb65d9db545b7ad2828494677e, type: 3}
+    m_FontSize: 70
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 60
-    m_Alignment: 4
+    m_MaxSize: 70
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -907,11 +907,11 @@ RectTransform:
   m_Father: {fileID: 1840749902}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &887494246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,7 +1178,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1007748262 stripped
 Transform:
@@ -1213,17 +1213,17 @@ RectTransform:
   m_GameObject: {fileID: 1041146017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1840749902}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -0.5}
-  m_SizeDelta: {x: -30, y: -3}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 130, y: 17}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1041146019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,16 +1246,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 98191d5a879258e4aa88b905dd4e36ed, type: 3}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Option A
 --- !u!222 &1041146020
@@ -1295,7 +1295,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8679245, g: 0.53631186, b: 0.6720916, a: 1}
+  m_Color: {r: 0.6273585, g: 0.85256165, b: 1, a: 1}
   m_Intensity: 0.43
   m_Range: 10
   m_SpotAngle: 30
@@ -1635,12 +1635,12 @@ PrefabInstance:
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[1].enemySpawnInfo.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
@@ -1650,22 +1650,27 @@ PrefabInstance:
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[0].enemyType
-      value: Dummy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[2].enemyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[1].enemySpawnInfo.Array.data[0].enemyType
-      value: Dummy
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[1].enemySpawnInfo.Array.data[1].enemyType
-      value: Dummy
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[1].enemySpawnInfo.Array.data[2].enemyType
-      value: EnemyA
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
@@ -1680,12 +1685,22 @@ PrefabInstance:
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[0].generateIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[1].generateIndex
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[2].generateIndex
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.data[1].enemySpawnInfo.Array.data[0].generateIndex
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
@@ -1715,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
@@ -1812,7 +1827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.5, y: -0.5}
+  m_AnchoredPosition: {x: -7, y: -0.5}
   m_SizeDelta: {x: -25, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1621335161
@@ -1848,7 +1863,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '"Dummy"'
+  m_Text: Dummy
 --- !u!222 &1621335162
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2217,21 +2232,33 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: '"Dummy"'
+    - m_Text: Dummy
       m_Image: {fileID: 0}
-    - m_Text: '"EnemyA"'
+    - m_Text: EnemyA
       m_Image: {fileID: 0}
-    - m_Text: '"EnemyB"'
+    - m_Text: EnemyB
       m_Image: {fileID: 0}
-    - m_Text: '"BossA"'
+    - m_Text: BossA
       m_Image: {fileID: 0}
-    - m_Text: '"EnemyC"'
+    - m_Text: EnemyC
       m_Image: {fileID: 0}
-    - m_Text: '"BossB"'
+    - m_Text: BossB
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1002974327}
+        m_TargetAssemblyTypeName: TrainManager, Assembly-CSharp
+        m_MethodName: DropDownSet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1882599868
 MonoBehaviour:
@@ -2368,7 +2395,7 @@ PrefabInstance:
     - target: {fileID: 5782879614669127603, guid: 1db1ce72675ed3f4cb02957c8147996e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -97.9
+      value: -22.64
       objectReference: {fileID: 0}
     - target: {fileID: 6560402094350869769, guid: 1db1ce72675ed3f4cb02957c8147996e,
         type: 3}
@@ -2598,14 +2625,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.4171044, b: 0.11356357, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 74ac16302f2994b898e17f225c303437, type: 3}
+  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

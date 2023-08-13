@@ -3361,6 +3361,16 @@ PrefabInstance:
     - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: enemySpawnInfoArray.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268826163097594243, guid: 27e9afd9c229c294090596998c58bb25,
+        type: 3}
+      propertyPath: enemySpawnInfoArray.Array.data[0].enemySpawnInfo.Array.data[0].generateIndex
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2637996650089757421, guid: 27e9afd9c229c294090596998c58bb25,

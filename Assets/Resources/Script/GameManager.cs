@@ -65,9 +65,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Serializable]//필요하더라
     public class EnemySpawnInfo
     {
-        public string enemyType;
+        public EnemyType enemyType;
         public int generateIndex;
-        public EnemyType enemyType2;
     }
 
     [Serializable]
@@ -145,13 +144,13 @@ public class GameManager : MonoBehaviourPunCallbacks
             //읽어내기
             foreach (EnemySpawnInfo spawnInfo in enemySpawnInfoArray[index].enemySpawnInfo)
             {
-                if (tmpEnemyMap.ContainsKey(spawnInfo.enemyType))//이미 있다면 추가함
+                if (tmpEnemyMap.ContainsKey(spawnInfo.enemyType.ToString()))//이미 있다면 추가함
                 {
-                    tmpEnemyMap[spawnInfo.enemyType] += 1;
+                    tmpEnemyMap[spawnInfo.enemyType.ToString()] += 1;
                 }
                 else//처음이라면 생성함
                 {
-                    tmpEnemyMap[spawnInfo.enemyType] = 1;
+                    tmpEnemyMap[spawnInfo.enemyType.ToString()] = 1;
                 }
             }
             //갱신하기
@@ -384,7 +383,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             //적 소환
             {
                 foreach (var spawnInfo in enemySpawnList)
-                    SpawnEnemy(spawnInfo.enemyType, spawnInfo.generateIndex);
+                    SpawnEnemy(spawnInfo.enemyType.ToString(), spawnInfo.generateIndex);
             }
         }
         //입장 시, 퇴장 불가능 하도록 룸 설정
@@ -422,22 +421,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         //스테이지 적 리스트에 삽입
         foreach (EnemySpawnInfo spawnInfo in enemySpawnInfoArray[curStage].enemySpawnInfo)
             enemySpawnList.Add(spawnInfo);
-       
-        #region 쥐 대사 관리
-        string curEnemyType = "";
-        int curEnemyTypeCount = 0;
         MaxEnemiesCount = enemySpawnList.Count;
 
-        foreach (var spawnInfo in enemySpawnList)
+        #region 쥐 대사 관리
+        EnemyType curEnemyType = EnemyType.Dummy;
+        int curEnemyTypeCount = 0;
+        
+        foreach (EnemySpawnInfo spawnInfo in enemySpawnList)
         {
             if (curEnemyType == spawnInfo.enemyType)//같은 종류인 경우
             {
                 curEnemyTypeCount++;
             }
-            else
+            else//다른 종류일 경우
             {
-                //맨 처음 대사를 시작하는 것이 아니라면 ,하고 체 추가
-                if (curEnemyType != "")
+                if (curEnemyTypeCount > 0)//텍스트 삽입
                 {
                     mouseText += ", " + curEnemyType + " " + curEnemyTypeCount + "체";
                 }
@@ -446,13 +444,12 @@ public class GameManager : MonoBehaviourPunCallbacks
                 //해당 타입의 적 수 초기화
                 curEnemyTypeCount = 1;
             }
-        }
-
+        }       
         // 마지막 적 종류 정보를 추가
-        if (curEnemyType != "")
         {
             mouseText += ", " + curEnemyType + " " + curEnemyTypeCount + "체";
         }
+        
 
         // 첫 번째 쉼표와 공백 제거
         if (mouseText.Length > 2 && mouseText.Substring(0, 2) == ", ")

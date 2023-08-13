@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations.Rigging;
 
 public class ClickMove : MonoBehaviourPunCallbacks
 {
@@ -56,10 +57,11 @@ public class ClickMove : MonoBehaviourPunCallbacks
         nms = gameManager.GetComponent<NavMeshSurface>();
         //라인 렌더러
         lr = GetComponent<LineRenderer>();
-        lr.startWidth = 0.1f;
-        lr.endWidth = 0.1f;
-        lr.material.color = new Color(0.3f, 0.7f, 0.3f);
-        lr.enabled = false;
+        lr.startWidth = 0.8f;
+        lr.endWidth = 0.03f;
+        //lr.material.color = new Color(0.3f, 0.7f, 0.3f);
+        lr.startColor = Color.green; //선 시작점 색
+        lr.endColor = Color.red; //선 끝점 색
 
         //AI 경로
         nms.BuildNavMesh();
@@ -226,6 +228,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
         gameManager.audioManager.PlaySfx(AudioManager.Sfx.Impact, true);
         //통제 불가
         isControl = false;
+
         //경로 설정
         if (agent.enabled) 
         {
@@ -236,8 +239,10 @@ public class ClickMove : MonoBehaviourPunCallbacks
         //정지중 다시 가려고하면 자동으로 꺼짐 방지
         if (draw != null)
             StopCoroutine(draw);
+
         //죽었을 때 충돌하지 않도록
         col.enabled = false;
+
         //애니메이션
         anim.SetBool("isRun", false);
         anim.SetBool("isLive", false);
@@ -336,6 +341,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
             {
                 if (Input.GetMouseButtonDown(1))
                 {
+                    
                     gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
                 }
                 #region 마우스 이동
@@ -351,7 +357,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 if (draw != null) StopCoroutine(draw);
                 //경로 보이게 라인 렌더러 코루틴실행
                 draw = StartCoroutine(DrawPath());
-
             }
             //도착함
             else if (agent.remainingDistance < 0.15f)
@@ -382,21 +387,11 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 agent.SetDestination(spot.position);//hit.point
                                                     //애니메이션 실행
                 anim.SetBool("isRun", true);
-                //이미 실행중이라면 종료
-                if (draw != null) StopCoroutine(draw);
-                //경로 보이게 라인 렌더러 코루틴실행
-                draw = StartCoroutine(DrawPath());
-
             }
-            //도착함
+            //도착함 
             else if (agent.remainingDistance < 0.15f)
             {
-                //애니메이션
                 anim.SetBool("isRun", false);
-                //라인 렌더러 종료
-                lr.enabled = false;
-                if (draw != null) //정지중 다시 가려고하면 자동으로 꺼짐 방지
-                    StopCoroutine(draw);//시작했던 코루틴 종료-----------------------------------
             }
             #endregion
         }
@@ -404,8 +399,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
     #region 이동 경로 보여주기
     IEnumerator DrawPath()
     {
-        //yield return null;
-        lr.enabled = true;
+        bool isFirst = true;
         while (isControl)
         {
             int cnt = agent.path.corners.Length;//가는 경로를 점으로 표기했을 때, 점의 갯수
@@ -415,6 +409,16 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 lr.SetPosition(i, agent.path.corners[i]);//점들을 표기
             }
             yield return null;
+            if (!isControl) //false일때 나가기(죽었을 때, 이동 누르고 있으면 계속 경로 보이는 버그 해결)
+            {
+                lr.enabled = false;
+                break;
+            }
+            else if (isFirst)//첫 실행 이후에는 활성화가 꺼져야됨
+            {
+                lr.enabled = true;
+                isFirst = false;
+            }
         } 
     }
     #endregion
@@ -453,7 +457,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if (!b) isDissolve = false;
         skinnedMeshRenderer[0].material.SetFloat("_AlphaControl", targetValue);
         skinnedMeshRenderer[1].material.SetFloat("_AlphaControl", targetValue);
-
     }
     #endregion
 }
