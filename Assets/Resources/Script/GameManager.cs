@@ -124,11 +124,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         //하이라키 창에서 자식으로
         minePlayer.transform.parent = playerGroup.transform;
         //시작하는 물리적 위치를 이동
-        minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, Random.Range(-4, 2));
+        if (photonView.IsMine)
+            minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, 2);
+        else
+            minePlayer.transform.position = playerGroup.transform.position + new Vector3(0, 0, -2);
         #endregion
-        
+
         //입장 브금
-         audioManager.PlayBgm(AudioManager.Bgm.Entrance);
+        audioManager.PlayBgm(AudioManager.Bgm.Entrance);
 
         if (!photonView.IsMine) //내 뒤론 모찌나간다
             return;
