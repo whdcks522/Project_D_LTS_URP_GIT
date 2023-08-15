@@ -176,7 +176,11 @@ public class BossB : Enemy
                 bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + 10 * i * value, 0);
                 //커브를 위한 부모 설정
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+                //bulletScript.photonView.RPC("ParentSame", RpcTarget.AllBuffered, this);
                 bulletScript.parent = this;
+                //ParentSame
+
                 //투사체 네트워크를 통한 가속 조정
                 bulletScript.photonView.RPC("RPCActivate", RpcTarget.AllBuffered, bullet.transform.forward);
                 //투사체 방향 재조정

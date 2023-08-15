@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.Asteroids;
@@ -10,19 +10,19 @@ using static UnityEngine.Rendering.DebugUI;
 public class Bullet : MonoBehaviourPunCallbacks
 {
     
-    public PhotonView photonView;//public ³»ºñµÎÀÚ
+    public PhotonView photonView;//public ë‚´ë¹„ë‘ì
     public TrailRenderer trailRenderer;
     GameManager gameManager;
     Rigidbody rigid;
 
-    [Header("Åõ»çÃ¼ °ü·Ã º¯¼ö°ª")]
+    [Header("íˆ¬ì‚¬ì²´ ê´€ë ¨ ë³€ìˆ˜ê°’")]
     public int dmg;
     public int speed;
-    public int secondSpeed;//°¡¼ÓÄ¡
+    public int secondSpeed;//ê°€ì†ì¹˜
     public float lifeTime;
     public float secondLifeTime;
-    public bool isBullet;//Ãæµ¹ ½Ã »ç¶óÁú °ÍÀÎ°¡
-    public bool isGenetic;//¼±ÃµÀûÀÎ °ÍÀÎ°¡?
+    public bool isBullet;//ì¶©ëŒ ì‹œ ì‚¬ë¼ì§ˆ ê²ƒì¸ê°€
+    public bool isGenetic;//ì„ ì²œì ì¸ ê²ƒì¸ê°€?
     public Enemy parent;
     public enum BulletType {Normal, Accel, Curve}
     public BulletType bulletType;
@@ -35,12 +35,21 @@ public class Bullet : MonoBehaviourPunCallbacks
         gameManager = GameManager.Instance;
         rigid = GetComponent<Rigidbody>();
 
-        //¼±ÃµÀûÀÎ °ÍÀÌ ¾Æ´Ï¸é ºÎ¸ğ¸¦ °ÔÀÓ¸Å´ÏÀú ¾È¿¡
+        //ì„ ì²œì ì¸ ê²ƒì´ ì•„ë‹ˆë©´ ë¶€ëª¨ë¥¼ ê²Œì„ë§¤ë‹ˆì € ì•ˆì—
         if (!isGenetic)
         transform.parent = gameManager.transform;
     }
 
-    private void OnDisable()=>CancelInvoke();
+    private void OnDisable() 
+    {
+        CancelInvoke();
+        if (trailRenderer != null) 
+        {
+            trailRenderer.Clear();
+            trailRenderer.enabled = false;
+        }
+        //parent = null;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,90 +58,77 @@ public class Bullet : MonoBehaviourPunCallbacks
 
     private void OnEnable()
     {
-        if (lifeTime != 0)//¼ö¸íÀÌ 0ÀÌ ¾Æ´Ñ°æ¿ì ÀÏÁ¤ ½Ã°£ ÈÄ »èÁ¦
+        if (lifeTime != 0)//ìˆ˜ëª…ì´ 0ì´ ì•„ë‹Œê²½ìš° ì¼ì • ì‹œê°„ í›„ ì‚­ì œ
         {
             Invoke("TimeOver", lifeTime);
         }
+        if (trailRenderer != null)//ê²½ë¡œë¥¼ ì‚¬ìš©í•˜ëŠ” ê²½ìš°
+        {
+            trailRenderer.enabled = true;
+        }
     }
 
-    void Accel() 
+    void TimeOver() //ìƒì„± í›„, ì²˜ìŒìœ¼ë¡œ ìˆ˜ëª…ì´ ë‹¤ ë  ê²½ìš°
     {
-        photonView.RPC("RPCAccel", RpcTarget.AllBuffered);
-    }
-
-    [PunRPC]
-    public void RPCAccel()
-    {
-        rigid.velocity *= 5;
-    }
-
-    void TimeOver() //»ı¼º ÈÄ, Ã³À½À¸·Î ¼ö¸íÀÌ ´Ù µÉ °æ¿ì
-    {
-        //±âÁ¸ ÃÑ¾Ë Á¾·á
+        //ê¸°ì¡´ ì´ì•Œ ì¢…ë£Œ
         if (BulletType.Normal == bulletType)
             photonView.RPC("BulletOff", RpcTarget.AllBuffered);
 
-        #region °¡¼ÓÀÏ °æ¿ì »õ·Î »ı¼º
+        #region ê°€ì†ì¼ ê²½ìš° ìƒˆë¡œ ìƒì„±
         else if (BulletType.Accel == bulletType)
         {
             rigid.velocity *= secondSpeed;
 
-            //±İ¹æ »èÁ¦
+            //ê¸ˆë°© ì‚­ì œ
             Invoke("BulletOffStart", secondLifeTime);
 
-            //Æø¹ß
+            //ï¿½ï¿½ï¿½ï¿½
             GameObject bullet = gameManager.Get("EnemyBulletB");
-            //Æø¹ß À§Ä¡ Á¶Á¤ 
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ 
             bullet.transform.position = transform.position;
-            //Æø¹ß ³×Æ®¿öÅ©
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½Å©
             bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
         }
         #endregion
-
-        #region Ä¿ºêÀÏ °æ¿ì »õ·Î »ı¼º
-        else if (BulletType.Curve == bulletType) 
+        #region ì»¤ë¸Œì¼ ê²½ìš° ìƒˆë¡œ ìƒì„±
+        else if (BulletType.Curve == bulletType && gameManager.photonView.IsMine) 
         {
-            //ºÎ¸ğ¸¦ ÅëÇØ Å¸°ÙÀÇ À§Ä¡ È®ÀÎ
+            //ë¶€ëª¨ë¥¼ í†µí•´ íƒ€ê²Ÿì˜ ìœ„ì¹˜ í™•ì¸
             Vector3 targetPos = parent.target.transform.position;
-            //Åõ»çÃ¼ ¹æÇâ Á¶Á¤
+            //íˆ¬ì‚¬ì²´ ë°©í–¥ ì¡°ì •
             transform.rotation = Quaternion.LookRotation(targetPos - transform.position);
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-            //Åõ»çÃ¼ ³×Æ®¿öÅ©¸¦ ÅëÇÑ °¡¼Ó Á¶Á¤
-            photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
-            //Åõ»çÃ¼ ¹æÇâ ÀçÁ¶Á¤
+            //íˆ¬ì‚¬ì²´ ë„¤íŠ¸ì›Œí¬ë¥¼ í†µí•œ ê°€ì† ì¡°ì •
+                photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
+            //íˆ¬ì‚¬ì²´ ë°©í–¥ ì¬ì¡°ì •
             transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0);
-            //±İ¹æ »èÁ¦
+
+
+            //ï¿½İ¹ï¿½ ï¿½ï¿½ï¿½ï¿½
             Invoke("BulletOffStart", secondLifeTime);
 
-            //Æø¹ß
+            //ï¿½ï¿½ï¿½ï¿½
             GameObject bullet = gameManager.Get("EnemyBulletB");
-            //Æø¹ß À§Ä¡ Á¶Á¤ 
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ 
             bullet.transform.position = transform.position;
-            //Æø¹ß ³×Æ®¿öÅ©
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½Å©
             bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
         }
         #endregion
     }
 
-    void BulletOffStart()//Á¤¸»·Î Á¾·á
+    void BulletOffStart()//ì •ë§ë¡œ ì¢…ë£Œ
     {
         photonView.RPC("BulletOff", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    public void BulletOff() //ÃÑ¾Ë ºñÈ°¼ºÈ­
+    public void BulletOff() //ì´ì•Œ ë¹„í™œì„±í™”
     {
         gameObject.SetActive(false);
     }
 
-    [PunRPC]
-    public void TrailClear() //ÃÑ¾Ë ºñÈ°¼ºÈ­
-    {
-        trailRenderer.Clear();
-    }
-
-
-    [PunRPC]//ÃÑ¾Ë È°¼ºÈ­ ÈÄ, ¹æÇâ Á¶Á¤
+    [PunRPC]//ì´ì•Œ í™œì„±í™” í›„, ë°©í–¥ ì¡°ì •
     public void RPCActivate(Vector3 vec)
     {
         gameObject.SetActive(true);

@@ -35,3 +35,8 @@
 '2D Pixel - RPG Monster Pack', 'UI Particle Image', 'PUN 2 - FREE', 'Fantasy Skybox FREE'를 활용했습니다.
 지난 달에 구매한 '메가번들(megaBundle)'이 정말 도움이 됐습니다.
 */
+
+//아쉬운 점
+/*
+ 위치 시작할 때만 연동할 껄
+ */

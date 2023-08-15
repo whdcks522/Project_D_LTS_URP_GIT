@@ -18,7 +18,7 @@ public class TrainManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         //시작 시, 기본 값 설정
-        dropdown.value = 0;
+        dropdown.value = 5;
     }
 
     public string DropDownTranslate() //임시 적 소환

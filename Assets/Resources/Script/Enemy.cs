@@ -140,12 +140,6 @@ public class Enemy : MonoBehaviourPunCallbacks
     {
         if (!gameObject.activeSelf) 
             return;
-
-        //체력바 관리
-        //Color grayColor = grayBar.color;
-        //Color redColor = redBar.color;
-        //grayBar.color = new Color(grayColor.r, grayColor.g, grayColor.b , 1);
-        //redBar.color = new Color(redColor.r, redColor.g, redColor.b, 1);
         //제어
         isControl = true;
         //애니메이션

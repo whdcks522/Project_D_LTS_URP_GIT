@@ -201,7 +201,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
                     select = item;
                 }
-
                 else if (item.gameObject.tag == "Enemy")//적은 적에서 반환
                 {
                     select = item;

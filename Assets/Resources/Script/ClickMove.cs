@@ -208,6 +208,8 @@ public class ClickMove : MonoBehaviourPunCallbacks
             gameManager.EnemiesCount > 0 && !anim.GetCurrentAnimatorStateInfo(0).IsName("Sprinting Forward Roll") 
             && (!gameManager.chapterArea.activeSelf)) 
         {
+            //return;
+
             Bullet otherBullet = other.gameObject.GetComponent<Bullet>();
 
             //데미지 계산은 피격자만 함
@@ -337,8 +339,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 bullet.transform.position = transform.position + new Vector3(0, 1.5f, 0) + transform.forward.normalized;
                 //투사체 네트워크를 통한 가속
                 bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, transform.forward);
-                //투사체 잔상 제거
-                bullet.GetComponent<Bullet>().photonView.RPC("TrailClear", RpcTarget.AllBuffered);
                 //UI관리를 위해 모두에게 알리기
                 photonView.RPC("ShotControl", RpcTarget.AllBuffered);
                 //업적 관리
