@@ -357,8 +357,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
 
                 if (Input.GetMouseButtonDown(1) || isFirstClick)
                 {
-                    Debug.Log("Press");
-
                     anim.SetBool("isRun", true);
 
                     gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
@@ -419,8 +417,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
     #region 이동 경로 보여주기
     IEnumerator DrawPath()
     {
-        Debug.Log("A");
-        
         while (isControl)
         {
             int cnt = agent.path.corners.Length;//가는 경로를 점으로 표기했을 때, 점의 갯수
@@ -429,17 +425,14 @@ public class ClickMove : MonoBehaviourPunCallbacks
             {
                 lr.SetPosition(i, agent.path.corners[i]);//점들을 표기
             }
-            Debug.Log("B");
             yield return null;
             if (!isControl) //false일때 나가기(죽었을 때, 이동 누르고 있으면 계속 경로 보이는 버그 해결)
             {
-                Debug.Log("isNotControl");
                 lr.enabled = false;
                 break;
             }
             else if (isFirstMove)//첫 실행 이후에는 활성화가 꺼져야됨
             {
-                Debug.Log("isFirstMove");
                 lr.enabled = true;
                 isFirstMove = false;
             }

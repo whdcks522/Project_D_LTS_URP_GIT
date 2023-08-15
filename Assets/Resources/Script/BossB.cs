@@ -16,7 +16,6 @@ public class BossB : Enemy
     Vector3 burstVec;
     bool isLook = true;
     AudioManager audioManager;
-
     private void OnDisable()
     {
         //공격 경로 초기화
@@ -28,7 +27,6 @@ public class BossB : Enemy
         //초기화
         CancelInvoke();
     }
-
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();

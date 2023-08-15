@@ -53,8 +53,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
 
-        emailField.text = "222@222.2";
-        passwordField.text = "222@222.2";
+        //emailField.text = "222@222.2";
+        //passwordField.text = "222@222.2";
 
         //준비가 안됐는데 사용하면 안되므로
         btnGroup.SetActive(false);
