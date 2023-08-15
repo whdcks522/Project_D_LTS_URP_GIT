@@ -121,7 +121,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
             return;
 
         //UI 위치 초기화
-        if (!isShot)
+        if (!isShot)//사격 시, 이름 흔들리는 것 방지
         {
             playerName.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.forward + Vector3.left * 0.5f);//transform.GetChild(1).
             if (photonView.IsMine) 
@@ -171,7 +171,7 @@ public class ClickMove : MonoBehaviourPunCallbacks
         if(photonView.IsMine)
             spot.transform.position = transform.position;
 
-        //isControl = false;
+        isControl = false;//클리어해서 Revive 할 수도 있음
         agent.enabled = true;
         if(agent.enabled)
         agent.isStopped = true;
@@ -201,9 +201,12 @@ public class ClickMove : MonoBehaviourPunCallbacks
         }
     }
 
+    
     private void OnTriggerEnter(Collider other)//적이 충돌함
     {
-        if (other.gameObject.tag == "EnemyAttack" && !isDissolve && gameManager.EnemiesCount > 0 ) 
+        if (other.gameObject.tag == "EnemyAttack" && !isDissolve &&
+            gameManager.EnemiesCount > 0 && !anim.GetCurrentAnimatorStateInfo(0).IsName("Sprinting Forward Roll") 
+            && (!gameManager.chapterArea.activeSelf)) 
         {
             Bullet otherBullet = other.gameObject.GetComponent<Bullet>();
 
@@ -297,12 +300,15 @@ public class ClickMove : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    //사격 후, 계속 드래그 시 자연스럽게 이동하기 위함
+    public void ShotClear()=> isFirstClick = true;
+
     void Update()
     {
         if (photonView.IsMine && isControl && !gameManager.isChat)//로컬이 아니면 취소
         {
 
-            if (Input.GetKeyDown(KeyCode.Q) && curTime >= maxTime)
+            if (Input.GetKeyDown(KeyCode.Q) && (curTime >= maxTime))
             {
                 #region 플레이어공격A
                 //무반동 삭제
@@ -339,7 +345,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 gameManager.archiveNoShot = false;//챕터 중, 단 한 발도 발사하지 않음(쏘면 false)(1)
                 #endregion
             }
-
             else if (Input.GetMouseButton(1))
             {
                 targetControl();
@@ -353,7 +358,9 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 if (Input.GetMouseButtonDown(1) || isFirstClick)
                 {
                     Debug.Log("Press");
-                    
+
+                    anim.SetBool("isRun", true);
+
                     gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
                     isFirstMove = true;
                     isFirstClick = false;
@@ -364,8 +371,6 @@ public class ClickMove : MonoBehaviourPunCallbacks
                     draw = StartCoroutine(DrawPath());
                 }
                 #region 마우스 이동
-                
-                anim.SetBool("isRun", true);
             }
             //도착함
             else if (agent.remainingDistance < 0.15f)
@@ -376,6 +381,12 @@ public class ClickMove : MonoBehaviourPunCallbacks
                 lr.enabled = false;
                 if (draw != null) //정지중 다시 가려고하면 자동으로 꺼짐 방지
                     StopCoroutine(draw);//시작했던 코루틴 종료-----------------------------------
+            }
+            if (Input.GetMouseButtonDown(0) && (curTime >= maxTime) && (lr.enabled)) 
+            {
+                gameManager.audioManager.PlaySfx(AudioManager.Sfx.Step, true);
+                curTime = 0f;
+                anim.SetTrigger("isRoll");
             }
             #endregion
         }

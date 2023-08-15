@@ -24,7 +24,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     {
         if (State == 1) 
         {
-            stateText.text = "2온라인: 마스터 서버에 접속 됨";
+            stateText.text = "2. 온라인: 마스터 서버에 접속 됨";
             //플레이어 닉네임
             PhotonNetwork.LocalPlayer.NickName = "NickName" + Random.Range(0, 10000);//NickNameInput.text
             State = 2;                                                          //자동 실행을 위한 상태 변환
@@ -38,7 +38,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         if (State == 2) 
         {
             //joinButton.interactable = false;
-            stateText.text = $"3오프라인: 연결 실패함: {cause.ToString()}";
+            stateText.text = $"3. 오프라인: 연결 실패함: {cause.ToString()}";
             //재시도
             PhotonNetwork.ConnectUsingSettings();
         }
@@ -57,19 +57,19 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
             PhotonNetwork.ConnectUsingSettings();//설정 정보(ex) 게임 버전 등(이번에는 게임 버전만 가능))를 갖고 마스터 서버에 접속 시도----------->
             
             joinButton.interactable = false;
-            stateText.text = "1마스터 서버에 연결 중..";
+            stateText.text = "1. 마스터 서버에 연결 중..";
         }
         else if (State == 2) 
         {
             //joinButton.interactable = false;
             if (PhotonNetwork.IsConnected) //누르는 순간 끊길 수도 있으모로, 안전 장치임
             {
-                stateText.text = "4 랜덤한 방에 접속 시도";
+                stateText.text = "4. 랜덤한 방에 접속 시도";
                 PhotonNetwork.JoinRandomRoom();//랜덤한 룸에 접속 시도(빈 방이 없다면 당연히 실패)------------>
             }
             else //접속 불가할 경우
             {
-                stateText.text = "3오프라인: 연결 실패함: 재시도 해봐라}";
+                stateText.text = "3. 오프라인: 연결 실패함: 재시도 해봐라";
                 //재시도
                 PhotonNetwork.ConnectUsingSettings();
             }
@@ -81,7 +81,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
         if (State == 2) 
         {
             //새로 방을 만들고, 자신이 방장이 됨
-            stateText.text = "5 빈 방이 없으므로, 직접 만듬";
+            stateText.text = "5. 빈 방이 없으므로, 직접 만듬";
             //변수(방 이름, 조건(최대 2명))
              PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });//네트워크 상에서 새로운 방 제작 후, 들어감----------->
             
@@ -108,7 +108,7 @@ public class TmpManager : MonoBehaviourPunCallbacks//일반적인 MonoBehaviour와 달
     {
         audioManager.PlaySfx(AudioManager.Sfx.DoorDrag, true);
 
-        stateText.text = "6 방에 들어옴";
+        stateText.text = "6. 방에 들어옴";
         joinButton.interactable = true;
         //씬 매니저로 이동하면 나만 넘어가고, 다른 사람은 같이 안넘어감(각각 써서, 동기화가 안됨)
         PhotonNetwork.LoadLevel("TmpScene");//방장이 하면 나머지도 자동으로 끌려옴, 동기화도 자동으로 됨

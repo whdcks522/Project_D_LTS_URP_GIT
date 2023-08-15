@@ -32,7 +32,7 @@ public class Mouse : MonoBehaviour
             gameManager.audioManager.PlaySfx(AudioManager.Sfx.Paper, true);
            //글자 애니메이션
             StartCoroutine(TypingRoutine(
-                $" 현재는 {gameManager.curStage} 스테이지 입니다.\n 적은 {gameManager.mouseText}입니다.\n 총 수는 {gameManager.MaxEnemiesCount}체 입니다"
+                $" 현재는 {gameManager.curStage} 스테이지 입니다.\n 적은 {gameManager.mouseText}입니다.\n 총 수는 {gameManager.MaxEnemiesCount}체 입니다."
                 ));
         }
     }

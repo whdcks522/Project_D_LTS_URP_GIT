@@ -3112,7 +3112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: 8}
+  m_AnchoredPosition: {x: 444, y: -127}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &670575099
@@ -3148,7 +3148,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC801\uB4E4\uC744 \uBAA8\uB450 \uACF5\uB7B5"
+  m_Text: "\uC2E4\uD5D8\uC2E4\uC5D0\uC11C \uC5F0\uC2B5"
 --- !u!222 &670575100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4991,6 +4991,18 @@ PrefabInstance:
     - target: {fileID: 3360, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: m_Acceleration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: playerName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: blueThunder
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: darkThunder
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4011, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: sceneViewId
@@ -7561,7 +7573,7 @@ GameObject:
   - component: {fileID: 1758478479}
   - component: {fileID: 1758478478}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: BookText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8776,8 +8788,8 @@ RectTransform:
   - {fileID: 988634480}
   - {fileID: 1825758571}
   - {fileID: 1396440682}
-  - {fileID: 670575098}
   - {fileID: 1758478477}
+  - {fileID: 670575098}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8981,10 +8993,12 @@ MonoBehaviour:
   - material: {fileID: 2100000, guid: b29b5ff1823e9e9498d7e7ff83790c21, type: 2}
   - material: {fileID: 2100000, guid: c2b6f3277b8c9ad49800a9e8c3db15d4, type: 2}
   - material: {fileID: 2100000, guid: bbb9cab8d0908af46b51724848af1e32, type: 2}
-  - material: {fileID: 2100000, guid: 20530b08c93bfe54492f4b7a3c496007, type: 2}
   - material: {fileID: 2100000, guid: c8cc6ff6fbeaf584288ed5331cee9784, type: 2}
+  - material: {fileID: 2100000, guid: 7627803eea138b24abc0a668bffd2b0e, type: 2}
+  - material: {fileID: 2100000, guid: 20530b08c93bfe54492f4b7a3c496007, type: 2}
   - material: {fileID: 2100000, guid: 764d974bddfa6204180bde21d1461c3f, type: 2}
   - material: {fileID: 2100000, guid: acf997c7576b8ff48942b18f45893005, type: 2}
+  - material: {fileID: 2100000, guid: e681e4318b432d1468aa35b14925bf65, type: 2}
   - material: {fileID: 2100000, guid: 8e7e1739d378d964eb0a33d0fbb4e0cc, type: 2}
   pages:
   - {fileID: 136123228}

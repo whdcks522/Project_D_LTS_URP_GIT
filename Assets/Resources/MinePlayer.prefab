@@ -6022,6 +6022,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isLive
+  - Type: 9
+    SynchronizeType: 1
+    Name: isRoll
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
