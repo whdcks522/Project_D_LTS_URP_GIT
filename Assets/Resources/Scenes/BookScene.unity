@@ -3386,7 +3386,7 @@ PrefabInstance:
     - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8985991921315537541, guid: 27e9afd9c229c294090596998c58bb25,
         type: 3}
@@ -3448,6 +3448,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27e9afd9c229c294090596998c58bb25, type: 3}
+--- !u!4 &700703460 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1292757763814086458, guid: 27e9afd9c229c294090596998c58bb25,
+    type: 3}
+  m_PrefabInstance: {fileID: 700703459}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &714016469
 GameObject:
   m_ObjectHideFlags: 0
@@ -4984,6 +4990,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 668, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3360, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: m_Speed
       value: 1
@@ -4991,6 +5001,18 @@ PrefabInstance:
     - target: {fileID: 3360, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: m_Acceleration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_Speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_Acceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 4010, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
       propertyPath: playerName
@@ -5008,10 +5030,18 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4504, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: spot
+      value: 
+      objectReference: {fileID: 700703460}
+    - target: {fileID: 4505, guid: 5fe5eac54d74b3840b0698f55a68ebb9, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3537065302837879361, guid: 5fe5eac54d74b3840b0698f55a68ebb9,
         type: 3}

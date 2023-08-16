@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     private void OnDisable() 
     {
         CancelInvoke();
-        if (trailRenderer != null) 
+        if (trailRenderer != null && gameObject.tag == "PlayerAttack") 
         {
             trailRenderer.Clear();
             trailRenderer.enabled = false;
@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             Invoke("TimeOver", lifeTime);
         }
-        if (trailRenderer != null)//경로를 사용하는 경우
+        if (trailRenderer != null && gameObject.tag == "PlayerAttack")//경로를 사용하는 경우
         {
             trailRenderer.enabled = true;
         }
@@ -71,7 +71,7 @@ public class Bullet : MonoBehaviourPunCallbacks
     void TimeOver() //생성 후, 처음으로 수명이 다 될 경우
     {
         //기존 총알 종료
-        if (BulletType.Normal == bulletType)
+        if (BulletType.Normal == bulletType && gameManager.photonView.IsMine)
             photonView.RPC("BulletOff", RpcTarget.AllBuffered);
 
         #region 가속일 경우 새로 생성
@@ -79,15 +79,18 @@ public class Bullet : MonoBehaviourPunCallbacks
         {
             rigid.velocity *= secondSpeed;
 
-            //금방 삭제
-            Invoke("BulletOffStart", secondLifeTime);
+            if (gameManager.photonView.IsMine) 
+            {
+                //금방 삭제
+                Invoke("BulletOffStart", secondLifeTime);
 
-            //����
-            GameObject bullet = gameManager.Get("EnemyBulletB");
-            //���� ��ġ ���� 
-            bullet.transform.position = transform.position;
-            //���� ��Ʈ��ũ
-            bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
+                //����
+                GameObject bullet = gameManager.Get("EnemyBulletB");
+                //���� ��ġ ���� 
+                bullet.transform.position = transform.position;
+                //���� ��Ʈ��ũ
+                bullet.GetComponent<Bullet>().photonView.RPC("RPCActivate", RpcTarget.AllBuffered, Vector3.zero);
+            } 
         }
         #endregion
         #region 커브일 경우 새로 생성

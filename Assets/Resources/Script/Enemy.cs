@@ -217,6 +217,8 @@ public class Enemy : MonoBehaviourPunCallbacks
                 anim.SetBool("isRun", false);
             }
             anim.SetBool("isLive", false);
+            
+
 
             if (hitbyPlayer) //플레이어에 의해 맞았을 때만, 사망 애니메이션
                 anim.SetTrigger("isDie");

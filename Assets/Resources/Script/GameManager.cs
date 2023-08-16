@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //입장 브금
         audioManager.PlayBgm(AudioManager.Bgm.Entrance);
 
-        if (!photonView.IsMine) //내 뒤론 모찌나간다
+        if (!photonView.IsMine) //내 뒤론 모찌나간다--------------------------------------------------
             return;
         
 
