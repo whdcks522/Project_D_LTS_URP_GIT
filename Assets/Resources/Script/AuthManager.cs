@@ -75,6 +75,8 @@ public class AuthManager : MonoBehaviour//MonoBehaviour
                 firebaseApp = FirebaseApp.DefaultInstance;//기본적인 관리 기능앱을 가져옴
                 firebaseAuth = FirebaseAuth.DefaultInstance;//인증을 집중적으로 관리하는 오브젝트를 가져옴
             }
+            if (IsFirebaseReady)
+                stateText.text = "로그인 필요";
             btnGroup.SetActive(IsFirebaseReady);//버튼 입력 가능한 것 다시 조정
             fireImage.SetActive(!IsFirebaseReady);
         });//async이므로 비동기, 여기서 안멈추고 계속 다음 진행
